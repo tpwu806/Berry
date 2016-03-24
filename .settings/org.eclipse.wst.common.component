@@ -2,7 +2,7 @@
     <wb-module deploy-name="Raspberry_pi2B">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Raspberry_pi2B"/>
         <property name="java-output-path" value="/Raspberry_pi2B/build/classes"/>
+        <property name="context-root" value="pi"/>
     </wb-module>
 </project-modules>

@@ -1,3 +1,4 @@
+<!--  
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -11,16 +12,17 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <!-- 自动扫描的包名 -->
+    自动扫描的包名 
     <context:component-scan base-package="com.iot.foundation.controller"></context:component-scan>
-    <!-- 默认的注解映射的支持 -->
+     默认的注解映射的支持
     <mvc:annotation-driven />
     
-    <!-- 视图解释类 -->
+     视图解释类
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+        可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp" />
 	</bean>
 	
 </beans>
+-->

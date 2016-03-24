@@ -1,0 +1,31 @@
+package com.iot.foundation.config;
+
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+//@ComponentScan(basePackages = { "com.ght.forums.service", "com.ght.usermgmt.service", "com.ght.org.service",
+//		"com.ght.foundation.security", "com.ght.foundation.intercepts", "com.ght.common.utilities",
+//		"com.ght.common.validation", "com.ght.common.dao","com.ght.appversion.service","com.ght.smsplatform.service", 
+//		"com.ght.news.service","com.ght.notice.service","com.ght.Receipt.service" })
+@EnableTransactionManagement(proxyTargetClass = true)
+@PropertySource({ "classpath:application.properties" })
+public class WebAppConfig {
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySources() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	@Bean(name = { "properties" })
+	public PropertiesFactoryBean properties() {
+		PropertiesFactoryBean bean = new PropertiesFactoryBean();
+		bean.setLocation(new ClassPathResource("application.properties"));
+		return bean;
+	}
+}
