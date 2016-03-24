@@ -6,7 +6,7 @@ Created on 2016年3月24日 上午8:06:13
  *
  * 修改历史
  * Revision 0.1   2016年3月24日 上午8:06:13 by wutongpeng
- * Update: ------ 上传测试 ------
+ * Update: ------ 初始化 ------
  * 
  * Revision 0.2   2016年3月24日 上午9:06:13 by wutongpeng
- * Update: ------ spring springMVC测试 ------
+ * Update: ------ spring springMVC整合 ------
