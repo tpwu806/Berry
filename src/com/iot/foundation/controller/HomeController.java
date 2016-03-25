@@ -11,64 +11,53 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-/**
- * *****************************************************************
- * Created on 2016年1月18日 上午11:37:00
- * @author zhanggp (mailto:*****@sdas.org)
- * 功能说明：主页Controller
- *
- * 修改历史
- * Revision 1.0.1   2016年1月18日 上午11:37:00 by zhanggp
- * Update: ------ empty log ------
- ******************************************************************
- */
+
+import com.iot.exceptions.DaoFinderException;
+import com.iot.usermgmt.dto.CreateEditUserDO;
+import com.iot.usermgmt.service.UserService;
+
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	//@Autowired
-	//private UserUtility userUtil;
-
-	//@Autowired
-	//private ForumPostService postService;
+	@Autowired
+	private UserService userService;
 
 	@Resource
 	private Environment env;
 
+	@RequestMapping({"/login" })
+	public ModelAndView login(CreateEditUserDO user) {
+		ModelAndView mv = null;	
+		//System.out.println(user.getUsername());
+		try {
+			if(this.userService.LoginCheck(user)){
+				mv = new ModelAndView("redirect:/usermgmt/welcome");
+			}else{
+				mv = new ModelAndView("loginform");
+			}
+		} catch (DaoFinderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mv;
+	}
 	@RequestMapping({ "/", "/index" })
-	public ModelAndView mainPage() {
-		ModelAndView mv = null;
-		try {
-			//if (this.userUtil.isCurrentUserInRole("ROLE_USRMGMT"))
-			//	mv = new ModelAndView("redirect:/org/editorgform");
-			//else {
-				mv = new ModelAndView("redirect:/welcome");
-			//}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return mv;
-	}
-	@RequestMapping({ "/welcome" })
-	public ModelAndView welcome() {
-		ModelAndView mv = null;
-		try {
-			//if (this.userUtil.isCurrentUserInRole("ROLE_USRMGMT"))
-			//	mv = new ModelAndView("redirect:/org/editorgform");
-			//else {
-				mv = new ModelAndView("welcome");
-			//}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
+	public ModelAndView mainPage(CreateEditUserDO User) {
+		ModelAndView mv = null;	
+				mv = new ModelAndView("redirect:/loginform");		
 		return mv;
 	}
 
-	@RequestMapping({ "/loginform" })
+	@RequestMapping(value = { "/loginform" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
 	public ModelAndView loginPage() {
-		return new ModelAndView("login_form");
+		ModelAndView modelAndView = new ModelAndView("login_form");
+		
+		CreateEditUserDO userForm = new CreateEditUserDO();
+		modelAndView.addObject("userForm", userForm);
+		
+		return modelAndView;
 	}
 
 	@RequestMapping({ "/unauthorized" })

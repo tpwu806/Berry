@@ -1,6 +1,5 @@
 package com.iot.foundation.config;
 
-//import com.iot.foundation.intercepts.ModuleStatusHandlerInterceptor;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,8 +19,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.iot.foundation.intercepts.ModuleStatusHandlerInterceptor;
+
 @Configuration
-@ComponentScan(basePackages = {"com.iot.user.controller", "com.iot.foundation.controller"})
+@ComponentScan(basePackages = {"com.iot.usermgmt.controller", "com.iot.foundation.controller"})
 @EnableWebMvc
 @EnableScheduling
 @PropertySource({ "classpath:application.properties" })
@@ -63,6 +64,6 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 	}
 
 	public void addInterceptors(InterceptorRegistry registry) {
-	//	registry.addInterceptor(this.moduleStatusHandlerInterceptor);
+		//registry.addInterceptor(this.moduleStatusHandlerInterceptor);
 	}
 }

@@ -1,0 +1,230 @@
+/*******************************************************************************
+ * Grasshopper Technologies Corporation CONFIDENTIAL
+ *
+ * Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
+ * All rights reserved.
+ *
+ * NOTICE: This unpublished material is proprietary to Grasshopper
+ * Technologies Corporation. All information contained herein is,
+ * and remains the property of Grasshopper Technologies Corporation.
+ * The methods and techniques contained herein are proprietary to
+ * Grasshopper Technologies Corporation and are considered trade
+ * secrets and/or confidential, and may be covered by China, U.S.
+ * and Foreign Patents, patents in process, and are protected by
+ * trade secret or copyright law. Reproduction or distribution, in
+ * whole or in part, is strictly forbidden except by express written
+ * permission of Grasshopper Technologies Corporation.
+ ******************************************************************************/
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+body {
+	margin: 0
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
+	display: block;
+}
+.container-yh{
+	width:100%;
+	height:800px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}
+.container-qy{
+	width:100%;
+	height:1530px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}
+.yh-title{
+	height:50px;
+	line-height:50px;
+	margin-left:50px;
+	margin-right:50px;
+	border-bottom:1px solid #999;
+	font-size:18px;
+}
+.font-s{
+	float:right;
+	margin-right:10px;
+	}
+.hy-con{
+	height:85%;
+	margin-top:10px;
+	margin-left:50px;
+	margin-right:50px;
+	border:1px solid #ccc;
+	background-color:#FFF;
+}
+.qy-con{
+	padding-bottom:20px;
+	margin-top:10px;
+	margin-left:50px;
+	margin-right:50px;
+	border:1px solid #ccc;
+	background-color:#FFF;
+}
+.news{
+	height:100%;
+	padding-top:30px;
+	padding-bottom:30px;
+	font-size:16px;
+}
+.search-admin{
+	width:500px;
+	margin:0 auto;
+	padding-left:10px;
+}
+.qy-input{
+	width:550px;
+	padding-top:30px;
+	margin:0 auto;
+	font-size:16px;
+}
+.qy-input p{
+	padding-left:50px;
+	font-size:14px;
+	color:#999;
+}
+.hy-input{
+	height:85%;
+	width:550px;
+	padding-top:30px;
+	margin:0 auto;
+	font-size:16px;
+}
+.hy-list{
+	height:40px;
+	line-height:40px;
+}
+.hy-tx{
+	height:58px;
+	line-height:58px;
+}
+.hy-in{
+	width:70%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#ccc;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-in{
+	width:20%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#ccc;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-title-in{
+	width:40%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#ccc;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-l{
+	width:100px;
+	float:left;
+}
+.news-r{
+	width:70%;
+	float:left;
+	padding-left:10px;
+}
+.news-lm{
+	height:180px;
+}
+.yh-l{
+	width:200px;
+	float:left;
+}
+.yh-r{
+	width:340px;
+	float:left;
+	padding-left:10px;
+}
+.text-r{
+	text-align:right;
+}
+.btn-login{
+	margin-top:20px;
+	margin-left:220px;
+}
+.size{
+	width:200px;
+	height:35px;
+}
+.hy-sm{
+	line-height:12px;
+	font-size:12px;
+	color:#CCC;
+}
+.news-textarea{
+	width:80%;
+	height:175px;
+	border-radius:4px;	
+}
+.news-t{
+	float:left;
+	text-align:start;
+}
+.btn-news{
+	width:100px;
+	margin:0 auto;
+}
+.btx{
+	font-size:12px;
+	padding-left:50px;
+	padding-top:100px;
+}
+.news-title{
+	margin:0 auto;
+	max-width:500px;
+}
+.f-title{
+	font-size:12px;
+	color:#CCC;	
+}
+.new-con{
+	padding-left:40px;
+	padding-right:40px;
+	padding-bottom:40px;
+}
+.news-img{
+	padding-top:1em;
+	padding-bottom:1em;
+}
+.news-img img{
+	margin:0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+

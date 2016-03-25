@@ -10,10 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-//@ComponentScan(basePackages = { "com.ght.forums.service", "com.ght.usermgmt.service", "com.ght.org.service",
-//		"com.ght.foundation.security", "com.ght.foundation.intercepts", "com.ght.common.utilities",
-//		"com.ght.common.validation", "com.ght.common.dao","com.ght.appversion.service","com.ght.smsplatform.service", 
-//		"com.ght.news.service","com.ght.notice.service","com.ght.Receipt.service" })
+@ComponentScan(basePackages = { "com.iot.usermgmt.service" })
 @EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({ "classpath:application.properties" })
 public class WebAppConfig {

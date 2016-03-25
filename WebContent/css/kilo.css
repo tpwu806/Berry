@@ -1,0 +1,670 @@
+/*******************************************************************************
+ * Grasshopper Technologies Corporation CONFIDENTIAL
+ *
+ * Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
+ * All rights reserved.
+ *
+ * NOTICE: This unpublished material is proprietary to Grasshopper
+ * Technologies Corporation. All information contained herein is,
+ * and remains the property of Grasshopper Technologies Corporation.
+ * The methods and techniques contained herein are proprietary to
+ * Grasshopper Technologies Corporation and are considered trade
+ * secrets and/or confidential, and may be covered by China, U.S.
+ * and Foreign Patents, patents in process, and are protected by
+ * trade secret or copyright law. Reproduction or distribution, in
+ * whole or in part, is strictly forbidden except by express written
+ * permission of Grasshopper Technologies Corporation.
+ ******************************************************************************/
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+body {
+	margin: 0
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
+	display: block;
+}
+.clear{
+	clear:both;
+}
+.container-yh-userdetail{
+	width:100%;
+	height:850px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}
+.container-yh-copy{
+	width:100%;
+	height:950px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}/* hyx user edit */
+.container-yh{
+	width:100%;
+	height:800px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}
+.container-qy{
+	width:100%;
+	height:1570px;
+	margin-top:70px;
+	background-color:#ddd;
+	clear:both;
+}
+.yh-title{
+	height:50px;
+	line-height:50px;
+	margin-left:50px;
+	margin-right:50px;
+	border-bottom:1px solid #999;
+	font-size:18px;
+}
+.font-s{
+	float:right;
+	margin-right:10px;
+	}
+.hy-con{
+	height:85%;
+	margin-top:10px;
+	margin-left:50px;
+	margin-right:50px;
+	border:1px solid #ccc;
+	background-color:#FFF;
+}
+.qy-con{
+	padding-bottom:30px;
+	margin-top:10px;
+	margin-left:50px;
+	margin-right:50px;
+	border:1px solid #ccc;
+	background-color:#FFF;
+}
+.news{
+	height:100%;
+	padding-top:30px;
+	padding-bottom:30px;
+	font-size:16px;
+}
+.search-admin{
+	width:500px;
+	margin:0 auto;
+	padding-left:10px;
+}
+.qy-input{
+	width:800px;
+	padding-top:30px;
+	margin:0 auto;
+	font-size:16px;
+}
+.hy-input{
+	height:85%;
+	width:800px;
+	padding-top:30px;
+	margin:0 auto;
+	font-size:16px;
+}
+.btxx{
+	text-align:left;
+	padding-top:20px;
+	padding-left:175px;
+}
+.hy-list{
+	height:45px;
+	line-height:40px;
+}
+.hy-textarea{
+	padding-top:4px;
+}
+.news-textarea-list{
+	margin-top:5px;
+}
+
+.uploading{
+	padding-top:10px;
+}
+.uploading img{
+	padding-right:10px;
+	vertical-align:bottom;
+}
+.news-checkbox{
+	padding-top:5px;
+	padding-left:5px;
+}
+.hy-tx{
+	height:58px;
+	line-height:58px;
+	margin-bottom:5px;
+}
+.hy-tx img{
+	padding-right:5px;
+	vertical-align:bottom;
+    max-height:60px;
+}
+	
+.hy-int{
+	color:#333;
+}
+.hy-in{
+	width:48%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#333;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.hy-inn{
+	width:70%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#a9a9a9;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-in{
+	width:20%;
+	height:30px;
+	padding:3px 5px;
+	margin-left:2px;
+	font-size:14px;
+	line-height:1.42857143;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-title-in{
+	width:80%;
+	height:34px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#333;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-subhead-in{
+	width:40%;
+	height:34px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#333;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.news-l{
+	width:100px;
+	float:left;
+}
+.news-r{
+	width:70%;
+	float:left;
+	padding-left:10px;
+}
+.news-lm{
+	height:465px;
+}
+.yh-l{
+	width:260px;
+	float:left;
+}
+.yh-r{
+	width:500px;
+	float:left;
+	padding-left:10px;
+}
+.text-r{
+	text-align:right;
+}
+.btn-login{
+	margin-top:20px;
+	margin-left:220px;
+}
+.btn-off{
+	display:block;
+	margin:0 auto;
+}
+.bbs-off{
+	padding-left:30px;
+	padding-right:30px;
+	min-height:300px;
+}
+.bbs-off h3{
+	padding-top:20px;
+	text-align:left;
+	font-weight:bold;
+}
+.bbs-off p{
+	padding-left:0;
+	padding-top:10px;
+}
+.size{
+	width:200px;
+	height:35px;
+}
+.hy-sm{
+	line-height:12px;
+	font-size:12px;
+	color:#CCC;
+}
+.news-textarea{
+	width:80%;
+	height:175px;
+	border-radius:4px;	
+}
+.news-t{
+	float:left;
+	text-align:start;
+}
+.btn-news{
+	width:100px;
+	margin-left:49%;
+	margin-top:50px;
+
+}
+.btx{
+	padding-left:40px;
+	padding-top:40px;
+}
+.news-title{
+	margin:0 auto;
+	max-width:420px;
+}
+.f-title{
+	font-size:14px;
+	color:#CCC;	
+}
+.new-con{
+	padding-left:40px;
+	padding-right:40px;
+	padding-bottom:40px;
+}
+.new-con p{
+	padding:0;
+}
+.news-img{
+	padding-top:1em;
+	padding-bottom:1em;
+}
+.news-img img{
+	margin:0 auto;
+}
+.admin-search{
+	width:32%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#555;
+	font-weight:normal;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.min-search{
+	width:20%;
+	height:30px;
+	padding:3px 5px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#555;
+	font-weight:normal;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.page-dropdown{
+	width:100%;
+	color:#5cb85c;
+	font-weight:bold;
+	font-size:16px;
+}
+.page-dropdown span{
+	padding-left:8px;
+	padding-right:25px;
+}
+nav{
+	width:100%;
+	margin:0 auto;
+}
+.header{
+	height:72px;
+	border-bottom:4px solid #2c4b68;
+	background-color:#FFF;
+	-webkit-box-shadow: #666 0px 0px 8px;
+    -moz-box-shadow: #666 0px 0px 8px;
+    box-shadow: #666 0px 0px 8px;
+	position:fixed;
+	left:0;
+	top:0;
+	right:0;
+	z-index:1030;
+}
+.header-admin{
+	line-height:70px;
+	float:right;
+	margin-right:20px;
+}
+.admin{
+	line-height:70px;
+	float:left;
+}
+.admin span{
+	padding-right:15px;
+}
+.setting{
+	border-left:1px solid #ccc;
+	margin-top:22px;
+	line-height:24px;
+	float:left;
+}
+
+.container-fluid{
+	margin-top:70px;
+}
+.container-top{
+	margin-top:100px;
+	margin-bottom:30px;
+}
+.header img{
+	margin-left:15px;
+}
+.sidebar{
+	height:1500px;
+	background-color:#333;
+}
+
+.qy-title{
+	height:60px;
+	line-height:60px;
+	margin-left:20px;
+	margin-right:20px;
+	border-bottom:1px solid #999;
+	font-size:18px;
+}
+.sidebar-menu {
+    position: fixed;
+    top:50px;
+    bottom: 0;
+    left:13%;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #a1a1a1;
+    /* border-right: 1px solid #eee; */
+}
+.table span{
+	color:#999;
+}
+
+/******************议题版块*****************/
+.forum-container{
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:70px;
+	margin-bottom:50px;
+	padding-bottom:20px;
+	border:1px solid #ccc;
+}
+.forum{
+	border-bottom:1px solid #ccc;
+}
+.forum-user{
+	width:20%;
+	height:auto;
+	float:left;
+}
+.forum-con{
+	width:80%;
+	min-height:220px;
+	float:left;
+	border-left:1px solid #ccc;
+}
+
+.forum-title{
+	height:70px;
+	border-bottom:1px solid #ccc;
+	padding-left:20px;
+	padding-right:20px;
+	background-color:#eef7ee;
+}
+.forum-t{
+	float:left;
+	font-size:16px;
+	font-weight:bold;
+	line-height:70px;
+}
+.forum-b{
+	float:right;
+	font-size:14px;
+	line-height:70px;
+}
+.forum-b span{
+	padding-left:20px;
+}
+.date-time{
+	color:#9c9c9c;
+	line-height:35px;
+	padding-right:20px;
+}
+.forum-img{
+	padding-left:5%;
+	padding-right:5%;
+}
+.forum-text{
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.guestbook{
+	min-height:220px;
+	border-bottom:1px solid #ccc;
+}
+.forum-page{
+	padding-top:15px;
+	padding-bottom:10px;
+}
+.forum-textarea{
+	width:80%;
+	height:150px;
+}
+.forum-btn{
+	width:80%;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin:0 auto;	
+}
+.box-user{
+	width:120px;
+	height:120px;
+	margin-left:30px;
+	margin-top:20px;
+}
+.user-border img{
+	width:120px;
+	height:120px;
+	border:1px solid #ccc;
+}
+.favorites{
+	padding-top:5px;
+	margin:0 auto;
+}
+
+/************************更新的css******************/
+
+.btn-lg,.btn-group-lg>.btn {
+	padding: 4px 26px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 6px
+}
+.nav{
+	font-size:18px;
+}
+.col-md-2{
+	width:13%;
+}
+.nav-menu {
+	padding-left: 0px;
+	margin-bottom: 0px;
+	list-style: none;
+	font-size: 18px;
+}
+.nav-menu>li {
+	position: relative;
+	display: block;
+	background:#a1a1a1;
+	border-top:solid 1px #aeaeae;
+	border-bottom:solid 1px #909090;
+}
+.nav-menu>li>a {
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+	text-decoration:none;
+	color:#000;
+}
+.nav>li{
+	border-top:solid 1px #444;
+	border-bottom:solid 1px #222;
+}
+a{
+	color:#000;
+}
+.nav>li>a{
+	color:#fff;
+}
+.nav>li>img{
+	width:18px;
+	height:18px;
+	position:absolute;
+	top:14px;
+	left:10px;
+	z-index:100;
+}
+.nav-menu>li>img{
+	width:18px;
+	height:18px;
+	position:absolute;
+	top:14px;
+	left:10px;
+	z-index:100;
+}
+.nav>li>a{
+   padding-right:20px;
+   padding-left:40px;
+}
+.nav-menu>li>a{
+   padding-right:20px;
+   padding-left:40px;
+}
+.nav>li>a:hover,.nav>li>a:focus {
+	text-decoration: none;
+	background-color:#a1a1a1;
+	color:#fff;
+}
+.nav-menu>li>a:hover,.nav-menu>li>a:focus {
+	text-decoration: none;
+	background-color: #fff;
+	color:#000;
+}
+a:hover,a:focus {
+	color: #000;
+	text-decoration: underline
+}
+
+.col-md-offset-2 {
+	margin-left: 26%
+}
+.col-md-10 {
+	width:74%
+}
+.search {
+	position:relative;
+	text-align:center;
+}
+.main {
+	background:#fff;
+	padding:20px;
+}
+.table> thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+	border:1px solid #ddd;
+
+}
+.table>caption+thead>tr:first-child>th,.table>colgroup+thead>tr:first-child>th,.table>thead:first-child>tr:first-child>th,.table>caption+thead>tr:first-child>td,.table>colgroup+thead>tr:first-child>td,.table>thead:first-child>tr:first-child>td{
+  border-top:1px solid #ddd;
+}
+
+.table> thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+	border:1px solid #ddd;
+}
+.table>thead>tr>th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #ddd
+}
+.page-header{
+	padding-bottom:9px;
+	margin:0;
+	border-bottom:0;
+}
+.form-control {
+	display:inline-block;
+	width: 82.1%;
+}
+.btn {
+	margin-bottom:2px;
+}
+.row{
+	margin-right:0;
+	margin-left:0;
+}
+.dropdown-menu{
+	top:47px;
+	left:-60px;
+	min-width:110px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #0088cc;
+}
+.error{
+	color:red;
+}
+.min-h{
+	min-height:700px;
+}
+
+
+
+
+
+
+
+
+
