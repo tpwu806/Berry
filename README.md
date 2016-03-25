@@ -11,6 +11,8 @@ Created on 2016年3月24日 上午8:06:13
  * Revision 0.2   2016年3月24日 上午9:06:13 by wutongpeng
  * Update: ------ spring springMVC整合 ------
  * 
- *  Revision 0.2   2016年3月24日 下午2:06:13 by wutongpeng
+ * Revision 0.3   2016年3月24日 下午2:06:13 by wutongpeng
  * Update: ------ spring springMVC整合改为注解 ------
  * 
+ * Revision 0.4   2016年3月25日 下午4:06:13 by wutongpeng
+ * Update: ------ 整合hibernate ------
