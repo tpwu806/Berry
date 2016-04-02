@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Grasshopper Technologies Corporation CONFIDENTIAL
+  ~
+  ~ Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
+  ~ All rights reserved.
+  ~
+  ~ NOTICE: This unpublished material is proprietary to Grasshopper
+  ~ Technologies Corporation. All information contained herein is,
+  ~ and remains the property of Grasshopper Technologies Corporation.
+  ~ The methods and techniques contained herein are proprietary to
+  ~ Grasshopper Technologies Corporation and are considered trade
+  ~ secrets and/or confidential, and may be covered by China, U.S.
+  ~ and Foreign Patents, patents in process, and are protected by
+  ~ trade secret or copyright law. Reproduction or distribution, in
+  ~ whole or in part, is strictly forbidden except by express written
+  ~ permission of Grasshopper Technologies Corporation.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--%>
+
+<!-- Setup the active class for the list items -->
+<c:set var="url" value="url: ${requestScope['javax.servlet.forward.servlet_path']}"/>
+<c:set var="mod1" value=""/>
+<c:set var="mod2" value=""/>
+<c:set var="mod3" value=""/>
+<c:set var="mod4" value=""/>
+<c:set var="mod5" value=""/>
+<c:set var="mod6" value=""/>
+<c:choose>
+     <c:when test="${fn:containsIgnoreCase(url, '/notice/')}">
+        <c:set var="mod1" value="class=\"active\""/>
+    </c:when>
+    <c:when test="${fn:containsIgnoreCase(url, '/news/')}">
+        <c:set var="mod2" value="class=\"active\""/>
+    </c:when>
+    <c:when test="${fn:containsIgnoreCase(url, '/forum/')}">
+        <c:set var="mod3" value="class=\"active\""/>
+    </c:when>
+     <c:when test="${fn:containsIgnoreCase(url, '/org/')}">
+        <c:set var="mod4" value="class=\"active\""/>
+    </c:when>
+     <c:when test="${fn:containsIgnoreCase(url, '/user/')}">
+        <c:set var="mod5" value="class=\"active\""/>
+    </c:when>
+     <c:when test="${fn:containsIgnoreCase(url, '/smsplatform/')}">
+        <c:set var="mod6" value="class=\"active\""/>
+    </c:when>
+   
+    <c:otherwise></c:otherwise>
+</c:choose>
+
+<!-- The HTML to be generated -->
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+    
+       <sec:authorize access="hasAnyRole('ROLE_ORGREG', 'ROLE_ORGMGMT', 'ROLE_ORGMOD', 'ROLE_ORGADMIN')">
+            <li id="mod1" ${mod1}>
+                <img src="<c:url value="/images/navmenu/forums-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/qilu/notice/viewnotice?page=0&size=${properties['paging.numitems']}">
+                    通知管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+        
+          <sec:authorize access="hasAnyRole('ROLE_ORGREG', 'ROLE_ORGMGMT', 'ROLE_ORGMOD', 'ROLE_ORGADMIN')">
+            <li id="mod2" ${mod2}>
+                <img src="<c:url value="/images/navmenu/news-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/qilu/news/viewnews?page=0&size=${properties['paging.numitems']}">
+                    新闻管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+        
+        
+        <sec:authorize access="hasAnyRole('ROLE_ORGREG', 'ROLE_ORGMGMT', 'ROLE_ORGMOD')">
+            <c:if test="${forumStatus == true}">
+                <li id="mod3" ${mod3}>
+                    <img src="<c:url value="/images/header/setting.png"/>"/>
+                    <a href="${pageContext.request.contextPath}/qilu/forum/viewcat">
+                        服务管理<span style="right:10%; position:absolute;">›</span>
+                    </a>
+                </li>
+            </c:if>
+        </sec:authorize>
+
+        <sec:authorize access="hasAnyRole('ROLE_ORGADMIN')">
+            <li id="mod3" ${mod3}>
+                <img src="<c:url value="/images/header/setting.png"/>"/>
+                <a href="${pageContext.request.contextPath}/qilu/forum/viewcat">
+                    服务管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+        
+           <sec:authorize access="hasAnyRole('ROLE_ORGREG', 'ROLE_ORGMGMT', 'ROLE_ORGMOD', 'ROLE_ORGADMIN')">
+            <li id="mod4" ${mod4}>
+                <img src="<c:url value="/images/navmenu/org-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/qilu/org/vieworgs?page=0&size=${properties['paging.numitems']}">
+                    企业管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+
+        <!-- Only show this if the logged in user is a USRMGMT user.  -->
+        <sec:authorize access="hasRole('ROLE_USRMGMT')">
+            <li id="mod4" ${mod4}>
+                <img src="<c:url value="/images/navmenu/news-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/org/editorgform">
+                    企业管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+
+        <sec:authorize access="hasAnyRole('ROLE_ORGREG', 'ROLE_ORGMGMT', 'ROLE_ORGMOD', 'ROLE_ORGADMIN')">
+            <li id="mod5" ${mod5}>
+                <img src="<c:url value="/images/navmenu/user-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/qilu/user/viewusers?page=0&size=${properties['paging.numitems']}">
+                    用户管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+        
+        <sec:authorize access="hasAnyRole('ROLE_ORGADMIN')">
+            <li id="mod6" ${mod6}>
+                <img src="<c:url value="/images/navmenu/forums-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/admin/smsplatform/viewplatforminfo">
+                    短信平台管理<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
+        </sec:authorize>
+        
+     
+
+    </ul>
+</div>

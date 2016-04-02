@@ -12,6 +12,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.context.SecurityContextImpl;
+
 //import org.springframework.security.core.context.SecurityContextImpl;
 
 public class MyFilter implements Filter{
@@ -38,8 +40,8 @@ public class MyFilter implements Filter{
 	}
 	
 	
-	//private void showParams(HttpServletRequest request) {   
-    //    SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");      
-    //}  
+	private void showParams(HttpServletRequest request) {   
+        SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");      
+    }  
 
 }

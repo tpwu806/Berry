@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Raspberry_pi2B">
+    <wb-module deploy-name="Berry">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/Raspberry_pi2B/build/classes"/>
-        <property name="context-root" value="pi"/>
+        <property name="java-output-path" value="/Berry/build/classes"/>
+        <property name="context-root" value="Berry"/>
     </wb-module>
 </project-modules>
