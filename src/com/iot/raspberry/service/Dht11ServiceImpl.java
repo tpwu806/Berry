@@ -11,17 +11,17 @@ import com.iot.exceptions.DaoFinderException;
 import com.iot.raspberry.dao.Dht11DAO;
 import com.iot.usermgmt.service.UserServiceImpl;
 
-@Service
-@Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
+//@Service
+//@Transactional(rollbackFor = { Exception.class })
+//@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
 public class Dht11ServiceImpl implements Dht11Service {
 
 static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	
-	@Autowired
+	//@Autowired
 	private Dht11DAO dht11DAO;
 
-	@Override
+	//@Override
 	public Integer getTem() throws DaoFinderException {
 		// TODO Auto-generated method stub
 		return null;

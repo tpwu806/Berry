@@ -41,7 +41,7 @@ public class MyFilter implements Filter{
 	
 	
 	private void showParams(HttpServletRequest request) {   
-        SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");      
+       // SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");      
     }  
 
 }

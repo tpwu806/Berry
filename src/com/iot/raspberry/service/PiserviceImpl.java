@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iot.raspberry.dao.PiDAO;
 
-@Service
-@Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
+//@Service
+//@Transactional(rollbackFor = { Exception.class })
+//@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
 public class PiserviceImpl implements PiService {
 
-	@Autowired
+//	@Autowired
 	private PiDAO piDAO;
 }
