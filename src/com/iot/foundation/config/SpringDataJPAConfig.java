@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({ "classpath:application.properties" })
-@EnableJpaRepositories(basePackages = {"com.iot.usermgmt.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.usermgmt.dao","com.iot.supervise.dao"})
 public class SpringDataJPAConfig {
 	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
@@ -65,7 +65,7 @@ public class SpringDataJPAConfig {
 
 		config.addDataSourceProperty("useUnicode", "true");
 		
-		//自定义本机测试配置
+		//鑷畾涔夋湰鏈烘祴璇曢厤缃�
 		try {
 			java.net.InetAddress addr =  java.net.InetAddress.getLocalHost();
 			List<String> locals =new ArrayList<String>();
@@ -94,7 +94,7 @@ public class SpringDataJPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource());
-		entityManagerFactoryBean.setPackagesToScan(new String[] { "com.iot.usermgmt.domain"});
+		entityManagerFactoryBean.setPackagesToScan(new String[] { "com.iot.usermgmt.domain","com.iot.supervise.domain"});
 
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
 

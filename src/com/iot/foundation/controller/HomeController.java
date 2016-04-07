@@ -32,7 +32,7 @@ public class HomeController {
 		//System.out.println(user.getUsername());
 		try {
 			if(this.userService.LoginCheck(user)){
-				mv = new ModelAndView("redirect:/usermgmt/welcome");
+				mv = new ModelAndView("redirect:/device/getsensor");
 			}else{
 				mv = new ModelAndView("loginform");
 			}

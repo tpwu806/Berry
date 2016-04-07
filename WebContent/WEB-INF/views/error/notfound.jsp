@@ -23,7 +23,7 @@
 
 <html>
 <head>
-	<title>齐鲁软件园服务平台</title>
+	<title>Berry</title>
 </head>
 <body>
 

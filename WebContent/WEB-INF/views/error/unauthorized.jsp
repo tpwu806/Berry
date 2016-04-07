@@ -25,14 +25,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>齐鲁软件园服务平台</title>
+	<title>Berry</title>
 </head>
 <body>
 
 <c:url var="logoutUrl" value="/logout"/>
 
 <h1 style="text-align: center; color: red;">
-    您没有权限访问此页面, 有疑问请跟济南齐鲁软件园发展中心联系.  请点击这里<span><a href="${logoutUrl}">退出</a></span>.
+    您没有权限访问此页面, 有疑问请跟Berry联系.  请点击这里<span><a href="${logoutUrl}">退出</a></span>.
 </h1>
 
 
