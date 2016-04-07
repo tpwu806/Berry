@@ -28,12 +28,12 @@ public class DeviceControler {
 	private DeviceService deviceService;
 	
 	
-	@RequestMapping(value = { "/device/getsensor" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.GET})
-	public ModelAndView getTem() throws DaoFinderException {
-		ModelAndView modelAndView = new ModelAndView("/supervise/supervise");			
-		Integer tem=this.sensorService.getTem();
-		modelAndView.addObject("tem", tem);
-		return modelAndView;
-	}
+//	@RequestMapping(value = { "/device/getsensor" }, method = {
+//			org.springframework.web.bind.annotation.RequestMethod.GET})
+//	public ModelAndView getTem() throws DaoFinderException {
+//		ModelAndView modelAndView = new ModelAndView("/supervise/supervise");			
+//		Integer tem=this.sensorService.getTem();
+//		modelAndView.addObject("tem", tem);
+//		return modelAndView;
+//	}
 }

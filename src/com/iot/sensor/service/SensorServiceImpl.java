@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iot.exceptions.DaoFinderException;
-import com.iot.supervise.dao.SuperviseDAO;
+import com.iot.sensor.dao.SensorDAO;
 import com.iot.usermgmt.service.UserServiceImpl;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.sensor.dao"})
 public class SensorServiceImpl implements SensorService {
 
 static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
-	private SuperviseDAO superviseDAO;
+	private SensorDAO sensorDAO;
 
 	@Override
 	public Integer getTem() throws DaoFinderException {

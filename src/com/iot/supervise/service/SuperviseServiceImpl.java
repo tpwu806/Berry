@@ -9,7 +9,7 @@ import com.iot.supervise.dao.SuperviseDAO;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.supervise.dao"})
 public class SuperviseServiceImpl implements SuperviseService {
 
 	@Autowired

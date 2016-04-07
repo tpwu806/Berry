@@ -9,7 +9,7 @@ import com.iot.device.dao.DeviceDAO;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.raspberry.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.device.dao"})
 public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired

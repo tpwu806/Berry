@@ -10,7 +10,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = { "com.iot.usermgmt.service" ,"com.iot.supervise.service"})
+@ComponentScan(basePackages = { "com.iot.usermgmt.service" ,"com.iot.supervise.service",
+		"com.iot.device.service" ,"com.iot.sensor.service"})
 @EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({ "classpath:application.properties" })
 public class WebAppConfig {

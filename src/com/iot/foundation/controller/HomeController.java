@@ -4,6 +4,8 @@ package com.iot.foundation.controller;
 //import com.ght.common.utilities.UserUtility;
 //import com.ght.forums.service.ForumPostService;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,15 @@ public class HomeController {
 
 	@Resource
 	private Environment env;
-
+	
 	@RequestMapping({"/login" })
-	public ModelAndView login(CreateEditUserDO user) {
+	public ModelAndView login(CreateEditUserDO user,HttpSession httpSession) {
 		ModelAndView mv = null;	
 		//System.out.println(user.getUsername());
 		try {
 			if(this.userService.LoginCheck(user)){
-				mv = new ModelAndView("redirect:/device/getsensor");
+				mv = new ModelAndView("redirect:/supervise/viewsupervise");
+				httpSession.setAttribute("loginname", user.getUsername());
 			}else{
 				mv = new ModelAndView("loginform");
 			}

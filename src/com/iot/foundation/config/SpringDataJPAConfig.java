@@ -26,7 +26,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({ "classpath:application.properties" })
-@EnableJpaRepositories(basePackages = {"com.iot.usermgmt.dao","com.iot.supervise.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.usermgmt.dao","com.iot.supervise.dao",
+		"com.iot.device.dao","com.iot.sensor.dao"})
 public class SpringDataJPAConfig {
 	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
@@ -94,7 +95,8 @@ public class SpringDataJPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource());
-		entityManagerFactoryBean.setPackagesToScan(new String[] { "com.iot.usermgmt.domain","com.iot.supervise.domain"});
+		entityManagerFactoryBean.setPackagesToScan(new String[] { "com.iot.usermgmt.domain","com.iot.supervise.domain",
+				"com.iot.device.domain","com.iot.sensor.domain"});
 
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
 

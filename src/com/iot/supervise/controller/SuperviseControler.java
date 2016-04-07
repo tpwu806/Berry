@@ -25,10 +25,10 @@ public class SuperviseControler {
 	
 	
 	
-	@RequestMapping(value = { "/device/getsensor" }, method = {
+	@RequestMapping(value = { "/supervise/viewsupervise" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET})
 	public ModelAndView getTem() /*throws DaoFinderException*/ {
-		ModelAndView modelAndView = new ModelAndView("/supervise/supervise");			
+		ModelAndView modelAndView = new ModelAndView("/supervise/list-of-supervise");			
 		//Integer tem=this.sensorService.getTem();
 		//modelAndView.addObject("tem", tem);
 		return modelAndView;

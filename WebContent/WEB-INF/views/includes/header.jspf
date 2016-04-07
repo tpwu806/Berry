@@ -1,36 +1,19 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Grasshopper Technologies Corporation CONFIDENTIAL
-  ~
-  ~ Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
-  ~ All rights reserved.
-  ~
-  ~ NOTICE: This unpublished material is proprietary to Grasshopper
-  ~ Technologies Corporation. All information contained herein is,
-  ~ and remains the property of Grasshopper Technologies Corporation.
-  ~ The methods and techniques contained herein are proprietary to
-  ~ Grasshopper Technologies Corporation and are considered trade
-  ~ secrets and/or confidential, and may be covered by China, U.S.
-  ~ and Foreign Patents, patents in process, and are protected by
-  ~ trade secret or copyright law. Reproduction or distribution, in
-  ~ whole or in part, is strictly forbidden except by express written
-  ~ permission of Grasshopper Technologies Corporation.
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--%>
-
 <nav class="header">
     <a href="<c:url value="/"/>">
-        <img src="<c:url value="/images/header/qilusoft-logo.png"/>">
+        <img width="200" height="60" src="<c:url value="/images/header/berry-logo.png"/>">
     </a>
     <div class="header-admin">
-        <sec:authorize access="isAuthenticated()">
+        
             <div class="admin">
-                <span>欢迎，<c:out value="${givenName}"/></span>
-                <!-- To get the spring security principal username, use $ { pageContext.request.remoteUser  } -->
-                <c:url var="logoutUrl" value="/logout"/>
-                <span><a href="${logoutUrl}">退出</a></span>
+                <span>欢迎，<%=request.getSession().getAttribute("loginname")%></span>
+                <c:url var="logoutUrl" value="/login"/>
+                
+                <span><a href="/logout">退出</a></span>
+                
             </div>
-        </sec:authorize>
+        
 
         <div id="fat-menu" class="setting dropdown">
             <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
