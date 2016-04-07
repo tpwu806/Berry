@@ -1,4 +1,4 @@
-package com.iot.supervise.service;
+package com.iot.device.service;
 
 
 public interface DeviceService {

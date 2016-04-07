@@ -1,4 +1,4 @@
-package com.iot.supervise.controller;
+package com.iot.device.controller;
 
 import javax.annotation.Resource;
 
@@ -10,27 +10,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.iot.supervise.service.SuperviseService;
+import com.iot.exceptions.DaoFinderException;
+import com.iot.device.service.DeviceService;
+import com.iot.sensor.service.SensorService;
 
 @Controller
-public class SuperviseControler {
-	static final Logger log = LoggerFactory.getLogger(SuperviseControler.class);
+public class DeviceControler {
+	static final Logger log = LoggerFactory.getLogger(DeviceControler.class);
 	
 	@Resource
 	private Environment env;
 	
 	@Autowired
-	private SuperviseService superviseService;
+	private SensorService sensorService;
 	
-	
+	@Autowired
+	private DeviceService deviceService;
 	
 	
 	@RequestMapping(value = { "/device/getsensor" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET})
-	public ModelAndView getTem() /*throws DaoFinderException*/ {
+	public ModelAndView getTem() throws DaoFinderException {
 		ModelAndView modelAndView = new ModelAndView("/supervise/supervise");			
-		//Integer tem=this.sensorService.getTem();
-		//modelAndView.addObject("tem", tem);
+		Integer tem=this.sensorService.getTem();
+		modelAndView.addObject("tem", tem);
 		return modelAndView;
 	}
 }

@@ -1,4 +1,4 @@
-package com.iot.supervise.domain;
+package com.iot.sensor.domain;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.iot.supervise.service;
+package com.iot.sensor.service;
 
 import com.iot.exceptions.DaoFinderException;
 

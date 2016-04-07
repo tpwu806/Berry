@@ -27,7 +27,7 @@
 <c:set var="mod5" value=""/>
 <c:set var="mod6" value=""/>
 <c:choose>
-     <c:when test="${fn:containsIgnoreCase(url, '/notice/')}">
+    <c:when test="${fn:containsIgnoreCase(url, '/notice/')}">
         <c:set var="mod1" value="class=\"active\""/>
     </c:when>
     <c:when test="${fn:containsIgnoreCase(url, '/news/')}">

@@ -1,4 +1,4 @@
-package com.iot.supervise.dto;
+package com.iot.device.dto;
 
 public class DeviceDO {
 
