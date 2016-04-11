@@ -1,27 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<%--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Grasshopper Technologies Corporation CONFIDENTIAL
-  ~
-  ~ Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
-  ~ All rights reserved.
-  ~
-  ~ NOTICE: This unpublished material is proprietary to Grasshopper
-  ~ Technologies Corporation. All information contained herein is,
-  ~ and remains the property of Grasshopper Technologies Corporation.
-  ~ The methods and techniques contained herein are proprietary to
-  ~ Grasshopper Technologies Corporation and are considered trade
-  ~ secrets and/or confidential, and may be covered by China, U.S.
-  ~ and Foreign Patents, patents in process, and are protected by
-  ~ trade secret or copyright law. Reproduction or distribution, in
-  ~ whole or in part, is strictly forbidden except by express written
-  ~ permission of Grasshopper Technologies Corporation.
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--%>
 
 <?xml version="1.0" encoding="UTF-8" ?>
 
@@ -31,11 +12,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>新闻列表</title>
+    <title>设备列表</title>
     <!-- Bootstrap -->
     <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/dashboard.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/qilu.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/kilo.css"/>" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,16 +36,16 @@
         <%@ include file="../includes/outermenu.jspf" %>
 
         <!-- Inner menu bar -->
-        <%@ include file="include/innermenu.jspf" %>
+        <%-- <%@ include file="include/innermenu.jspf" %> --%>
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
         
-        	<form method="GET"  action="${pageContext.request.contextPath}/qilu/notice/searchnotice" accept-charset="UTF-8">
+        	<form method="GET"  action="${pageContext.request.contextPath}/device/searchdevice" accept-charset="UTF-8">
 
                 <div class="search-admin">
                     <div class="page-header">
-                        <input type="text" class="form-control" name="searchKey" maxlength="20" placeholder="请输入通知标题">
+                        <input type="text" class="form-control" name="searchKey" maxlength="20" placeholder="请输入设备名称">
                         <input type="hidden" name="page" value="0">
                         <input type="hidden" name="size" value="${properties['paging.numitems']}">
                         <button class="btn btn-lg btn-primary btn-success" type="submit"><img src="<c:url value="/images/search_16.png"/>"></button>
@@ -85,25 +66,25 @@
                 <table class="table table-striped text-center">
                     <thead>
                     <tr>
-                        <th class="text-center">标题</th>
-                        <th class="text-center">发布者</th>
-                        <th class="text-center">发布时间</th>
-                        <th class="text-center">是否含回执</th>
+                        <th class="text-center">设备名称</th>
+                        <th class="text-center">IP地址</th>
+                        <th class="text-center">端口号</th>
+                        <th class="text-center">传感器个数</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <c:catch var="exception">
-                        <c:forEach var="thread" items="${noticeList.content}">
+                        <c:forEach var="thread" items="${deviceList.content}">
 
                             <tr>
                                 <td class="text-center">
                                  
-                                       <a class="urlLink" href="${pageContext.request.contextPath}/qilu/notice/viewnotice/viewnoticearticle/${thread.id}" target="_blank">
-                                               ${thread.title}
+                                       <a class="urlLink" href="${pageContext.request.contextPath}/device/viewdevicearticle/${thread.id}" target="_blank">
+                                               ${thread.devicename}
                                        </a>
                                 </td>
-                                <td>${thread.authorname}</td>
+                                <td>${thread.deviceip}</td>
                                 <td>
                                     <fmt:formatDate var="date" value="${thread.publisheddate}" pattern="yyyy-MM-dd HH:mm:ss" />
                                         ${date}
