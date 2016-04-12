@@ -18,23 +18,23 @@ public class Device implements Serializable{
 	@Column(name = "DEVICEID")
 	private Integer deviceid;//设备编号
 	
-	@Column(name = "DEVICE_NAME")
+	@Column(name = "DEVICENAME")
 	private String devicename;//设备名称
 	
-	@Column(name = "DEVICE_IP")
+	@Column(name = "DEVICEIP")
 	private String deviceip;//连接IP地址
 	
-	@Column(name = "DEVICE_PORT")
+	@Column(name = "DEVICEPORT")
 	private String deviceport;//监听端口号
 	
-	@Column(name = "DEVICE_STATUS")
+	@Column(name = "DEVICESTATUS")
 	private String devicestatus;//设备状态
 	
-	@Column(name = "DEVICE_TYPE")
-	private String devicetype;//设备类型
+	@Column(name = "DEVICETYPE")
+	private String devicetype;//设备型号
 	
-	@Column(name = "DEVICE_SENSOR_NUMBER")
-	private Integer devicesensornumber;//传感器个数
+	@Column(name = "SENSORNUMBER")
+	private Integer sensornumber;//传感器个数
 
 	
 
@@ -86,14 +86,12 @@ public class Device implements Serializable{
 		this.devicetype = devicetype;
 	}
 
-	public Integer getDevicesensornumber() {
-		return devicesensornumber;
+	public Integer getSensornumber() {
+		return sensornumber;
 	}
 
-	public void setDevicesensornumber(Integer devicesensornumber) {
-		this.devicesensornumber = devicesensornumber;
+	public void setSensornumber(Integer sensornumber) {
+		this.sensornumber = sensornumber;
 	}
 
-	
-	
 }
