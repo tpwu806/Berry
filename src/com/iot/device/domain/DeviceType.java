@@ -20,7 +20,7 @@ public class DeviceType implements Serializable{
 	private Integer devicetypeid;//编号
 	
 	@Column(name = "DEVICETYPE")
-	private Integer deviceTYPE;//设备型号
+	private String deviceTYPE;//设备型号
 
 	public Integer getDevicetypeid() {
 		return devicetypeid;
@@ -30,11 +30,11 @@ public class DeviceType implements Serializable{
 		this.devicetypeid = devicetypeid;
 	}
 
-	public Integer getDeviceTYPE() {
+	public String getDeviceTYPE() {
 		return deviceTYPE;
 	}
 
-	public void setDeviceTYPE(Integer deviceTYPE) {
+	public void setDeviceTYPE(String deviceTYPE) {
 		this.deviceTYPE = deviceTYPE;
 	}
 	

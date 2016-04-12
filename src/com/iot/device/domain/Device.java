@@ -15,8 +15,8 @@ public class Device implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "DEVICEID")
-	private Integer deviceid;//设备编号
+	@Column(name = "ID")
+	private Integer id;//设备编号
 	
 	@Column(name = "DEVICENAME")
 	private String devicename;//设备名称
@@ -36,14 +36,12 @@ public class Device implements Serializable{
 	@Column(name = "SENSORNUMBER")
 	private Integer sensornumber;//传感器个数
 
-	
-
-	public Integer getDeviceid() {
-		return deviceid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setDeviceid(Integer deviceid) {
-		this.deviceid = deviceid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getDevicename() {

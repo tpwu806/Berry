@@ -15,8 +15,8 @@ public class Sensor implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "SENSORID")
-	private Integer sensorid;//传感器编号
+	@Column(name = "ID")
+	private Integer id;//传感器编号
 	
 	@Column(name = "SENSORNAME")
 	private String sensorname;//传感器名称
@@ -25,17 +25,17 @@ public class Sensor implements Serializable{
 	private String sensortype;//传感器类型
 	
 	@Column(name = "SENSORPARAMETER")
-	private String sensorparameter;//传感器参数名
+	private Integer sensorparameter;//传感器参数名
 	
 	@Column(name = "SENSORPARAMETER2")
-	private String sensorparameter2;//传感器参数2名
+	private Integer sensorparameter2;//传感器参数2名
 
-	public Integer getSensorid() {
-		return sensorid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setSensorid(Integer sensorid) {
-		this.sensorid = sensorid;
+	public void setId(Integer id) {
+		this.id = id;
 	}	
 
 	public String getSensorname() {
@@ -54,19 +54,19 @@ public class Sensor implements Serializable{
 		this.sensortype = sensortype;
 	}
 
-	public String getSensorparameter() {
+	public Integer getSensorparameter() {
 		return sensorparameter;
 	}
 
-	public void setSensorparameter(String sensorparameter) {
+	public void setSensorparameter(Integer sensorparameter) {
 		this.sensorparameter = sensorparameter;
 	}
 
-	public String getSensorparameter2() {
+	public Integer getSensorparameter2() {
 		return sensorparameter2;
 	}
 
-	public void setSensorparameter2(String sensorparameter2) {
+	public void setSensorparameter2(Integer sensorparameter2) {
 		this.sensorparameter2 = sensorparameter2;
 	}
 

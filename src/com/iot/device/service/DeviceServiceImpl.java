@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iot.device.dao.DeviceDAO;
+import com.iot.device.dao.DeviceTypeDAO;
 import com.iot.device.domain.Device;
 import com.iot.device.dto.DeviceDO;
 import com.iot.exceptions.DaoCreateException;
@@ -22,6 +23,9 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired
 	private DeviceDAO deviceDAO;
+	
+	@Autowired
+	private DeviceTypeDAO deviceTypeDAO;
 
 	@Override
 	public Page<DeviceDO> retrieveAllDevice(Pageable pgble) throws DaoFinderException {

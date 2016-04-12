@@ -14,6 +14,7 @@ import com.iot.exceptions.DaoDeleteException;
 import com.iot.exceptions.DaoFinderException;
 import com.iot.exceptions.DaoUpdateException;
 import com.iot.sensor.dao.SensorDAO;
+import com.iot.sensor.dao.SensorTypeDAO;
 import com.iot.sensor.domain.Sensor;
 import com.iot.sensor.dto.SensorDO;
 import com.iot.usermgmt.service.UserServiceImpl;
@@ -27,6 +28,9 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private SensorDAO sensorDAO;
+	
+	@Autowired
+	private SensorTypeDAO sensorTypeDAO;
 
 	@Override
 	public Integer getTem() throws DaoFinderException {

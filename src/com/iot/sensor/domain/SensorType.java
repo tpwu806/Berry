@@ -19,7 +19,7 @@ public class SensorType implements Serializable{
 	private Integer sensortypeid;//编号
 	
 	@Column(name = "SENSORTYPE")
-	private Integer sensorTYPE;//传感器型号
+	private Integer sensortype;//传感器型号
 
 	public Integer getSensortypeid() {
 		return sensortypeid;
@@ -29,12 +29,12 @@ public class SensorType implements Serializable{
 		this.sensortypeid = sensortypeid;
 	}
 
-	public Integer getSensorTYPE() {
-		return sensorTYPE;
+	public Integer getSensortype() {
+		return sensortype;
 	}
 
-	public void setSensorTYPE(Integer sensorTYPE) {
-		this.sensorTYPE = sensorTYPE;
+	public void setSensortype(Integer sensortype) {
+		this.sensortype = sensortype;
 	}
 	
 	
