@@ -1,4 +1,4 @@
-package com.iot.warning.domain;
+package com.iot.sensor.domain;
 
 public class Threshold {
 
