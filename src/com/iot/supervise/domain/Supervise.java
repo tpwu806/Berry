@@ -28,19 +28,13 @@ import com.iot.sensor.domain.Sensor;
  ******************************************************************
  */
 @Entity
-@Table(name = "SUPERVISE_SUPERVISE")//历史信息表表名
+@Table(name = "SUPERVISE_SUPERVISE")//采集信息表
 public class Supervise implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Integer id;//编号
-	
-	@Column(name = "DEVICENAME")
-	private Integer devicename;//设备名称
-	
-	@Column(name = "SENSORNAME")
-	private Integer sensorname;//传感器名称
 
 	@Column(name = "SUPERVISETIME")
 	private Timestamp supervisetime;//采集时间
@@ -62,21 +56,6 @@ public class Supervise implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getDevicename() {
-		return devicename;
-	}
-
-	public void setDevicename(Integer devicename) {
-		this.devicename = devicename;
-	}
-
-	public Integer getSensorname() {
-		return sensorname;
-	}
-
-	public void setSensorname(Integer sensorname) {
-		this.sensorname = sensorname;
-	}
 
 	public Timestamp getSupervisetime() {
 		return supervisetime;
