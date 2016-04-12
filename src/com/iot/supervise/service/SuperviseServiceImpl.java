@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iot.supervise.dao.SuperviseDAO;
+import com.iot.supervise.dao.TaskDAO;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
@@ -14,4 +15,7 @@ public class SuperviseServiceImpl implements SuperviseService {
 
 	@Autowired
 	private SuperviseDAO superviseDAO;
+	
+	@Autowired
+	private TaskDAO taskDAO;
 }
