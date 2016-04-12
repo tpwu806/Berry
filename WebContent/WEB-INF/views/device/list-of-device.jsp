@@ -36,11 +36,11 @@
         <%@ include file="../includes/outermenu.jspf" %>
 
         <!-- Inner menu bar -->
-        <%-- <%@ include file="include/innermenu.jspf" %> --%>
+        <%@ include file="include/innermenu.jspf" %> 
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
-        
+                
         	<form method="GET"  action="${pageContext.request.contextPath}/device/searchdevice" accept-charset="UTF-8">
 
                 <div class="search-admin">
@@ -51,16 +51,21 @@
                         <button class="btn btn-lg btn-primary btn-success" type="submit"><img src="<c:url value="/images/search_16.png"/>"></button>
                     </div>
                     <div class="page-header ">
-                        <div class="page-header page-dropdown">是否含回执
-                             <select name="receiptstate" class="admin-search">
+                        <div class="page-header page-dropdown">设备型号
+                             <select name="devicetype" class="admin-search">
 				                <option value="">全部</option>
-				                <option value="RECEIPT_YES">含回执</option>
-				                <option value="RECEIPT_NO">不含回执</option>
+				                <option value="RECEIPT_YES">树莓派</option>
+				                <option value="RECEIPT_NO">audrou</option>
+				                <option value="RECEIPT_OTHER">其他</option>
 				              </select>   
                         </div>
                     </div>
                 </div>
-
+                <div style="width: 240px;float:right;padding-bottom: 10px;">
+			         <div class="page-dropdown" style="width: 140px;"> 
+		                               共&nbsp;${deviceNum}&nbsp;个设备
+		         </div>	
+	            </div>
             </form>
 			 <div class="table-responsive">
                 <table class="table table-striped text-center">
@@ -69,6 +74,7 @@
                         <th class="text-center">设备名称</th>
                         <th class="text-center">IP地址</th>
                         <th class="text-center">端口号</th>
+                        <th class="text-center">设备型号</th>
                         <th class="text-center">传感器个数</th>
                     </tr>
                     </thead>
@@ -85,19 +91,10 @@
                                        </a>
                                 </td>
                                 <td>${thread.deviceip}</td>
-                                <td>
-                                    <fmt:formatDate var="date" value="${thread.publisheddate}" pattern="yyyy-MM-dd HH:mm:ss" />
-                                        ${date}
-                                </td>
-                                <td>
-                                	 <c:if test="${thread.receiptsign[0] == 0}" >
-                                	 	不含回执
-                                	 </c:if>
-                                	 
-                                	  <c:if test="${thread.receiptsign[0] == 1}" >
-                                	 	含回执
-                                	 </c:if>
-                                </td>
+                                <td>${thread.deviceport}</td>
+                                <td>${thread.devicetype}</td>
+                                <td>${thread.sensornumber}</td>
+                                
                             </tr>
                         </c:forEach>
                     </c:catch>
@@ -105,6 +102,22 @@
 
                 </table>
             </div>
+            
+            <c:if test="${exception == null}">
+                <nav class="search">
+                    <ul class="pagination pagination-lg">
+                            ${deviceList.printLeftArrows()}
+                            ${deviceList.printPageNumbers()}
+                            ${deviceList.printRightArrows()}
+                    </ul>
+                </nav>
+            </c:if>
+            
+            <c:if test="${not empty MESSAGE_KEY}">
+                <nav class="search">
+                    ${MESSAGE_KEY}
+                </nav>
+            </c:if>
         </div>
     </div>
 </div>
@@ -121,12 +134,12 @@
 
     //查询条件回填——开始
     var searchKey = "${searchKey}";
-    var receiptstate = "${receiptstate}";
+    var receiptstate = "${devicetype}";
     if (searchKey != "" && searchKey != null) {
     	$("input[name='searchKey']").val(searchKey);
     }
-    if (receiptstate != "" && receiptstate != null) {
-    	$("select[name='receiptstate']").val(receiptstate);
+    if (devicetype != "" && devicetype != null) {
+    	$("select[name='devicetype']").val(devicetype);
     }
 	//查询条件回填——结束
 

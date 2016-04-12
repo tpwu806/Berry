@@ -9,6 +9,12 @@ public class DeviceDO {
 	private String deviceip;//连接IP地址
 	
 	private String deviceport;//监听端口号
+	
+	private String devicestatus;//设备状态
+	
+	private String devicetype;//设备型号
+	
+	private Integer sensornumber;//传感器个数
 
 	public Integer getId() {
 		return id;
@@ -41,6 +47,31 @@ public class DeviceDO {
 	public void setDeviceport(String deviceport) {
 		this.deviceport = deviceport;
 	}
+
+	public String getDevicestatus() {
+		return devicestatus;
+	}
+
+	public void setDevicestatus(String devicestatus) {
+		this.devicestatus = devicestatus;
+	}
+
+	public String getDevicetype() {
+		return devicetype;
+	}
+
+	public void setDevicetype(String devicetype) {
+		this.devicetype = devicetype;
+	}
+
+	public Integer getSensornumber() {
+		return sensornumber;
+	}
+
+	public void setSensornumber(Integer sensornumber) {
+		this.sensornumber = sensornumber;
+	}
+	
 	
 	
 }

@@ -1,7 +1,12 @@
 package com.iot.device.service;
 
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,7 @@ import com.iot.exceptions.DaoUpdateException;
 @EnableJpaRepositories(basePackages = {"com.iot.device.dao"})
 public class DeviceServiceImpl implements DeviceService {
 
+	static final Logger log = LoggerFactory.getLogger(DeviceServiceImpl.class);
 	@Autowired
 	private DeviceDAO deviceDAO;
 	
@@ -29,8 +35,39 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Override
 	public Page<DeviceDO> retrieveAllDevice(Pageable pgble) throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+		Page<DeviceDO> results = null;
+		try {
+			Page<Device> page = null;
+			
+			page = this.deviceDAO.findAll(pgble);
+			
+			ArrayList<DeviceDO> list = new ArrayList<DeviceDO>();
+			if ((page != null) && (page.hasContent())) {
+				for (Device device : page.getContent()) {
+					DeviceDO dd = new DeviceDO();
+					
+					dd.setId(device.getId());
+					dd.setDevicename(device.getDevicename());
+					dd.setDeviceip(device.getDeviceip());
+					dd.setDeviceport(device.getDeviceport());
+					
+					if(device.getSensornumber()==null){
+						dd.setSensornumber(0);
+					}else{
+						dd.setSensornumber(device.getSensornumber());
+					}
+					
+					dd.setDevicestatus(device.getDevicestatus());
+					dd.setDevicetype(device.getDevicetype());
+
+					list.add(dd);
+				}
+			}
+			return new PageImpl(list, pgble, page.getTotalElements());
+		} catch (Exception ex) {
+			log.debug("Error retrieving notice for user", ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
 	}
 
 	@Override

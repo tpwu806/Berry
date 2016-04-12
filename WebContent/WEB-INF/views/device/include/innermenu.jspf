@@ -1,31 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Grasshopper Technologies Corporation CONFIDENTIAL
-  ~
-  ~ Copyright (c) Grasshopper Technologies Corporation 2012 - 2015
-  ~ All rights reserved.
-  ~
-  ~ NOTICE: This unpublished material is proprietary to Grasshopper
-  ~ Technologies Corporation. All information contained herein is,
-  ~ and remains the property of Grasshopper Technologies Corporation.
-  ~ The methods and techniques contained herein are proprietary to
-  ~ Grasshopper Technologies Corporation and are considered trade
-  ~ secrets and/or confidential, and may be covered by China, U.S.
-  ~ and Foreign Patents, patents in process, and are protected by
-  ~ trade secret or copyright law. Reproduction or distribution, in
-  ~ whole or in part, is strictly forbidden except by express written
-  ~ permission of Grasshopper Technologies Corporation.
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--%>
 
 <!-- Setup the active class for the list items -->
 <c:set var="url" value="url: ${requestScope['javax.servlet.forward.servlet_path']}"/>
 <c:set var="fxn1" value=""/>
 <c:choose>
-	<c:when test="${fn:containsIgnoreCase(url, '/notice/viewnotice')}">
+	<c:when test="${fn:containsIgnoreCase(url, '/device/viewdevice')}">
         <c:set var="fxn1" value="class=\"active\""/>
     </c:when>
-    <c:when test="${fn:containsIgnoreCase(url, '/notice/newnoticeform')}">
+    <c:when test="${fn:containsIgnoreCase(url, '/device/newdeviceform')}">
         <c:set var="fxn2" value="class=\"active\""/>
     </c:when>
     <c:otherwise></c:otherwise>
@@ -37,19 +20,19 @@
 		
 		<li id="fxn1" ${fxn1}>
             <img src="<c:url value="/images/navmenu/view-24.png"/>"/>
-            <a href="${pageContext.request.contextPath}/qilu/notice/viewnotice?page=0&size=${properties['paging.numitems']}">
-                浏览通知<span style="right:10%; position:absolute;">›</span>
+            <a href="${pageContext.request.contextPath}/device/viewdevice?page=0&size=${properties['paging.numitems']}">
+               	 浏览设备<span style="right:10%; position:absolute;">›</span>
             </a>
         </li>
 		
-        <sec:authorize access="hasAnyRole('ROLE_ORGMOD', 'ROLE_ORGADMIN')">
-            <li id="fxn2" ${fxn2}>
-                <img src="<c:url value="/images/navmenu/edit-24.png"/>"/>
-                <a href="${pageContext.request.contextPath}/mod/notice/newnoticeform">
-                    新增通知<span style="right:10%; position:absolute;">›</span>
-                </a>
-            </li>
-        </sec:authorize>
+        
+        <li id="fxn2" ${fxn2}>
+            <img src="<c:url value="/images/navmenu/edit-24.png"/>"/>
+            <a href="${pageContext.request.contextPath}/device/newdeviceform">
+               	 新增设备<span style="right:10%; position:absolute;">›</span>
+            </a>
+        </li>
+        
 
     </ul>
 </div>

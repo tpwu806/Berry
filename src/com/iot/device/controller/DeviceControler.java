@@ -50,7 +50,7 @@ public class DeviceControler {
 		try {
 			String searchTerm="";
 			String receiptState="";
-			deviceNum=this.deviceService.getNumSearchDevice(searchTerm,receiptState);
+			//deviceNum=this.deviceService.getNumSearchDevice(searchTerm,receiptState);
 			modelAndView.addObject("deviceNum", deviceNum);
 			if ((deviceList != null) && ((deviceList instanceof Pager))) {
 				if (((Pager) deviceList).hasContent()) {
