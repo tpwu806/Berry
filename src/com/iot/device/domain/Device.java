@@ -15,8 +15,8 @@ public class Device implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
-	private Integer id;//设备编号
+	@Column(name = "DEVICEID")
+	private Integer deviceid;//设备编号
 	
 	@Column(name = "DEVICE_NAME")
 	private String devicename;//设备名称
@@ -26,13 +26,24 @@ public class Device implements Serializable{
 	
 	@Column(name = "DEVICE_PORT")
 	private String deviceport;//监听端口号
+	
+	@Column(name = "DEVICE_STATUS")
+	private String devicestatus;//设备状态
+	
+	@Column(name = "DEVICE_TYPE")
+	private String devicetype;//设备类型
+	
+	@Column(name = "DEVICE_SENSOR_NUMBER")
+	private Integer devicesensornumber;//传感器个数
 
-	public Integer getId() {
-		return id;
+	
+
+	public Integer getDeviceid() {
+		return deviceid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setDeviceid(Integer deviceid) {
+		this.deviceid = deviceid;
 	}
 
 	public String getDevicename() {
@@ -58,6 +69,31 @@ public class Device implements Serializable{
 	public void setDeviceport(String deviceport) {
 		this.deviceport = deviceport;
 	}
+
+	public String getDevicestatus() {
+		return devicestatus;
+	}
+
+	public void setDevicestatus(String devicestatus) {
+		this.devicestatus = devicestatus;
+	}
+
+	public String getDevicetype() {
+		return devicetype;
+	}
+
+	public void setDevicetype(String devicetype) {
+		this.devicetype = devicetype;
+	}
+
+	public Integer getDevicesensornumber() {
+		return devicesensornumber;
+	}
+
+	public void setDevicesensornumber(Integer devicesensornumber) {
+		this.devicesensornumber = devicesensornumber;
+	}
+
 	
 	
 }

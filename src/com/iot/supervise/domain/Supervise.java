@@ -28,37 +28,31 @@ import com.iot.sensor.domain.Sensor;
  ******************************************************************
  */
 @Entity
-@Table(name = "SUPERVISE_SUPERVISE")//设备表名
+@Table(name = "SUPERVISE_SUPERVISE")//历史信息表表名
 public class Supervise implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
-	private Integer id;//任务号
-	
-	@Column(name = "SUPERVISE_NAME")
-	private String supervisename;//任务名称
+	private Integer id;//编号
 	
 	@Column(name = "DEVICENAME")
-	private Integer devicename;//多对一设备名称
-	@ManyToOne(targetEntity = Device.class)
-	@JoinColumn(name = "DEVICENAME", updatable = false, insertable = false)
-	private Device device;//设备集合
+	private Integer devicename;//设备名称
 	
 	@Column(name = "SENSORNAME")
-	private Integer sensorname;//多对一传感器名称
-	@ManyToOne(targetEntity = Sensor.class)
-	@JoinColumn(name = "SENSORNAME", updatable = false, insertable = false)
-	private Sensor sensor;//传感器集合
+	private Integer sensorname;//传感器名称
+
+	@Column(name = "SUPERVISETIME")
+	private Timestamp supervisetime;//采集时间
 	
-	@Column(name = "SUPERVISE_STARTIME")
-	private Timestamp supervisestarttime;//开启时间
+	@Column(name = "SUPERVISEVALUE")
+	private String sensorvalue;//传感器参数值
 	
-	@Column(name = "SUPERVISE_STOPTIME")
-	private Timestamp supervisestoptime;//关闭时间
-	
-	@Column(name = "SUPERVISE_TYPE")
-	private String supervisetype;//开关状态
+	@Column(name = "SUPERVISEVALUE2")
+	private String sensorvalue2;//传感器参数2值
+
+	@Column(name = "WARNINGCLASS")
+	private Integer warningclass;//报警状态
 
 	public Integer getId() {
 		return id;
@@ -66,14 +60,6 @@ public class Supervise implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getSupervisename() {
-		return supervisename;
-	}
-
-	public void setSupervisename(String supervisename) {
-		this.supervisename = supervisename;
 	}
 
 	public Integer getDevicename() {
@@ -84,14 +70,6 @@ public class Supervise implements Serializable{
 		this.devicename = devicename;
 	}
 
-	public Device getDevice() {
-		return device;
-	}
-
-	public void setDevice(Device device) {
-		this.device = device;
-	}
-
 	public Integer getSensorname() {
 		return sensorname;
 	}
@@ -100,38 +78,38 @@ public class Supervise implements Serializable{
 		this.sensorname = sensorname;
 	}
 
-	public Sensor getSensor() {
-		return sensor;
+	public Timestamp getSupervisetime() {
+		return supervisetime;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
+	public void setSupervisetime(Timestamp supervisetime) {
+		this.supervisetime = supervisetime;
 	}
 
-	public Timestamp getSupervisestarttime() {
-		return supervisestarttime;
+	public String getSensorvalue() {
+		return sensorvalue;
 	}
 
-	public void setSupervisestarttime(Timestamp supervisestarttime) {
-		this.supervisestarttime = supervisestarttime;
+	public void setSensorvalue(String sensorvalue) {
+		this.sensorvalue = sensorvalue;
 	}
 
-	public Timestamp getSupervisestoptime() {
-		return supervisestoptime;
+	public String getSensorvalue2() {
+		return sensorvalue2;
 	}
 
-	public void setSupervisestoptime(Timestamp supervisestoptime) {
-		this.supervisestoptime = supervisestoptime;
+	public void setSensorvalue2(String sensorvalue2) {
+		this.sensorvalue2 = sensorvalue2;
 	}
 
-	public String getSupervisetype() {
-		return supervisetype;
+	public Integer getWarningclass() {
+		return warningclass;
 	}
 
-	public void setSupervisetype(String supervisetype) {
-		this.supervisetype = supervisetype;
+	public void setWarningclass(Integer warningclass) {
+		this.warningclass = warningclass;
 	}
-
+	
 	
 	
 }
