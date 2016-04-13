@@ -28,6 +28,12 @@ import com.iot.device.dto.DeviceDO;
 import com.iot.device.service.DeviceService;
 import com.iot.sensor.service.SensorService;
 
+/**
+ * @author wutongpeng
+ *
+ */
+
+
 @Controller
 public class DeviceControler {
 	static final Logger log = LoggerFactory.getLogger(DeviceControler.class);
@@ -41,6 +47,12 @@ public class DeviceControler {
 	@Autowired
 	private DeviceService deviceService;
 	
+	
+	
+	/**
+	 * 设备列表
+	 *
+	 */
 	@RequestMapping(value = { "/device/viewdevice" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
 	public ModelAndView viewAllPublishedDevice(@ModelAttribute("deviceList") Object deviceList, Pageable pgble,
@@ -78,6 +90,11 @@ public class DeviceControler {
 		return modelAndView;
 	}
 	
+
+	/**
+	 * 获得添加设备表单
+	 *
+	 */
 	@RequestMapping(value = { "/device/newdeviceform" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
 	public ModelAndView viewCreateDeviceForm() {
@@ -89,7 +106,10 @@ public class DeviceControler {
 		return modelAndView;
 	}
 	
-	
+	/**
+	 * 保存添加设备表单
+	 *
+	 */
 	@RequestMapping(value = { "/device/newdeviceform/newdevice" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.POST })
 	public String addNewDevice(@Valid @ModelAttribute("deviceForm") DeviceDO deviceForm, BindingResult bindingResult,
@@ -105,6 +125,64 @@ public class DeviceControler {
 			redirectAttributes.addFlashAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}
 		return "redirect:/device/viewdevice?page=0&size=" + this.env.getRequiredProperty("paging.numitems");
+	}
+	
+	/**
+	 * 获得修改设备表单
+	 *
+	 */
+	@RequestMapping(value = { "/device/editdeviceform/{deviceId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView editDevice(@PathVariable Integer deviceId) {
+		ModelAndView modelAndView = new ModelAndView("device/edit-device-form");
+		try {
+
+			DeviceDO deviceObject = this.deviceService.getDeviceDetailById(deviceId,"");
+			modelAndView.addObject("deviceForm", deviceObject);			
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to display edit device form", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+	
+	/**
+	 * 保存修改设备表单
+	 *
+	 */
+	@RequestMapping(value = { "/device/editdeviceform/editdevice/{deviceId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.POST })
+	public ModelAndView viewEditDeviceForm(@PathVariable Integer deviceId, @ModelAttribute("deviceForm") DeviceDO deviceForm) {
+		ModelAndView modelAndView = null;
+		try {
+			Device nn = this.deviceService.updateDevice(deviceForm);
+			//Integer noticeId = nn.getId();
+
+			modelAndView = new ModelAndView("redirect:/device/viewdevice/viewdevicearticle/" + deviceId);
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to use in editing device article", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+	
+	/**
+	 * 删除设备
+	 *
+	 */
+	@RequestMapping(value = { "/device/deletedevice/{id}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView deleteDevice(@PathVariable Integer id) {
+		ModelAndView modelAndView = null;
+		try {
+			modelAndView = new ModelAndView(
+					"redirect:/device/viewdevice?page=0&size=" + this.env.getRequiredProperty("paging.numitems"));
+			this.deviceService.deleteDevice(id);			
+		} catch (Exception ex) {
+			log.debug("Error in deleting device", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = { "/device/searchdevice" }, method = {
@@ -155,49 +233,5 @@ public class DeviceControler {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = { "/device/editdeviceform/{deviceId}" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView editDevice(@PathVariable Integer deviceId) {
-		ModelAndView modelAndView = new ModelAndView("device/edit-device-form");
-		try {
 
-			DeviceDO deviceObject = this.deviceService.getDeviceDetailById(deviceId,"");
-			modelAndView.addObject("deviceForm", deviceObject);			
-		} catch (Exception ex) {
-			log.debug("Error in finding news article to display edit device form", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
-		}
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = { "/device/editdeviceform/editdevice/{deviceId}" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.POST })
-	public ModelAndView viewEditDeviceForm(@PathVariable Integer deviceId, @ModelAttribute("deviceForm") DeviceDO deviceForm) {
-		ModelAndView modelAndView = null;
-		try {
-			Device nn = this.deviceService.updateDevice(deviceForm);
-			//Integer noticeId = nn.getId();
-
-			modelAndView = new ModelAndView("redirect:/device/viewdevice/viewdevicearticle/" + deviceId);
-		} catch (Exception ex) {
-			log.debug("Error in finding news article to use in editing device article", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
-		}
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = { "/device/deletedevice/{id}" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView deleteDevice(@PathVariable Integer id) {
-		ModelAndView modelAndView = null;
-		try {
-			modelAndView = new ModelAndView(
-					"redirect:/device/viewdevice?page=0&size=" + this.env.getRequiredProperty("paging.numitems"));
-			this.deviceService.deleteDevice(id);			
-		} catch (Exception ex) {
-			log.debug("Error in deleting device", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
-		}
-		return modelAndView;
-	}
 }

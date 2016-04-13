@@ -1,18 +1,31 @@
 package com.iot.sensor.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.iot.exceptions.DaoFinderException;
+import com.iot.common.utilities.Pager;
 import com.iot.device.service.DeviceService;
+import com.iot.sensor.domain.Sensor;
+import com.iot.sensor.dto.SensorDO;
 import com.iot.sensor.service.SensorService;
+
+
 
 @Controller
 public class SensorControler {
@@ -27,13 +40,144 @@ public class SensorControler {
 	@Autowired
 	private DeviceService deviceService;
 	
+	/**
+	 * 传感器列表
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/viewsensor" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public String viewAllPublishedSensor(@ModelAttribute("sensorList") Object sensorList,Model model, Pageable pgble,
+			HttpServletRequest request) {
+		
+		Integer sensorNum=0;
+		try {
+
+			if (null != sensorList && sensorList instanceof Pager) {
+
+				if (((Pager) sensorList).hasContent()) {
+
+					Pager<SensorDO> rList = (Pager) sensorList;
+					model.addAttribute("sensorList", rList);
+
+				} else {
+
+					model.addAttribute("MESSAGE_KEY", "没有搜索结果");
+
+				}
+
+			} else {
+				System.out.println(request.getParameter("deviceId"));
+				
+				Page<SensorDO> sensor = this.sensorService.retrieveAllSensor(pgble,
+						Integer.valueOf(request.getParameter("deviceId")));				
+				System.out.println(sensor.getContent().size());
+				String url = request.getContextPath() + "/sensor/viewsensor?";
+				Pager<SensorDO> rList = new Pager(sensor, url);
+				model.addAttribute("sensorList", rList);
+
+			}
+			model.addAttribute("sensorNum", sensorNum);
+		} catch (Exception ex) {
+			log.debug("Error retrieving list sensor search results or retrieving all sensor", ex);
+			model.addAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return "sensor/list-of-sensor";
+	}
 	
-//	@RequestMapping(value = { "/device/getsensor" }, method = {
-//			org.springframework.web.bind.annotation.RequestMethod.GET})
-//	public ModelAndView getTem() throws DaoFinderException {
-//		ModelAndView modelAndView = new ModelAndView("/supervise/supervise");			
-//		Integer tem=this.sensorService.getTem();
-//		modelAndView.addObject("tem", tem);
-//		return modelAndView;
-//	}
+
+	/**
+	 * 获得添加传感器表单
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/newsensorform" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView viewCreateSensorForm() {
+		ModelAndView modelAndView = new ModelAndView("sensor/add_sensor_form");
+		
+		SensorDO sensorObject = new SensorDO();
+		modelAndView.addObject("sensorForm", sensorObject);
+		
+		return modelAndView;
+	}
+	
+	/**
+	 * 保存添加传感器表单
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/newsensorform/newsensor" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.POST })
+	public String addNewSensor(@Valid @ModelAttribute("sensorForm") SensorDO sensorForm, BindingResult bindingResult,
+			Model model, RedirectAttributes redirectAttributes) {
+		ModelAndView modelAndView = null;
+		try {
+			if (bindingResult.hasErrors()) {
+				return "sensor/add-sensor-form";
+			}
+			Sensor np = this.sensorService.createSensor(sensorForm);
+		} catch (Exception ex) {
+			log.debug("Error when creating new sensor article", ex);
+			redirectAttributes.addFlashAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return "redirect:/sensor/viewsensor?page=0&size=" + this.env.getRequiredProperty("paging.numitems");
+	}
+	
+	/**
+	 * 获得修改传感器表单
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/editsensorform/{sensorId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView editSensor(@PathVariable Integer sensorId) {
+		ModelAndView modelAndView = new ModelAndView("sensor/edit-sensor-form");
+		try {
+
+			SensorDO sensorObject = this.sensorService.getSensorDetailById(sensorId,"");
+			modelAndView.addObject("sensorForm", sensorObject);			
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to display edit sensor form", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+	
+	/**
+	 * 保存修改传感器表单
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/editsensorform/editsensor/{sensorId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.POST })
+	public ModelAndView viewEditSensorForm(@PathVariable Integer sensorId, @ModelAttribute("sensorForm") SensorDO sensorForm) {
+		ModelAndView modelAndView = null;
+		try {
+			Sensor nn = this.sensorService.updateSensor(sensorForm);
+			//Integer noticeId = nn.getId();
+
+			modelAndView = new ModelAndView("redirect:/sensor/viewsensor/viewsensorarticle/" + sensorId);
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to use in editing device article", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+	
+	/**
+	 * 删除传感器
+	 *
+	 */
+	@RequestMapping(value = { "/sensor/deletesensor/{id}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView deleteSensor(@PathVariable Integer id) {
+		ModelAndView modelAndView = null;
+		try {
+			modelAndView = new ModelAndView(
+					"redirect:/sensor/viewsensor?page=0&size=" + this.env.getRequiredProperty("paging.numitems"));
+			this.sensorService.deleteSensor(id);			
+		} catch (Exception ex) {
+			log.debug("Error in deleting sensor", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+	
+
 }

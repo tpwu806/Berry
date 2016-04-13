@@ -14,7 +14,7 @@ public interface SensorService {
 
 	public abstract Integer getTem() throws DaoFinderException;
 	
-	public abstract Page<SensorDO> retrieveAllSensor(Pageable pgble) throws DaoFinderException;
+	public abstract Page<SensorDO> retrieveAllSensor(Pageable pgble , Integer deviceid) throws DaoFinderException;
 
 	public abstract Sensor createSensor(SensorDO sensorForm) throws DaoCreateException;
 

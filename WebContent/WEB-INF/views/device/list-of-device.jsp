@@ -36,7 +36,7 @@
         <%@ include file="../includes/outermenu.jspf" %>
 
         <!-- Inner menu bar -->
-        <%@ include file="include/innermenu.jspf" %> 
+       <%--  <%@ include file="include/innermenu.jspf" %>  --%>
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
@@ -75,7 +75,7 @@
                         <th class="text-center">IP地址</th>
                         <th class="text-center">端口号</th>
                         <th class="text-center">设备型号</th>
-                        <th class="text-center">传感器个数</th>
+                        <th class="text-center">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,8 +92,15 @@
                                 </td>
                                 <td>${thread.deviceip}</td>
                                 <td>${thread.deviceport}</td>
-                                <td>${thread.devicetype}</td>
-                                <td>${thread.sensornumber}</td>
+                                <td>${thread.devicetype}</td>                               
+                                <td width="200px">                                       
+                                	 	<a class="urlLink" href="${pageContext.request.contextPath}/sensor/newsensorform/${thread.id}" target="_blank">
+                                	 		<img id="add_sensor" title="新增传感器" src="<c:url value="/images/button/add_btn.png"/>" width="15" height="16" style="margin-bottom:4px;" />
+                                	 	</a>
+                                	 	<a class="urlLink" href="${pageContext.request.contextPath}/sensor/viewsensor?page=0&size=${properties['paging.numitems']}&deviceId=${thread.id}" target="_blank">
+                                	 		<img id="view_recript" title="查看传感器" src="<c:url value="/images/button/view-24.png"/>" width="15" height="16" style="margin-bottom:4px;" />
+                                	 	</a>
+                                </td>
                                 
                             </tr>
                         </c:forEach>

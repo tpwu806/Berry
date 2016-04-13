@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.iot.device.domain.Device;
 
 @Entity
 @Table(name = "SENSOR_SENSOR")//传感器表
@@ -25,10 +29,17 @@ public class Sensor implements Serializable{
 	private String sensortype;//传感器类型
 	
 	@Column(name = "SENSORPARAMETER")
-	private Integer sensorparameter;//传感器参数名
+	private String sensorparameter;//传感器参数名
 	
 	@Column(name = "SENSORPARAMETER2")
-	private Integer sensorparameter2;//传感器参数2名
+	private String sensorparameter2;//传感器参数2名
+	
+	@Column(name = "DEVICEID")
+	private Integer deviceid;//设备编号
+	
+	@ManyToOne(targetEntity = Device.class)
+	@JoinColumn(name = "DEVICEID", updatable = false, insertable = false)
+	private Device device;//多对一设备集合
 
 	public Integer getId() {
 		return id;
@@ -54,21 +65,38 @@ public class Sensor implements Serializable{
 		this.sensortype = sensortype;
 	}
 
-	public Integer getSensorparameter() {
+	public String getSensorparameter() {
 		return sensorparameter;
 	}
 
-	public void setSensorparameter(Integer sensorparameter) {
+	public void setSensorparameter(String sensorparameter) {
 		this.sensorparameter = sensorparameter;
 	}
 
-	public Integer getSensorparameter2() {
+	public String getSensorparameter2() {
 		return sensorparameter2;
 	}
 
-	public void setSensorparameter2(Integer sensorparameter2) {
+	public void setSensorparameter2(String sensorparameter2) {
 		this.sensorparameter2 = sensorparameter2;
 	}
 
+	public Integer getDeviceid() {
+		return deviceid;
+	}
+
+	public void setDeviceid(Integer deviceid) {
+		this.deviceid = deviceid;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
+	
 	
 }

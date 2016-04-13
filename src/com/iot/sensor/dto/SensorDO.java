@@ -1,12 +1,22 @@
 package com.iot.sensor.dto;
 
+import com.iot.device.domain.Device;
+
 public class SensorDO {
 
 	private Integer id;//传感器编号
 	
 	private String sensorname;//传感器名称
 	
-	private Integer sensorparamiter;//传感器参数
+	private String sensortype;//传感器类型
+	
+	private String sensorparameter;//传感器参数名
+	
+	private String sensorparameter2;//传感器参数2名
+	
+	private Integer deviceid;//设备id
+	
+	private Device device;//多对一设备集合
 
 	public Integer getId() {
 		return id;
@@ -24,13 +34,47 @@ public class SensorDO {
 		this.sensorname = sensorname;
 	}
 
-	public Integer getSensorparamiter() {
-		return sensorparamiter;
+	public String getSensortype() {
+		return sensortype;
 	}
 
-	public void setSensorparamiter(Integer sensorparamiter) {
-		this.sensorparamiter = sensorparamiter;
+	public void setSensortype(String sensortype) {
+		this.sensortype = sensortype;
 	}
+
+	public String getSensorparameter() {
+		return sensorparameter;
+	}
+
+	public void setSensorparameter(String sensorparameter) {
+		this.sensorparameter = sensorparameter;
+	}
+
+	public String getSensorparameter2() {
+		return sensorparameter2;
+	}
+
+	public void setSensorparameter2(String sensorparameter2) {
+		this.sensorparameter2 = sensorparameter2;
+	}
+
+	public Integer getDeviceid() {
+		return deviceid;
+	}
+
+	public void setDeviceid(Integer deviceid) {
+		this.deviceid = deviceid;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
+	
 	
 	
 }

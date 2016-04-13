@@ -1,14 +1,19 @@
 package com.iot.sensor.service;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.iot.device.domain.Device;
+import com.iot.device.dto.DeviceDO;
 import com.iot.exceptions.DaoCreateException;
 import com.iot.exceptions.DaoDeleteException;
 import com.iot.exceptions.DaoFinderException;
@@ -39,11 +44,35 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	}
 
 	@Override
-	public Page<SensorDO> retrieveAllSensor(Pageable pgble) throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<SensorDO> retrieveAllSensor(Pageable pgble, Integer deviceid) throws DaoFinderException {
+		Page<SensorDO> results = null;
+		try {
+			Page<Sensor> page = null;
+			
+			page = this.sensorDAO.findByDeviceidOrderByPostdateDesc(deviceid,pgble);
+			
+			ArrayList<SensorDO> list = new ArrayList<SensorDO>();
+			if ((page != null) && (page.hasContent())) {
+				for (Sensor sensor : page.getContent()) {
+					SensorDO sd = new SensorDO();
+					
+					sd.setId(sensor.getId());
+					sd.setSensorname(sensor.getSensorname());
+					sd.setSensortype(sensor.getSensortype());
+					sd.setSensorparameter(sensor.getSensorparameter());
+					sd.setSensorparameter2(sensor.getSensorparameter2());
+					sd.setDeviceid(sensor.getDeviceid());
+					
+					list.add(sd);
+				}
+			}
+			return new PageImpl(list, pgble, page.getTotalElements());
+		} catch (Exception ex) {
+			log.debug("Error retrieving notice for user", ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
 	}
-
+	
 	@Override
 	public Sensor createSensor(SensorDO sensorForm) throws DaoCreateException {
 		// TODO Auto-generated method stub
@@ -80,4 +109,6 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }
