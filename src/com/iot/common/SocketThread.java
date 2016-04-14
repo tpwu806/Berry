@@ -1,4 +1,4 @@
-package com.iot.common.socket;
+package com.iot.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;
