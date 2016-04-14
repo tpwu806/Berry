@@ -1,5 +1,7 @@
 package com.iot.sensor.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -68,12 +70,12 @@ public class SensorControler {
 			} else {
 				System.out.println(request.getParameter("deviceId"));
 				
-				Page<SensorDO> sensor = this.sensorService.retrieveAllSensor(pgble,
+				List<SensorDO> sensor = this.sensorService.retrieveAllSensor(pgble,
 						Integer.valueOf(request.getParameter("deviceId")));				
-				System.out.println(sensor.getContent().size());
+				System.out.println(sensor.get(0).getSensorname());
 				String url = request.getContextPath() + "/sensor/viewsensor?";
-				Pager<SensorDO> rList = new Pager(sensor, url);
-				model.addAttribute("sensorList", rList);
+				//List<SensorDO> rList = new List(sensor, url);
+				model.addAttribute("sensorList", sensor);
 
 			}
 			model.addAttribute("sensorNum", sensorNum);

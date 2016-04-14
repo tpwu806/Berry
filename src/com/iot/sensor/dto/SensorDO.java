@@ -15,8 +15,6 @@ public class SensorDO {
 	private String sensorparameter2;//传感器参数2名
 	
 	private Integer deviceid;//设备id
-	
-	private Device device;//多对一设备集合
 
 	public Integer getId() {
 		return id;
@@ -65,16 +63,5 @@ public class SensorDO {
 	public void setDeviceid(Integer deviceid) {
 		this.deviceid = deviceid;
 	}
-
-	public Device getDevice() {
-		return device;
-	}
-
-	public void setDevice(Device device) {
-		this.device = device;
-	}
-
-	
-	
 	
 }

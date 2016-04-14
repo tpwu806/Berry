@@ -47,7 +47,7 @@
             
                 <li id="mod3" ${mod3}>
                     <img src="<c:url value="/images/navmenu/user-24.png"/>"/>
-                    <a href="${pageContext.request.contextPath}/sensor/viewsensor?page=0&size=${properties['paging.numitems']}">
+                    <a href="#">
                      			 传感器管理<span style="right:10%; position:absolute;">›</span>
                     </a>
                 </li>

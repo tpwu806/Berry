@@ -1,5 +1,7 @@
 package com.iot.sensor.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,9 +12,9 @@ import com.iot.sensor.domain.Sensor;
 
 public interface SensorDAO extends JpaRepository<Sensor, Integer>{
 	
-	/*@Query("select s from Sensor s where s.deviceid = :deviceid order by postdate desc") 
-	public abstract Page<Sensor> findByDeviceidOrderByPostdateDesc(@Param("deviceid")Integer deviceid, Pageable paramPageable);*/
+	@Query("select s from Sensor s where s.deviceid = :deviceid ") 
+	public abstract List<Sensor> findByDeviceidOrderByPostdateDesc(@Param("deviceid")Integer deviceid);
 	
 	
-	public abstract Page<Sensor> findByDeviceidOrderByPostdateDesc(Integer deviceid, Pageable paramPageable);
+	//public abstract Page<Sensor> findByDeviceidOrderByPostdateDesc(Integer deviceid, Pageable paramPageable);
 }

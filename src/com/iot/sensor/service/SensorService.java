@@ -1,5 +1,7 @@
 package com.iot.sensor.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,7 +16,7 @@ public interface SensorService {
 
 	public abstract Integer getTem() throws DaoFinderException;
 	
-	public abstract Page<SensorDO> retrieveAllSensor(Pageable pgble , Integer deviceid) throws DaoFinderException;
+	public abstract List<SensorDO> retrieveAllSensor(Pageable pgble , Integer deviceid) throws DaoFinderException;
 
 	public abstract Sensor createSensor(SensorDO sensorForm) throws DaoCreateException;
 

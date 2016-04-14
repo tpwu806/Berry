@@ -81,10 +81,10 @@
                     <tbody>
 
                     <c:catch var="exception">
-                        <c:forEach var="thread" items="${sensorList.content}">
+                        <c:forEach var="thread" items="${sensorList}">
 
                             <tr>
-                                <td>${thread.ip}</td>
+                                <td>${thread.id}</td>
                                 <td class="text-center">
                                  
                                        <a class="urlLink" href="${pageContext.request.contextPath}/sensor/viewsensorarticle/${thread.id}" target="_blank">
@@ -101,16 +101,6 @@
 
                 </table>
             </div>
-            
-            <c:if test="${exception == null}">
-                <nav class="search">
-                    <ul class="pagination pagination-lg">
-                            ${sensorList.printLeftArrows()}
-                            ${sensorList.printPageNumbers()}
-                            ${sensorList.printRightArrows()}
-                    </ul>
-                </nav>
-            </c:if>
             
             <c:if test="${not empty MESSAGE_KEY}">
                 <nav class="search">

@@ -1,6 +1,7 @@
 package com.iot.sensor.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,16 +45,15 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	}
 
 	@Override
-	public Page<SensorDO> retrieveAllSensor(Pageable pgble, Integer deviceid) throws DaoFinderException {
-		Page<SensorDO> results = null;
+	public List<SensorDO> retrieveAllSensor(Pageable pgble, Integer deviceid) throws DaoFinderException {
 		try {
-			Page<Sensor> page = null;
+			List<Sensor> page = null;
 			
-			page = this.sensorDAO.findByDeviceidOrderByPostdateDesc(deviceid,pgble);
+			page = this.sensorDAO.findByDeviceidOrderByPostdateDesc(deviceid);
 			
 			ArrayList<SensorDO> list = new ArrayList<SensorDO>();
-			if ((page != null) && (page.hasContent())) {
-				for (Sensor sensor : page.getContent()) {
+			if ((page != null) ) {
+				for (Sensor sensor : page) {
 					SensorDO sd = new SensorDO();
 					
 					sd.setId(sensor.getId());
@@ -66,7 +66,7 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 					list.add(sd);
 				}
 			}
-			return new PageImpl(list, pgble, page.getTotalElements());
+			return list;
 		} catch (Exception ex) {
 			log.debug("Error retrieving notice for user", ex);
 			throw new DaoFinderException(ex.getMessage());
