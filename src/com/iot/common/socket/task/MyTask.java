@@ -3,7 +3,10 @@ package com.iot.common.socket.task;
 import java.net.Socket;
 import java.util.TimerTask;
 
-import com.iot.common.socket.IfWoke;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.iot.common.socket.SocketVirtualController;
 import com.iot.common.socket.thread.MyThread;
 
 
@@ -11,6 +14,7 @@ import com.iot.common.socket.thread.MyThread;
  * 控制线程的任务
  * */
 public class MyTask extends TimerTask {	
+	private static Logger LOG = LoggerFactory.getLogger(MyTask.class);
 	MyThread mt;
 	static Socket socket;
 	public MyTask(){
@@ -46,7 +50,7 @@ public class MyTask extends TimerTask {
 	public void run() {
 		
 		System.out.println("********");
-		IfWoke iw=new IfWoke();
+		SocketVirtualController iw=new SocketVirtualController();
 		if(iw.isCmdstatus()){			
 			if(!mt.isStatus()){
 				startThread();

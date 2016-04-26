@@ -7,10 +7,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 /**
  * socket线程
  * */
 public class MyThread extends Thread{
+	private static Logger LOG = LoggerFactory.getLogger(MyThread.class);
 	private volatile boolean status;//设备状态,ture;正在运行  false：已经关闭	
 	private Socket socket;
 	
