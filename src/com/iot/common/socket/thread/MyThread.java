@@ -1,4 +1,4 @@
-package com.iot.common;
+package com.iot.common.socket.thread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,23 +7,35 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class SocketThread implements Runnable{
-	
+/**
+ * socket线程
+ * */
+public class MyThread extends Thread{
+	private volatile boolean status;//设备状态,ture;正在运行  false：已经关闭	
 	private Socket socket;
-    public SocketThread(Socket socket){
+	
+    public MyThread(Socket socket){
         this.socket=socket;
     }
-	@Override
+	public  boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public void run() {
 		BufferedReader receive = null;
 		PrintWriter send = null;
 		String tem = null;
 		String cmd="GET";
+		
 		try{
 			receive = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		    send = new PrintWriter(socket.getOutputStream());
 		    
-		    while(true){  
+		    while(status){  
 		        send.println(cmd);  
                 send.flush();
 		    	tem = receive.readLine();  
@@ -31,18 +43,9 @@ public class SocketThread implements Runnable{
                     break;  
                 }                 
                 System.out.println("Client Socket Message:"+tem);  
-                Thread.sleep(2000);  
+                Thread.sleep(50);  
                   
             }
-		    
-//		    for (int i = 0; i < 10; i++) {  
-//		    	send.println(cmd + i);  
-//		    	send.flush();  
-//		    	tem = receive.readLine();  
-//                System.out.println(tem);  
-//            }  
-//		    send.println("END");  
-//		    send.flush();  
             
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -68,7 +71,7 @@ public class SocketThread implements Runnable{
                 System.out.println(e);
             }
 		}
-		
+					
 	}
-		
+	
 }
