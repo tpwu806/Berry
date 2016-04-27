@@ -11,7 +11,7 @@ import com.iot.common.socket.task.MyTask;
 /**
  * 开启一个任务
  * */
-@Component
+//@Component
 public class MyTimer {
 	private static Logger LOG = LoggerFactory.getLogger(MyTimer.class);
 	public MyTimer(){

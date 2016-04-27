@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.iot.device.domain.Device;
 
 @Entity
 @Table(name = "TASK_TASK")//任务表
@@ -19,11 +23,9 @@ public class Task implements Serializable{
 	@Column(name = "ID")
 	private Integer id;//任务编号
 	
-	@Column(name = "DEVICENAME")
-	private Integer devicename;//设备名称
-	
-	@Column(name = "SENSORNAME")
-	private Integer sensorname;//传感器名称
+	@ManyToOne
+	@JoinColumn(name = "DEVICEID")
+	private Device deviceid;//设备id
 	
 	@Column(name = "STARTTIME")
 	private Timestamp starttime;//任务开始时间
@@ -46,20 +48,20 @@ public class Task implements Serializable{
 		return starttime;
 	}
 
-	public Integer getDevicename() {
-		return devicename;
+	public Device getDevice() {
+		return deviceid;
 	}
 
-	public void setDevicename(Integer devicename) {
-		this.devicename = devicename;
+	public void setDevice(Device device) {
+		this.deviceid = device;
 	}
 
-	public Integer getSensorname() {
-		return sensorname;
+	public String getTaskstatus() {
+		return taskstatus;
 	}
 
-	public void setSensorname(Integer sensorname) {
-		this.sensorname = sensorname;
+	public void setTaskstatus(String taskstatus) {
+		this.taskstatus = taskstatus;
 	}
 
 	public void setStarttime(Timestamp starttime) {

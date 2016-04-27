@@ -117,7 +117,7 @@ public class DeviceControler {
 		ModelAndView modelAndView = null;
 		try {
 			if (bindingResult.hasErrors()) {
-				return "notice/add-notice-form";
+				return "device/add_device_form";
 			}
 			Device np = this.deviceService.createDevice(deviceForm);
 		} catch (Exception ex) {

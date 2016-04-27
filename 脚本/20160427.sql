@@ -21,13 +21,13 @@ USE `iot`;
 DROP TABLE IF EXISTS `device_device`;
 
 CREATE TABLE `device_device` (
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `DEVICENAME` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DEVICEIP` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DEVICEPORT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DEVICESTATUS` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DEVICETYPE` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SENSORNUMBER` int(10) DEFAULT NULL,
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DEVICENAME` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备名称',
+  `DEVICEIP` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备ip地址',
+  `DEVICEPORT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备端口号',
+  `DEVICESTATUS` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备状态',
+  `DEVICETYPE` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备状态',
+  `SENSORNUMBER` int(10) DEFAULT NULL COMMENT '传感器个数',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,11 +50,12 @@ CREATE TABLE `device_type` (
 DROP TABLE IF EXISTS `sensor_sensor`;
 
 CREATE TABLE `sensor_sensor` (
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `SENSORNAME` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SENSORTYPE` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SENSORPARAMETER` int(20) NOT NULL,
-  `SENSORPARAMETER2` int(20) DEFAULT NULL,
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DEVICEID` int(10) DEFAULT NULL COMMENT '外键设备id',
+  `SENSORNAME` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '传感器名称',
+  `SENSORTYPE` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '传感器类型',
+  `SENSORPARAMETER` int(20) NOT NULL COMMENT '参数一名称',
+  `SENSORPARAMETER2` int(20) DEFAULT NULL COMMENT '参数二名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -72,36 +73,38 @@ CREATE TABLE `sensor_type` (
 
 /*Data for the table `sensor_type` */
 
-/*Table structure for table `supervise_supervise` */
-
-DROP TABLE IF EXISTS `supervise_supervise`;
-
-CREATE TABLE `supervise_supervise` (
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `SUPERVISETIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `SUPERVISEVALUE` int(10) NOT NULL,
-  `SUPERVISEVALUE2` int(10) DEFAULT NULL,
-  `WARNINGCLASS` int(10) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `supervise_supervise` */
-
 /*Table structure for table `task_task` */
 
 DROP TABLE IF EXISTS `task_task`;
 
 CREATE TABLE `task_task` (
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `DEVICENAME` int(10) NOT NULL,
-  `SENSORNAME` int(10) NOT NULL,
-  `STARTTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `STOPTIME` timestamp NULL DEFAULT NULL,
-  `TASKSTATUS` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DEVICEID` int(10) DEFAULT NULL COMMENT '外键设备id',
+  `STARTTIME` timestamp NULL DEFAULT NULL COMMENT '任务开始时间',
+  `STOPTIME` timestamp NULL DEFAULT NULL COMMENT '任务结束时间',
+  `TASKSTATUS` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '任务状态',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `task_task` */
+
+/*Table structure for table `supervise_supervise` */
+
+DROP TABLE IF EXISTS `supervise_supervise`;
+
+CREATE TABLE `supervise_supervise` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `TASKID` int(10) DEFAULT NULL COMMENT '外键任务id',
+  `SUPERVISETIME` timestamp NULL DEFAULT NULL COMMENT '采集时间',
+  `SUPERVISEVALUE` int(10) NOT NULL COMMENT '参数一值',
+  `SUPERVISEVALUE2` int(10) DEFAULT NULL COMMENT '参数二值',
+  `WARNINGCLASS` int(10) DEFAULT NULL COMMENT '报警级别',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `supervise_supervise` */
+
+
 
 /*Table structure for table `user_user` */
 

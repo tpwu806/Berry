@@ -36,7 +36,7 @@
         <%@ include file="../includes/outermenu.jspf" %>
 
         <!-- Inner menu bar -->
-       <%--  <%@ include file="include/innermenu.jspf" %>  --%>
+        <%@ include file="include/innermenu.jspf" %>  
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
@@ -99,6 +99,9 @@
                                 	 	</a>
                                 	 	<a class="urlLink" href="${pageContext.request.contextPath}/sensor/viewsensor?page=0&size=${properties['paging.numitems']}&deviceId=${thread.id}" target="_blank">
                                 	 		<img id="view_recript" title="查看传感器" src="<c:url value="/images/button/view-24.png"/>" width="15" height="16" style="margin-bottom:4px;" />
+                                	 	</a>
+                                	 	<a class="urlLink" href="${pageContext.request.contextPath}/divice/deletedevice/${thread.id}" target="_blank">
+                                	 		<img id="view_recript" title="查看传感器" src="<c:url value="/images/button/trash.png"/>" width="15" height="16" style="margin-bottom:4px;" />
                                 	 	</a>
                                 </td>
                                 

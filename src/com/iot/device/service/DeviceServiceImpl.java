@@ -72,8 +72,22 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Override
 	public Device createDevice(DeviceDO deviceForm) throws DaoCreateException {
-		// TODO Auto-generated method stub
-		return null;
+		Device device = null;
+		try {
+			device = new Device();//deviceForm
+			device.setDevicename(deviceForm.getDevicename());
+			device.setDeviceip(deviceForm.getDeviceip());
+			device.setDeviceport(deviceForm.getDeviceport());
+			device.setDevicetype(deviceForm.getDevicetype());
+			
+			device.setDevicestatus("stop");
+			device.setSensornumber(0);
+
+			return (Device) this.deviceDAO.save(device);
+		} catch (Exception ex) {
+			log.debug("Error creating new news post", ex);
+			throw new DaoCreateException(ex.getMessage());
+		}
 	}
 
 	@Override

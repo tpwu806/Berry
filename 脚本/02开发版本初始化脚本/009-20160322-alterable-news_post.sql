@@ -1,0 +1,2 @@
+ALTER TABLE `socialbiz`.`news_post`   
+  CHANGE `CONTENT` `CONTENT` MEDIUMTEXT NOT NULL;

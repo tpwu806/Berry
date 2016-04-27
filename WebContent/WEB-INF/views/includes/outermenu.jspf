@@ -4,7 +4,7 @@
 <c:set var="url" value="url: ${requestScope['javax.servlet.forward.servlet_path']}"/>
 <c:set var="mod1" value=""/>
 <c:set var="mod2" value=""/>
-<c:set var="mod3" value=""/>
+<!-- <c:set var="mod3" value=""/> -->
 
 <c:choose>
     <c:when test="${fn:containsIgnoreCase(url, '/supervise/')}">
@@ -13,9 +13,9 @@
     <c:when test="${fn:containsIgnoreCase(url, '/device/')}">
         <c:set var="mod2" value="class=\"active\""/>
     </c:when>
-    <c:when test="${fn:containsIgnoreCase(url, '/sensor/')}">
+   <%--  <c:when test="${fn:containsIgnoreCase(url, '/sensor/')}">
         <c:set var="mod3" value="class=\"active\""/>
-    </c:when>   
+    </c:when>    --%>
    
     <c:otherwise></c:otherwise>
 </c:choose>
@@ -45,12 +45,12 @@
         
         
             
-                <li id="mod3" ${mod3}>
+               <%--  <li id="mod3" ${mod3}>
                     <img src="<c:url value="/images/navmenu/user-24.png"/>"/>
                     <a href="#">
                      			 传感器管理<span style="right:10%; position:absolute;">›</span>
                     </a>
-                </li>
+                </li> --%>
            
 
 
