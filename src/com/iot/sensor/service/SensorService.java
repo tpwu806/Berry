@@ -16,7 +16,7 @@ public interface SensorService {
 
 	public abstract Integer getTem() throws DaoFinderException;
 	
-	public abstract List<SensorDO> retrieveAllSensor(Pageable pgble , Integer deviceid) throws DaoFinderException;
+	public abstract Page<Sensor> retrieveAllSensor(Integer deviceid , Pageable pgble) throws DaoFinderException;
 
 	public abstract Sensor createSensor(SensorDO sensorForm) throws DaoCreateException;
 
@@ -30,4 +30,5 @@ public interface SensorService {
 	public abstract void deleteSensor(Integer sensorId)throws DaoDeleteException;
 	
 	public abstract Integer getNumSearchSensor(String name,String receiptsign)throws DaoFinderException;
+
 }

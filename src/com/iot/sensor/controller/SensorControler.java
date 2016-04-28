@@ -68,19 +68,18 @@ public class SensorControler {
 				}
 
 			} else {
-				System.out.println(request.getParameter("deviceId"));
+				Integer deviceId=Integer.valueOf(request.getParameter("deviceId"));
 				
-				List<SensorDO> sensor = this.sensorService.retrieveAllSensor(pgble,
-						Integer.valueOf(request.getParameter("deviceId")));				
-				System.out.println(sensor.get(0).getSensorname());
-				String url = request.getContextPath() + "/sensor/viewsensor?";
-				//List<SensorDO> rList = new List(sensor, url);
-				model.addAttribute("sensorList", sensor);
+				Page<Sensor> sList = this.sensorService.retrieveAllSensor(deviceId,pgble);				
+				String url = request.getContextPath() + "/sensor/viewsensor?page=0&size=${properties['paging.numitems']}&deviceId=deviceId";
+				Pager<Sensor> rList = new Pager(sList, url);
+				model.addAttribute("sensorList", rList);
+				System.out.println(rList.getContent().get(0).getSensortype());
 
-			}
-			model.addAttribute("sensorNum", sensorNum);
+			}			
 		} catch (Exception ex) {
 			log.debug("Error retrieving list sensor search results or retrieving all sensor", ex);
+			System.out.println(ex);
 			model.addAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}
 		return "sensor/list-of-sensor";

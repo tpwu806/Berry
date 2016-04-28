@@ -22,9 +22,12 @@ public class Sensor implements Serializable{
 	@Column(name = "ID")
 	private Integer id;//传感器编号
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "DEVICEID")
 	private  Device deviceid;//设备id
+*/	
+	@Column(name = "DEVICEID")
+	private Integer deviceid;//传感器名称
 	
 	@Column(name = "SENSORNAME")
 	private String sensorname;//传感器名称
@@ -46,11 +49,11 @@ public class Sensor implements Serializable{
 		this.id = id;
 	}
 
-	public Device getDeviceid() {
+	public Integer getDeviceid() {
 		return deviceid;
 	}
 
-	public void setDeviceid(Device deviceid) {
+	public void setDeviceid(Integer deviceid) {
 		this.deviceid = deviceid;
 	}
 
