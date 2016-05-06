@@ -4,26 +4,21 @@ import java.sql.Timestamp;
 
 import com.iot.device.domain.Device;
 import com.iot.sensor.domain.Sensor;
+import com.iot.supervise.domain.Task;
 
 public class SuperviseDO {
 
-	private Integer id;//设备编号
+	private Integer id;//采集编号
 	
-	private String supervisename;//任务名称
+	private Integer taskid;//设备id
 	
-	private String devicename;//多对一设备名称
+	private Timestamp supervisetime;//采集时间
 	
-	private Device device;//设备集合
+	private String sensorvalue;//传感器参数值
 	
-	private String sensorname;//多对一传感器名称
+	private String sensorvalue2;//传感器参数2值
 	
-	private Sensor sensor;//传感器集合
-	
-	private Timestamp supervisestarttime;//开启时间
-	
-	private Timestamp supervisestoptime;//关闭时间
-	
-	private String supervisetype;//开关状态
+	private Integer warningclass;//报警状态
 
 	public Integer getId() {
 		return id;
@@ -33,71 +28,45 @@ public class SuperviseDO {
 		this.id = id;
 	}
 
-	public String getSupervisename() {
-		return supervisename;
+	public Integer getTaskid() {
+		return taskid;
 	}
 
-	public void setSupervisename(String supervisename) {
-		this.supervisename = supervisename;
+	public void setTaskid(Integer taskid) {
+		this.taskid = taskid;
 	}
 
-	public String getDevicename() {
-		return devicename;
+	public Timestamp getSupervisetime() {
+		return supervisetime;
 	}
 
-	public void setDevicename(String devicename) {
-		this.devicename = devicename;
+	public void setSupervisetime(Timestamp supervisetime) {
+		this.supervisetime = supervisetime;
 	}
 
-	public Device getDevice() {
-		return device;
+	public String getSensorvalue() {
+		return sensorvalue;
 	}
 
-	public void setDevice(Device device) {
-		this.device = device;
+	public void setSensorvalue(String sensorvalue) {
+		this.sensorvalue = sensorvalue;
 	}
 
-	public String getSensorname() {
-		return sensorname;
+	public String getSensorvalue2() {
+		return sensorvalue2;
 	}
 
-	public void setSensorname(String sensorname) {
-		this.sensorname = sensorname;
+	public void setSensorvalue2(String sensorvalue2) {
+		this.sensorvalue2 = sensorvalue2;
 	}
 
-	public Sensor getSensor() {
-		return sensor;
+	public Integer getWarningclass() {
+		return warningclass;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
+	public void setWarningclass(Integer warningclass) {
+		this.warningclass = warningclass;
 	}
-
-	public Timestamp getSupervisestarttime() {
-		return supervisestarttime;
-	}
-
-	public void setSupervisestarttime(Timestamp supervisestarttime) {
-		this.supervisestarttime = supervisestarttime;
-	}
-
-	public Timestamp getSupervisestoptime() {
-		return supervisestoptime;
-	}
-
-	public void setSupervisestoptime(Timestamp supervisestoptime) {
-		this.supervisestoptime = supervisestoptime;
-	}
-
-	public String getSupervisetype() {
-		return supervisetype;
-	}
-
-	public void setSupervisetype(String supervisetype) {
-		this.supervisetype = supervisetype;
-	}
-
-	
 	
 	
 }

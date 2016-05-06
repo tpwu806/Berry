@@ -10,7 +10,7 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>控制中心</title>
+    <title>实时监控</title>
     <!-- Bootstrap -->
     <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/dashboard.css"/>" rel="stylesheet">
@@ -31,7 +31,7 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="<c:url value="/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript">
-        //window.onload=repeatFlush();
+        window.onload=repeatFlush();
 	    function repeatFlush(){
 	    	var xmlhttp;
 	    	var url="http://localhost:8080/Berry/supervise/getdht11";//aimat是目标servlet或页面
@@ -59,16 +59,29 @@
     <%@ include file="../includes/outermenu.jspf" %>
 	    <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
 	    <h1>欢迎使用Berry系统</h1>
-	    <h3>即时监测</h3>
-	   
+	    <h3>目前激活的任务：</h3>
+	    <th>
+           		<h4>
+           		<td>任务序号：${task.id}</td>
+           		&nbsp;&nbsp;<td>设备id：${task.deviceid}</td>
+           		&nbsp;&nbsp;<td>任务开启时间：<fmt:formatDate var="date" value="${task.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        ${date}</td>
+           		
+                </h4>
+        </th>
 	    
 	    <tr align="center">
 		温度为：<span id="temp">null</span>
 		</tr>
 		
-		<div><input id="dhtbtn" type="button" value="开始采集" onclick="repeatFlush();"></div>
+		<!-- <div><input id="dhtbtn" type="button" value="开始采集" onclick="repeatFlush();"></div> -->
 	    
 		</div>
+		<c:if test="${not empty MESSAGE_KEY}">
+                <nav class="search">
+                    ${MESSAGE_KEY}
+                </nav>
+            </c:if>
 	</div>
 </div>
 

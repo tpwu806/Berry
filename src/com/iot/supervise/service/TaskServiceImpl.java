@@ -9,10 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iot.common.utilities.TimeDateUtility;
 import com.iot.device.domain.Device;
+import com.iot.device.dto.DeviceDO;
 import com.iot.exceptions.DaoCreateException;
+import com.iot.exceptions.DaoFinderException;
 import com.iot.supervise.dao.SuperviseDAO;
 import com.iot.supervise.dao.TaskDAO;
 import com.iot.supervise.domain.Task;
+import com.iot.supervise.dto.TaskDO;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
@@ -52,6 +55,27 @@ public class TaskServiceImpl implements TaskService {
 		} catch (Exception ex) {
 			log.debug("Error creating new news post", ex);
 			throw new DaoCreateException(ex.getMessage());
+		}
+	}
+
+	@Override
+	public TaskDO findAliveTask() throws DaoFinderException {
+		TaskDO fh=null;
+		try {
+			Integer taskstatus=1;
+			Task task = (Task) this.taskDAO.findOne(taskstatus);
+			if (task != null) {
+				fh = new TaskDO();
+	
+				fh.setId(task.getId());
+				fh.setDeviceid(task.getDeviceid());
+				fh.setStarttime(task.getStarttime());
+	
+			}
+			return fh;
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
 		}
 	}
 

@@ -34,11 +34,13 @@ public class Supervise implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
-	private Integer id;//编号
+	private Integer id;//采集编号
 
-	@ManyToOne
-	@JoinColumn(name = "TASKID")
-	private Task taskid;//设备id
+	@Column(name = "TASKID")
+	private Integer taskid;//设备id
+	
+	@Column(name = "SUPERVISETIME")
+	private Timestamp supervisetime;//采集时间
 	
 	@Column(name = "SUPERVISEVALUE")
 	private String sensorvalue;//传感器参数值
@@ -57,12 +59,20 @@ public class Supervise implements Serializable{
 		this.id = id;
 	}
 
-	public Task getTaskid() {
+	public Integer getTaskid() {
 		return taskid;
 	}
 
-	public void setTaskid(Task taskid) {
+	public void setTaskid(Integer taskid) {
 		this.taskid = taskid;
+	}
+
+	public Timestamp getSupervisetime() {
+		return supervisetime;
+	}
+
+	public void setSupervisetime(Timestamp supervisetime) {
+		this.supervisetime = supervisetime;
 	}
 
 	public String getSensorvalue() {

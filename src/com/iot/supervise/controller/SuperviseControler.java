@@ -16,11 +16,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iot.device.domain.Device;
+import com.iot.device.dto.DeviceDO;
 import com.iot.device.service.DeviceService;
+import com.iot.exceptions.DaoFinderException;
 import com.iot.sensor.service.SensorService;
 import com.iot.supervise.domain.Task;
+import com.iot.supervise.dto.SuperviseDO;
+import com.iot.supervise.dto.TaskDO;
 import com.iot.supervise.service.SuperviseService;
 import com.iot.supervise.service.TaskService;
+
+/**
+ * @author wutongpeng 201605062115
+ * 控制
+ */
 
 @Controller
 public class SuperviseControler {
@@ -37,6 +46,9 @@ public class SuperviseControler {
 	@Autowired
 	private TaskService taskService;
 	
+	/**
+	 * 开启设备
+	 * */
 	@RequestMapping(value = { "/divice/startdevice/{deviceId}" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
 	public ModelAndView startDevice(@PathVariable Integer deviceId) {
@@ -70,17 +82,33 @@ public class SuperviseControler {
 	
 	@RequestMapping(value = { "/supervise/viewsupervise" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET})
-	public String viewSupervise(){			
-		return "/supervise/list-of-supervise";
+	public ModelAndView viewSupervise(){
+		ModelAndView modelAndView = new ModelAndView("/supervise/real_time_protection");
+		try{
+			TaskDO taskObject = this.taskService.findAliveTask();
+			if(taskObject==null){
+				modelAndView.addObject("MESSAGE_KEY", "没有任务被激活，请在设备列表中开启设备！");
+			}else{
+				modelAndView.addObject("task", taskObject);
+			}
+			
+			
+		} catch (Exception ex) {
+			log.debug("Error retrieving list device search results or retrieving all device", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}				
+		return modelAndView;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/supervise/getdht11" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.POST})
-	public String getdht11() /*throws DaoFinderException*/ {
+	public String getdht11() throws DaoFinderException {
 		String tem;
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		tem=df.format(new Date());
+		SuperviseDO s=this.superviseService.findMostNewSupervise();
+		tem=s.getSensorvalue();
+		/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		tem=df.format(new Date());*/
 					
 		return tem;
 	}
