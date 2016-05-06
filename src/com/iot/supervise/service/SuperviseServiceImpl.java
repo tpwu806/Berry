@@ -41,6 +41,11 @@ public class SuperviseServiceImpl implements SuperviseService {
 		
 		return fh;
 	}
+
+	@Override
+	public void creatSupervice(Supervise s) throws DaoFinderException {
+		this.superviseDAO.save(s);
+	}
 	
 	
 }

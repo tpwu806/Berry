@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.iot.common.socket.SocketVirtualController;
 import com.iot.common.socket.thread.MyThread;
+import com.iot.supervise.service.SuperviseService;
 
 
 /**
@@ -17,7 +18,9 @@ public class MyTask extends TimerTask {
 	private static Logger LOG = LoggerFactory.getLogger(MyTask.class);
 	MyThread mt;
 	static Socket socket;
-	public MyTask(){
+	SuperviseService superviseService;
+	public MyTask(SuperviseService superviseService){
+		this.superviseService=superviseService;
 		startThread();
 	}
 	
@@ -30,7 +33,7 @@ public class MyTask extends TimerTask {
 		try {
 			
 			socket = new Socket(IP, PORT);
-			mt=new MyThread(socket);
+			mt=new MyThread(socket,superviseService);
 			mt.setStatus(true);
 			mt.start();
 		}catch(Exception e){
@@ -49,7 +52,7 @@ public class MyTask extends TimerTask {
 	@Override
 	public void run() {
 		
-		System.out.println("********");
+		System.out.println("****MyTask****");
 		SocketVirtualController iw=new SocketVirtualController();
 		if(iw.isCmdstatus()){			
 			if(!mt.isStatus()){

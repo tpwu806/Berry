@@ -10,6 +10,11 @@ import java.net.UnknownHostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.iot.common.utilities.TimeDateUtility;
+import com.iot.exceptions.DaoFinderException;
+import com.iot.supervise.domain.Supervise;
+import com.iot.supervise.service.SuperviseService;
+
 
 /**
  * socket线程
@@ -18,9 +23,10 @@ public class MyThread extends Thread{
 	private static Logger LOG = LoggerFactory.getLogger(MyThread.class);
 	private volatile boolean status;//设备状态,ture;正在运行  false：已经关闭	
 	private Socket socket;
-	
-    public MyThread(Socket socket){
+	private SuperviseService superviseService;
+    public MyThread(Socket socket,SuperviseService superviseService){
         this.socket=socket;
+        this.superviseService=superviseService;
     }
 	public  boolean isStatus() {
 		return status;
@@ -43,10 +49,15 @@ public class MyThread extends Thread{
 		    while(status){  
 		        send.println(cmd);  
                 send.flush();
-		    	tem = receive.readLine();  
+		    	tem = receive.readLine(); 
+		    	Supervise s=new Supervise();
+                s.setSensorvalue(tem);
+                s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
+                this.superviseService.creatSupervice(s);
                 if(tem.equals("END")){  
                     break;  
-                }                 
+                }
+               
                 System.out.println("Client Socket Message:"+tem);  
                 Thread.sleep(50);  
                   
@@ -61,6 +72,9 @@ public class MyThread extends Thread{
 			e.printStackTrace();
 			System.out.println(e);
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DaoFinderException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
