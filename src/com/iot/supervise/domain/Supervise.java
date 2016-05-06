@@ -18,7 +18,7 @@ import com.iot.sensor.domain.Sensor;
  * *****************************************************************
  * Created on 2016年4月7日  16:40:10
  * @author wutongpeng (mailto:wutongpeng803@163.com)
- * 功能说明：监控器dao
+ * 功能说明：监控器daomain
  *
  * 修改历史
  * Revision 1.0.1   2016年 月 日  10:06:10 by 

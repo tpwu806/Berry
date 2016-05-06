@@ -23,9 +23,9 @@ public class Task implements Serializable{
 	@Column(name = "ID")
 	private Integer id;//任务编号
 	
-	@ManyToOne
-	@JoinColumn(name = "DEVICEID")
-	private Device deviceid;//设备id
+	
+	@Column(name = "DEVICEID")
+	private Integer deviceid;//设备id
 	
 	@Column(name = "STARTTIME")
 	private Timestamp starttime;//任务开始时间
@@ -48,12 +48,12 @@ public class Task implements Serializable{
 		return starttime;
 	}
 
-	public Device getDevice() {
+	public Integer getDeviceid() {
 		return deviceid;
 	}
 
-	public void setDevice(Device device) {
-		this.deviceid = device;
+	public void setDeviceid(Integer deviceid) {
+		this.deviceid = deviceid;
 	}
 
 	public String getTaskstatus() {

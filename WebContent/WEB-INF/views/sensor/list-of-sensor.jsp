@@ -16,7 +16,7 @@
     <!-- Bootstrap -->
     <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/dashboard.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/kilo.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/berry.css"/>" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,45 +33,34 @@
     <div class="row">
 
         <!-- Leftmost menu bar -->
-        <%@ include file="../includes/outermenu.jspf" %>
+        <%-- <%@ include file="../includes/outermenu.jspf" %> --%>
 
         <!-- Inner menu bar -->
         <%-- <%@ include file="include/innermenu.jspf" %> --%> 
 
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
-                
-        	<form method="GET"  action="${pageContext.request.contextPath}/sensor/searchsensor" accept-charset="UTF-8">
+        <div class="col-sm-9  col-md-offset-sensor col-md-10 main">
+                      
 
-                <div class="search-admin">
-                    <div class="page-header">
-                        <input type="text" class="form-control" name="searchKey" maxlength="20" placeholder="请输入传感器名称">
-                        <input type="hidden" name="page" value="0">
-                        <input type="hidden" name="size" value="${properties['paging.numitems']}">
-                        <button class="btn btn-lg btn-primary btn-success" type="submit"><img src="<c:url value="/images/search_16.png"/>"></button>
-                    </div>
-                    <div class="page-header ">
-                        <div class="page-header page-dropdown">传感器型号
-                             <select name="sensortype" class="admin-search">
-				                <option value="">全部</option>
-				                <option value="RECEIPT_YES">温度</option>
-				                <option value="RECEIPT_NO">湿度</option>
-				                <option value="RECEIPT_OTHER">其他</option>
-				              </select>   
-                        </div>
-                    </div>
-                </div>
-                <div style="width: 240px;float:right;padding-bottom: 10px;">
-			         <div class="page-dropdown" style="width: 140px;"> 
+             <div>
+              <h3>设备简介</h3>
+          		<th>
+           		<h4><td>设备名称：${device.devicename}</td>
+           		&nbsp;&nbsp;<td>设备ip：${device.deviceip}</td>
+           		&nbsp;&nbsp;<td>设备port：${device.deviceport}</td></h4>
+          		</th>
+         	 </div>
+             <div style="width: 240px;float:right;padding-bottom: 10px;
+              padding-top: 10px;">
+		         <div class="page-dropdown" style="width: 140px;"> 
 		                               共&nbsp;${sensorNum}&nbsp;个传感器
 		         </div>	
-	            </div>
-            </form>
+	         </div>
+            
 			 <div class="table-responsive">
                 <table class="table table-striped text-center">
                     <thead>
                     <tr>
-                        <th class="text-center">传感器编号</th>
                         <th class="text-center">传感器名称</th>
                         <th class="text-center">传感器型号</th>
                         <th class="text-center">传感器参数1</th>
@@ -81,15 +70,13 @@
                     <tbody>
 
                     <c:catch var="exception">
-                        <c:forEach var="thread" items="${sensorList}">
+                        <c:forEach var="thread" items="${sensorList.content}">
 
                             <tr>
-                                <td>${thread.id}</td>
-                                <td class="text-center">
-                                 
-                                       <a class="urlLink" href="${pageContext.request.contextPath}/sensor/viewsensorarticle/${thread.id}" target="_blank">
-                                               ${thread.sensorname}
-                                       </a>
+                                <td class="text-center">                                
+                                    <a class="urlLink" href="${pageContext.request.contextPath}/sensor/viewsensorarticle/${thread.id}" target="_blank">
+                                            ${thread.sensorname}
+                                    </a>
                                 </td>                                                              
                                 <td>${thread.sensortype}</td>
                                 <td>${thread.sensorparameter}</td>
@@ -101,7 +88,15 @@
 
                 </table>
             </div>
-            
+            <c:if test="${exception == null}">
+                <nav class="search">
+                    <ul class="pagination pagination-lg">
+                            ${sensorList.printLeftArrows()}
+                            ${sensorList.printPageNumbers()}
+                            ${sensorList.printRightArrows()}
+                    </ul>
+                </nav>
+            </c:if>
             <c:if test="${not empty MESSAGE_KEY}">
                 <nav class="search">
                     ${MESSAGE_KEY}

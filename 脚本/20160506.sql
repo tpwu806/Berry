@@ -1,0 +1,1 @@
+/*[17:45:12][463 ms]*/ ALTER TABLE `iot`.`device_device` CHANGE `DEVICESTATUS` `DEVICESTATUS` INT(10) NOT NULL COMMENT '设备状态';

@@ -46,8 +46,7 @@ public class DeviceControler {
 	
 	@Autowired
 	private DeviceService deviceService;
-	
-	
+		
 	
 	/**
 	 * 设备列表
@@ -55,30 +54,28 @@ public class DeviceControler {
 	 */
 	@RequestMapping(value = { "/device/viewdevice" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView viewAllPublishedDevice(@ModelAttribute("deviceList") Object deviceList, Pageable pgble,
+	public ModelAndView viewAllDevice(@ModelAttribute("deviceList") Object deviceList, Pageable pgble,
 			HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView("device/list-of-device");
-		Integer deviceNum=0;
+		Integer deviceNum;
 		try {
-			String searchTerm="";
-			String receiptState="";
-			//deviceNum=this.deviceService.getNumSearchDevice(searchTerm,receiptState);
-			modelAndView.addObject("deviceNum", deviceNum);
 			if ((deviceList != null) && ((deviceList instanceof Pager))) {
 				if (((Pager) deviceList).hasContent()) {
 					Pager<DeviceDO> page = (Pager) deviceList;
 					modelAndView.addObject("deviceList", page);
 				} else {
 					modelAndView.addObject("MESSAGE_KEY", "没有搜索结果");
+					deviceNum=0;
+					modelAndView.addObject("deviceNum", deviceNum);
 				}
 			} else {
 				Page<DeviceDO> searchResults = this.deviceService.retrieveAllDevice(pgble);
 				if ((searchResults != null) && (searchResults.hasContent())) {	
 					String url = request.getContextPath() + "/device/viewdevice?";
-
 					Pager<DeviceDO> page = new Pager(searchResults, url);
 					modelAndView.addObject("deviceList", page);
-					
+					deviceNum=page.getTotalElements();
+					modelAndView.addObject("deviceNum", deviceNum);
 					
 					
 				}
@@ -137,7 +134,7 @@ public class DeviceControler {
 		ModelAndView modelAndView = new ModelAndView("device/edit-device-form");
 		try {
 
-			DeviceDO deviceObject = this.deviceService.getDeviceDetailById(deviceId,"");
+			DeviceDO deviceObject = this.deviceService.getDeviceDetailById(deviceId);
 			modelAndView.addObject("deviceForm", deviceObject);			
 		} catch (Exception ex) {
 			log.debug("Error in finding news article to display edit device form", ex);
@@ -194,8 +191,8 @@ public class DeviceControler {
 			String pReceiptstate = StringUtils.isEmpty(receiptstate) ? "" : receiptstate;
 
 			Page<DeviceDO> searchResults = this.deviceService.searchNoticeContent(pSearchKey, pReceiptstate, pgble);
-			Integer deviceNum=0;
-			deviceNum=this.deviceService.getNumSearchDevice(pSearchKey,pReceiptstate);
+			Integer deviceNum;
+			
 			if ((searchResults != null) && (searchResults.hasContent())) {
 				String url = request.getContextPath() + "/device/searchdevice?searchKey=" + pSearchKey + "&receiptstate="
 						+ pReceiptstate + "&";
@@ -203,10 +200,12 @@ public class DeviceControler {
 				Pager<DeviceDO> page = new Pager(searchResults, url);
 
 				redirectAttributes.addFlashAttribute("noticeList", page);
+				deviceNum=page.getTotalElements();
 			} else {
 				Pager<DeviceDO> page = new Pager(null, null);
 
 				redirectAttributes.addFlashAttribute("deviceList", page);
+				deviceNum=0;
 			}
 			redirectAttributes.addFlashAttribute("deviceNum", deviceNum);
 			redirectAttributes.addFlashAttribute("searchKey", pSearchKey);
@@ -224,7 +223,7 @@ public class DeviceControler {
 	public ModelAndView viewDeviceArticle(@PathVariable Integer deviceId) {
 		ModelAndView modelAndView = new ModelAndView("device/view-device-article");
 		try {
-			DeviceDO noticeObject = this.deviceService.getDeviceDetailById(deviceId,"");
+			DeviceDO noticeObject = this.deviceService.getDeviceDetailById(deviceId);
 			modelAndView.addObject("deviceForm", noticeObject);
 		} catch (Exception ex) {
 			log.debug("Error finding news article to display", ex);

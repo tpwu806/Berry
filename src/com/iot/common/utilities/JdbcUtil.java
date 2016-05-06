@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * *****************************************************************
  * Created on 2016年1月18日 上午10:34:25
- * @author  
+ * @author  wutongpeng
  * 功能说明：jdbc连接工具类
  *
  * 修改历史

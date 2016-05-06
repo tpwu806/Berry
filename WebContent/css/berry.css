@@ -556,6 +556,9 @@ a:hover,a:focus {
 .col-md-offset-2 {
 	margin-left: 26%
 }
+.col-md-offset-sensor {
+	margin-left: 15%
+}
 .col-md-10 {
 	width:74%
 }

@@ -57,7 +57,9 @@ public class DeviceServiceImpl implements DeviceService {
 						dd.setSensornumber(device.getSensornumber());
 					}
 					
-					dd.setDevicestatus(device.getDevicestatus());
+					Integer[] s=new Integer[1];
+					s[0]=device.getDevicestatus();
+					dd.setStatus(s);
 					dd.setDevicetype(device.getDevicetype());
 
 					list.add(dd);
@@ -80,7 +82,11 @@ public class DeviceServiceImpl implements DeviceService {
 			device.setDeviceport(deviceForm.getDeviceport());
 			device.setDevicetype(deviceForm.getDevicetype());
 			
-			device.setDevicestatus("stop");
+			if ((deviceForm.getStatus() != null) && (deviceForm.getStatus().length > 0)) {
+				device.setDevicestatus(deviceForm.getStatus()[0]);
+			} else {
+				device.setDevicestatus(Integer.valueOf(0));
+			}
 			device.setSensornumber(0);
 
 			return (Device) this.deviceDAO.save(device);
@@ -91,14 +97,34 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
-	public Page<DeviceDO> searchNoticeContent(String searchTerm, String receiptState, Pageable pgble)
-			throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+	public DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException {
+		DeviceDO fh = null;
+		try {
+			Device device = (Device) this.deviceDAO.findOne(deviceId);
+			if (device != null) {
+				fh = new DeviceDO();
+	
+				fh.setId(device.getId());
+				fh.setDevicename(device.getDevicename());
+				Integer[] s=new Integer[1];
+				s[0]=device.getDevicestatus();
+				fh.setStatus(s);
+				fh.setDevicetype(device.getDevicetype());
+				fh.setDeviceip(device.getDeviceip());
+				fh.setDeviceport(device.getDeviceport());
+				fh.setSensornumber(device.getSensornumber());
+	
+			}
+			return fh;
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
 	}
 
 	@Override
-	public DeviceDO getDeviceDetailById(Integer deviceId, String username) throws DaoFinderException {
+	public Page<DeviceDO> searchNoticeContent(String searchTerm, String receiptState, Pageable pgble)
+			throws DaoFinderException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -116,8 +142,38 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
-	public Integer getNumSearchDevice(String name, String receiptsign) throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+	public Device startDevice(Integer deviceId) throws DaoUpdateException {
+		Device fh = null;
+		try {
+			fh = (Device) this.deviceDAO.findOne(deviceId);
+			if (fh != null) {				
+				fh.setDevicestatus(Integer.valueOf(1));				
+				fh = (Device) this.deviceDAO.save(fh);
+			} else {
+				throw new Exception("Cannot find device to update");
+			}
+			return fh;
+		} catch (Exception ex) {
+			log.debug("Cannot start device", ex);
+			throw new DaoUpdateException(ex.getMessage());
+		}
+	}
+
+	@Override
+	public Device stopDevice(Integer deviceId) throws DaoUpdateException {
+		Device fh = null;
+		try {
+			fh = (Device) this.deviceDAO.findOne(deviceId);
+			if (fh != null) {				
+				fh.setDevicestatus(Integer.valueOf(0));				
+				fh = (Device) this.deviceDAO.save(fh);
+			} else {
+				throw new Exception("Cannot find device to update");
+			}
+			return fh;
+		} catch (Exception ex) {
+			log.debug("Cannot stop device", ex);
+			throw new DaoUpdateException(ex.getMessage());
+		}
 	}
 }

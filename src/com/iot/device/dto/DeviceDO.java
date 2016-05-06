@@ -10,7 +10,7 @@ public class DeviceDO {
 	
 	private String deviceport;//监听端口号
 	
-	private String devicestatus;//设备状态
+	private Integer[] status;//设备状态
 	
 	private String devicetype;//设备型号
 	
@@ -46,14 +46,14 @@ public class DeviceDO {
 
 	public void setDeviceport(String deviceport) {
 		this.deviceport = deviceport;
+	}		
+
+	public Integer[] getStatus() {
+		return status;
 	}
 
-	public String getDevicestatus() {
-		return devicestatus;
-	}
-
-	public void setDevicestatus(String devicestatus) {
-		this.devicestatus = devicestatus;
+	public void setStatus(Integer[] status) {
+		this.status = status;
 	}
 
 	public String getDevicetype() {

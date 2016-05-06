@@ -123,7 +123,10 @@ public class Pager<T> {
 	public List<T> getContent() {
 		return this.content;
 	}
-
+	public Integer getTotalElements(){
+		return (int) this.page.getTotalElements();
+		
+	}
 	public String firstPageURL() {
 		return new StringBuffer(this.url).append("page=").append(0).append("&size=").append(PAGE_SIZE).toString();
 	}

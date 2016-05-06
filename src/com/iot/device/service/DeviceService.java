@@ -20,12 +20,14 @@ public interface DeviceService {
 	public abstract Page<DeviceDO> searchNoticeContent(
 			String searchTerm, String receiptState, Pageable pgble) throws DaoFinderException;
 
-	public abstract DeviceDO getDeviceDetailById(Integer deviceId, String username) throws DaoFinderException;
+	public abstract DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException;
 
 	public abstract Device updateDevice(DeviceDO deviceForm) throws DaoUpdateException;
 
 	public abstract void deleteDevice(Integer deviceId)throws DaoDeleteException;
 	
-	public abstract Integer getNumSearchDevice(String name,String receiptsign)throws DaoFinderException;
+	public abstract Device startDevice(Integer deviceId) throws DaoUpdateException;
+	
+	public abstract Device stopDevice(Integer deviceId) throws DaoUpdateException;
 	
 }

@@ -34,7 +34,7 @@ public class HomeController {
 		//System.out.println(user.getUsername());
 		try {
 			if(this.userService.LoginCheck(user)){
-				mv = new ModelAndView("redirect:/supervise/viewsupervise");
+				mv = new ModelAndView("redirect:/device/viewdevice");
 				httpSession.setAttribute("loginname", user.getUsername());
 			}else{
 				mv = new ModelAndView("loginform");

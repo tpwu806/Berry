@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iot.common.utilities.Pager;
+import com.iot.device.dto.DeviceDO;
 import com.iot.device.service.DeviceService;
 import com.iot.sensor.domain.Sensor;
 import com.iot.sensor.dto.SensorDO;
@@ -48,41 +49,43 @@ public class SensorControler {
 	 */
 	@RequestMapping(value = { "/sensor/viewsensor" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public String viewAllPublishedSensor(@ModelAttribute("sensorList") Object sensorList,Model model, Pageable pgble,
+	public ModelAndView viewAllSensor(@ModelAttribute("sensorList") Object sensorList,Model model, Pageable pgble,
 			HttpServletRequest request) {
-		
-		Integer sensorNum=0;
+		ModelAndView modelAndView = new ModelAndView("sensor/list-of-sensor");
+		Integer sensorNum;
 		try {
-
+			Integer deviceId=Integer.valueOf(request.getParameter("deviceId"));	
+			DeviceDO device=this.deviceService.getDeviceDetailById(deviceId);
+			modelAndView.addObject("device", device);
 			if (null != sensorList && sensorList instanceof Pager) {
 
 				if (((Pager) sensorList).hasContent()) {
 
 					Pager<SensorDO> rList = (Pager) sensorList;
-					model.addAttribute("sensorList", rList);
+					modelAndView.addObject("sensorList", rList);
 
 				} else {
 
-					model.addAttribute("MESSAGE_KEY", "没有搜索结果");
-
+					modelAndView.addObject("MESSAGE_KEY", "没有搜索结果");
+					sensorNum=0;
+					modelAndView.addObject("sensorNum", sensorNum);
 				}
 
 			} else {
-				Integer deviceId=Integer.valueOf(request.getParameter("deviceId"));
-				
-				Page<Sensor> sList = this.sensorService.retrieveAllSensor(deviceId,pgble);				
-				String url = request.getContextPath() + "/sensor/viewsensor?page=0&size=${properties['paging.numitems']}&deviceId=deviceId";
-				Pager<Sensor> rList = new Pager(sList, url);
-				model.addAttribute("sensorList", rList);
-				System.out.println(rList.getContent().get(0).getSensortype());
-
+								
+				Page<SensorDO> sList = this.sensorService.retrieveAllSensor(deviceId,pgble);				
+				String url = request.getContextPath() + "/sensor/viewsensor?";
+				Pager<SensorDO> page = new Pager(sList, url);
+				modelAndView.addObject("sensorList", page);
+				sensorNum=(int) page.getTotalElements();
+				modelAndView.addObject("sensorNum", sensorNum);
 			}			
 		} catch (Exception ex) {
 			log.debug("Error retrieving list sensor search results or retrieving all sensor", ex);
 			System.out.println(ex);
 			model.addAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}
-		return "sensor/list-of-sensor";
+		return modelAndView;
 	}
 	
 

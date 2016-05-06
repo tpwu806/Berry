@@ -10,23 +10,62 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iot.device.domain.Device;
+import com.iot.device.service.DeviceService;
+import com.iot.sensor.service.SensorService;
+import com.iot.supervise.domain.Task;
 import com.iot.supervise.service.SuperviseService;
+import com.iot.supervise.service.TaskService;
 
 @Controller
 public class SuperviseControler {
 	static final Logger log = LoggerFactory.getLogger(SuperviseControler.class);
 	
 	@Resource
-	private Environment env;
-	
+	private Environment env;	
 	@Autowired
 	private SuperviseService superviseService;
+	@Autowired
+	private SensorService sensorService;
+	@Autowired
+	private DeviceService deviceService;
+	@Autowired
+	private TaskService taskService;
 	
+	@RequestMapping(value = { "/divice/startdevice/{deviceId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView startDevice(@PathVariable Integer deviceId) {
+		ModelAndView modelAndView = null;
+		try {
+			Device d=this.deviceService.startDevice(deviceId);
+			Task t=this.taskService.startTask(d);
+			modelAndView = new ModelAndView("redirect:/device/viewdevice");
+		} catch (Exception ex) {
+			log.debug("Error in finding device  to use in start", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
 	
+	@RequestMapping(value = { "/divice/stopdevice/{deviceId}" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.GET })
+	public ModelAndView stopDevice(@PathVariable Integer deviceId) {
+		ModelAndView modelAndView = null;
+		try {
+			Device device=this.deviceService.stopDevice(deviceId);
+			Task t=this.taskService.stopTask(device);
+			modelAndView = new ModelAndView("redirect:/device/viewdevice");
+		} catch (Exception ex) {
+			log.debug("Error in finding device  to use in stop", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
 	
 	
 	@RequestMapping(value = { "/supervise/viewsupervise" }, method = {

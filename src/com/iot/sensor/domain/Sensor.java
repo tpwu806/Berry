@@ -17,6 +17,11 @@ import com.iot.device.domain.Device;
 @Table(name = "SENSOR_SENSOR")//传感器表
 public class Sensor implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9017101263097526324L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")

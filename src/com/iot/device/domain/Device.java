@@ -28,7 +28,7 @@ public class Device implements Serializable{
 	private String deviceport;//监听端口号
 	
 	@Column(name = "DEVICESTATUS")
-	private String devicestatus;//设备状态
+	private Integer devicestatus;//设备状态
 	
 	@Column(name = "DEVICETYPE")
 	private String devicetype;//设备型号
@@ -68,11 +68,11 @@ public class Device implements Serializable{
 		this.deviceport = deviceport;
 	}
 
-	public String getDevicestatus() {
+	public Integer getDevicestatus() {
 		return devicestatus;
 	}
 
-	public void setDevicestatus(String devicestatus) {
+	public void setDevicestatus(Integer devicestatus) {
 		this.devicestatus = devicestatus;
 	}
 

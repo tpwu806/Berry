@@ -45,11 +45,27 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	}
 
 	@Override
-	public Page<Sensor> retrieveAllSensor(Integer deviceid, Pageable pgble) throws DaoFinderException {
+	public Page<SensorDO> retrieveAllSensor(Integer deviceid, Pageable pgble) throws DaoFinderException {
 		try {
-			 //Page<SensorDO> page=this.sensorDAO.findByDeviceid(deviceid,pgble);
-			Page<Sensor> page=this.sensorDAO.findAll(pgble);
-			return page;
+			Page<Sensor> page = null;			
+			page = this.sensorDAO.findByDeviceid(deviceid, pgble);
+			
+			ArrayList<SensorDO> list = new ArrayList<SensorDO>();
+			if ((page != null) && (page.hasContent())) {
+				for (Sensor sensor : page.getContent()) {
+					SensorDO dd = new SensorDO();
+					
+					dd.setId(sensor.getId());
+					dd.setSensorname(sensor.getSensorname());
+					dd.setSensortype(sensor.getSensortype());					
+					dd.setSensorparameter(sensor.getSensorparameter());
+					dd.setSensorparameter2(sensor.getSensorparameter2());
+					dd.setDeviceid(sensor.getDeviceid());
+
+					list.add(dd);
+				}
+			}
+			return new PageImpl(list, pgble, page.getTotalElements());
 		} catch (Exception ex) {
 			log.debug("Error retrieving notice for user", ex);
 			throw new DaoFinderException(ex.getMessage());

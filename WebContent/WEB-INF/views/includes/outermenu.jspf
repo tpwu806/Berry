@@ -7,10 +7,10 @@
 <!-- <c:set var="mod3" value=""/> -->
 
 <c:choose>
-    <c:when test="${fn:containsIgnoreCase(url, '/supervise/')}">
+    <c:when test="${fn:containsIgnoreCase(url, '/device/')}">
         <c:set var="mod1" value="class=\"active\""/>
     </c:when>
-    <c:when test="${fn:containsIgnoreCase(url, '/device/')}">
+    <c:when test="${fn:containsIgnoreCase(url, '/supervise/')}">
         <c:set var="mod2" value="class=\"active\""/>
     </c:when>
    <%--  <c:when test="${fn:containsIgnoreCase(url, '/sensor/')}">
@@ -23,36 +23,26 @@
 <!-- The HTML to be generated -->
 <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
-    
-       
+        
             <li id="mod1" ${mod1}>
-                <img src="<c:url value="/images/navmenu/org-24.png"/>"/>
-                <a href="${pageContext.request.contextPath}/supervise/viewsupervise">
-                 				  控制中心<span style="right:10%; position:absolute;">›</span>
-                </a>
-            </li>
-        
-        
-          
-            <li id="mod2" ${mod2}>
                 <img src="<c:url value="/images/navmenu/news-24.png"/>"/>
                 <a href="${pageContext.request.contextPath}/device/viewdevice?page=0&size=${properties['paging.numitems']}">
                               	 设备管理<span style="right:10%; position:absolute;">›</span>
                 </a>
             </li>
-        
-        
-        
-        
-            
+                           
+            <li id="mod2" ${mod2}>
+                <img src="<c:url value="/images/navmenu/org-24.png"/>"/>
+                <a href="${pageContext.request.contextPath}/supervise/viewsupervise">
+                 				 即时信息<span style="right:10%; position:absolute;">›</span>
+                </a>
+            </li>
                <%--  <li id="mod3" ${mod3}>
                     <img src="<c:url value="/images/navmenu/user-24.png"/>"/>
                     <a href="#">
                      			 传感器管理<span style="right:10%; position:absolute;">›</span>
                     </a>
                 </li> --%>
-           
-
 
     </ul>
 </div>
