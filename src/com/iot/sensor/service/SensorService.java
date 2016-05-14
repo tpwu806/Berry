@@ -13,8 +13,6 @@ import com.iot.sensor.domain.Sensor;
 import com.iot.sensor.dto.SensorDO;
 
 public interface SensorService {
-
-	public abstract Integer getTem() throws DaoFinderException;
 	
 	public abstract Page<SensorDO> retrieveAllSensor(Integer deviceid , Pageable pgble) throws DaoFinderException;
 

@@ -72,7 +72,7 @@ public class DeviceControler {
 				Page<DeviceDO> searchResults = this.deviceService.retrieveAllDevice(pgble);
 				if ((searchResults != null) && (searchResults.hasContent())) {	
 					String url = request.getContextPath() + "/device/viewdevice?";
-					Pager<DeviceDO> page = new Pager(searchResults, url);
+					Pager<DeviceDO> page = new Pager<DeviceDO>(searchResults, url);
 					modelAndView.addObject("deviceList", page);
 					deviceNum=page.getTotalElements();
 					modelAndView.addObject("deviceNum", deviceNum);

@@ -39,12 +39,6 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	private SensorTypeDAO sensorTypeDAO;
 
 	@Override
-	public Integer getTem() throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Page<SensorDO> retrieveAllSensor(Integer deviceid, Pageable pgble) throws DaoFinderException {
 		try {
 			Page<Sensor> page = null;			

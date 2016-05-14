@@ -23,7 +23,7 @@ import com.iot.foundation.intercepts.ModuleStatusHandlerInterceptor;
 
 @Configuration
 @ComponentScan(basePackages = {"com.iot.usermgmt.controller", "com.iot.foundation.controller","com.iot.supervise.controller",
-		 "com.iot.sensor.controller","com.iot.device.controller","com.iot.common.socket"})
+		 "com.iot.sensor.controller","com.iot.device.controller","com.iot.foundation.scheduler"})
 @EnableWebMvc
 @EnableScheduling
 @PropertySource({ "classpath:application.properties" })

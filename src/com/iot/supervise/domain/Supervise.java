@@ -31,6 +31,11 @@ import com.iot.sensor.domain.Sensor;
 @Table(name = "SUPERVISE_SUPERVISE")//采集信息表
 public class Supervise implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
