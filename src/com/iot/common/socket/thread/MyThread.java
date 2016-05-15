@@ -24,14 +24,12 @@ import com.iot.supervise.service.SuperviseService;
  * */
 public class MyThread extends Thread{
 	private static Logger LOG = LoggerFactory.getLogger(MyThread.class);
+	
 	private volatile boolean status;//设备状态,ture;正在运行  false：已经关闭	
 	private Socket socket;
 	private SuperviseService superviseService;
 	private SuperviseDAO superviseDAO;
-    public MyThread(Socket socket,SuperviseDAO superviseDAO){
-        this.socket=socket;
-        this.superviseDAO=superviseDAO;
-    }
+	
 	public  boolean isStatus() {
 		return status;
 	}
@@ -39,7 +37,13 @@ public class MyThread extends Thread{
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
+	
+	public MyThread(Socket socket,SuperviseDAO superviseDAO){
+        this.socket=socket;
+        this.superviseDAO=superviseDAO;
+        status=true;
+    }
+	
 	public void run() {
 		BufferedReader receive = null;
 		PrintWriter send = null;
@@ -59,12 +63,14 @@ public class MyThread extends Thread{
 		    	/**
 		    	 * 保存到数据库
 		    	 * */
+		    	s=new Supervise();
 		    	s.setTaskid(1);
                 s.setSensorvalue(tem);
-                s.setSensorvalue2("6");
+                s.setSensorvalue2("666");
                 s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
                 s.setWarningclass(0);
                 this.superviseDAO.save(s);
+                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");
                 
                 if(tem.equals("END")){  
                     break;  

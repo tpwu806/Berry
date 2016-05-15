@@ -1,5 +1,7 @@
 package com.iot.supervise.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,13 @@ public class TaskServiceImpl implements TaskService {
 	private TaskDAO taskDAO;
 	
 	@Override
-	public Task startTask(Device device) throws DaoCreateException {
+	public Task startTask(DeviceDO device) throws DaoCreateException {
 		Task task = null;
 		try {
 			task = new Task();
 			task.setDeviceid(device.getId());
 			task.setStarttime(TimeDateUtility.getCurrentTimestamp());
-			task.setTaskstatus("1");					
+			task.setTaskstatus(1);					
 
 			return (Task) this.taskDAO.save(task);
 		} catch (Exception ex) {
@@ -44,12 +46,12 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task stopTask(Device device) throws DaoCreateException {
+	public Task stopTask(TaskDO t) throws DaoCreateException {
 		Task task = null;
 		try {
-			task=this.taskDAO.findOne(device.getId());
+			task=this.taskDAO.findOne(t.getId());
 			task.setStoptime(TimeDateUtility.getCurrentTimestamp());
-			task.setTaskstatus("0");					
+			task.setTaskstatus(0);					
 
 			return (Task) this.taskDAO.save(task);
 		} catch (Exception ex) {
@@ -63,7 +65,7 @@ public class TaskServiceImpl implements TaskService {
 		TaskDO fh=null;
 		try {
 			Integer taskstatus=1;
-			Task task = (Task) this.taskDAO.findOne(taskstatus);
+			Task task = (Task) this.taskDAO.findByTaskStatus(taskstatus);
 			if (task != null) {
 				fh = new TaskDO();
 	
@@ -73,6 +75,57 @@ public class TaskServiceImpl implements TaskService {
 	
 			}
 			return fh;
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
+	}
+
+	@Override
+	public void setAliveTask() throws DaoFinderException {		
+		try {
+			Integer taskstatus=1;
+			Task task = (Task) this.taskDAO.findByTaskStatus(taskstatus);
+			if (task != null) {
+				task.setTaskstatus(0);
+			}
+			this.taskDAO.save(task);
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
+		
+	}
+
+	@Override
+	public boolean findTaskByDeviceId(Integer deviceid) throws DaoFinderException {
+		try {
+			Task task = (Task) this.taskDAO.findByDeviceId(deviceid);
+			if (task != null) {
+				if("0".equals(task.getTaskstatus())){
+					return true;
+				}else{return false;}
+			}else{return false;}
+			
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
+	}
+
+	@Override
+	public boolean findTask() throws DaoFinderException {
+		boolean b=false;
+		try {
+			List<Task> tasks = (List<Task>) this.taskDAO.findTask();
+			if (tasks != null && tasks.size()>0) {
+				System.out.println(tasks.get(0).getStarttime());
+				if(0 == (tasks.get(0).getTaskstatus())){
+					b=true;
+				}
+			}
+			return b;
+			
 		} catch (Exception ex) {
 			log.debug("Error retrieving device article: " , ex);
 			throw new DaoFinderException(ex.getMessage());

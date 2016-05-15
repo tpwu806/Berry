@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.iot.common.socket.task.SocketUtilities;
+import com.iot.device.dto.DeviceDO;
+import com.iot.device.service.DeviceService;
 import com.iot.supervise.dao.SuperviseDAO;
+import com.iot.supervise.dto.TaskDO;
+import com.iot.supervise.service.TaskService;
 
 /**
  * 任务调度器
@@ -18,9 +23,42 @@ public class SocketScheduledTask {
 	
 	@Autowired
 	private SuperviseDAO superviseDAO;
-	
-	@Scheduled(cron="0/5 * *  * * ? ")//每5秒执行一次
-	private void ScheduledTask () throws Exception {	
-		System.out.println("Hello");
+	@Autowired
+	private DeviceService deviceService;
+	@Autowired
+	private TaskService taskService;
+	private boolean fiststart=true;
+	@Scheduled(cron="0/10 * *  * * ? ")//每5秒执行一次
+	private void ScheduledTask () throws Exception {
+		/**
+		 * 初始化数据库设备状态和任务状态
+		 * */
+		System.out.println("执行ScheduledTask");
+		if(fiststart){
+			System.out.println("初始化数据库");
+			fiststart=false;
+			this.deviceService.setAliveDevice();
+			this.taskService.setAliveTask();						
+		}else{	
+			System.out.println("判断设备状态");
+			DeviceDO dd=this.deviceService.findAliveDevice();
+            if(dd!=null){
+            	boolean b=this.taskService.findTask();
+            	if(b){
+            		System.out.println("连接树莓派");
+            		taskService.startTask(dd);
+            		SocketUtilities.startThread(dd,superviseDAO);
+            		
+            	}
+            }else{
+            	TaskDO task=this.taskService.findAliveTask();
+            	if(task!=null){
+            		SocketUtilities.stopThread();
+            		taskService.stopTask(task);
+            	}
+            }
+		}
+		
+		
 	}
 }

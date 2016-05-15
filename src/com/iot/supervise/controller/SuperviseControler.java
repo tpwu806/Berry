@@ -55,7 +55,7 @@ public class SuperviseControler {
 		ModelAndView modelAndView = null;
 		try {
 			Device d=this.deviceService.startDevice(deviceId);
-			Task t=this.taskService.startTask(d);
+			//Task t=this.taskService.startTask(d);
 			modelAndView = new ModelAndView("redirect:/device/viewdevice");
 		} catch (Exception ex) {
 			log.debug("Error in finding device  to use in start", ex);
@@ -70,7 +70,7 @@ public class SuperviseControler {
 		ModelAndView modelAndView = null;
 		try {
 			Device device=this.deviceService.stopDevice(deviceId);
-			Task t=this.taskService.stopTask(device);
+			//Task t=this.taskService.stopTask(device);
 			modelAndView = new ModelAndView("redirect:/device/viewdevice");
 		} catch (Exception ex) {
 			log.debug("Error in finding device  to use in stop", ex);
@@ -106,7 +106,8 @@ public class SuperviseControler {
 	public String getdht11() throws DaoFinderException {
 		String tem;
 		SuperviseDO s=this.superviseService.findMostNewSupervise();
-		tem=s.getSensorvalue();
+		//tem=s.getSensorvalue();
+		tem=s.getSupervisetime().toString();
 		/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		tem=df.format(new Date());*/
 					

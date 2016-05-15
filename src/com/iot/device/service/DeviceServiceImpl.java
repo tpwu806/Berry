@@ -20,6 +20,7 @@ import com.iot.exceptions.DaoCreateException;
 import com.iot.exceptions.DaoDeleteException;
 import com.iot.exceptions.DaoFinderException;
 import com.iot.exceptions.DaoUpdateException;
+import com.iot.supervise.domain.Task;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
@@ -123,7 +124,7 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
-	public Page<DeviceDO> searchNoticeContent(String searchTerm, String receiptState, Pageable pgble)
+	public Page<DeviceDO> searchDeviceContent(String searchTerm, String receiptState, Pageable pgble)
 			throws DaoFinderException {
 		// TODO Auto-generated method stub
 		return null;
@@ -174,6 +175,54 @@ public class DeviceServiceImpl implements DeviceService {
 		} catch (Exception ex) {
 			log.debug("Cannot stop device", ex);
 			throw new DaoUpdateException(ex.getMessage());
+		}
+	}
+
+	@Override
+	public void setAliveDevice() throws DaoUpdateException {
+		try {
+			Integer devicetatus=1;
+			Device device = (Device) this.deviceDAO.findOne(devicetatus);
+			if (device != null) {
+				device.setDevicestatus(0);
+			}
+			this.deviceDAO.save(device);
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			try {
+				throw new DaoFinderException(ex.getMessage());
+			} catch (DaoFinderException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
+		
+	}
+
+	@Override
+	public DeviceDO findAliveDevice() throws DaoUpdateException, DaoFinderException {
+		DeviceDO fh = null;
+		try {
+			Integer devicestatus=1;
+			Device device = (Device) this.deviceDAO.findByDeviceStatus(devicestatus);
+			if (device != null) {
+				fh = new DeviceDO();
+	
+				fh.setId(device.getId());
+				fh.setDevicename(device.getDevicename());
+				Integer[] s=new Integer[1];
+				s[0]=device.getDevicestatus();
+				fh.setStatus(s);
+				fh.setDevicetype(device.getDevicetype());
+				fh.setDeviceip(device.getDeviceip());
+				fh.setDeviceport(device.getDeviceport());
+				fh.setSensornumber(device.getSensornumber());
+	
+			}
+			return fh;
+		} catch (Exception ex) {
+			log.debug("Error retrieving device article: " , ex);
+			throw new DaoFinderException(ex.getMessage());
 		}
 	}
 }

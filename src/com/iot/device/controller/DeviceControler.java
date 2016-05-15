@@ -190,7 +190,7 @@ public class DeviceControler {
 			String pSearchKey = StringUtils.isEmpty(searchKey) ? "" : searchKey;
 			String pReceiptstate = StringUtils.isEmpty(receiptstate) ? "" : receiptstate;
 
-			Page<DeviceDO> searchResults = this.deviceService.searchNoticeContent(pSearchKey, pReceiptstate, pgble);
+			Page<DeviceDO> searchResults = this.deviceService.searchDeviceContent(pSearchKey, pReceiptstate, pgble);
 			Integer deviceNum;
 			
 			if ((searchResults != null) && (searchResults.hasContent())) {

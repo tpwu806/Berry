@@ -34,7 +34,7 @@ public class Task implements Serializable{
 	private Timestamp stoptime;//任务结束时间
 	
 	@Column(name = "TASKSTATUS")
-	private String taskstatus;//任务状态
+	private Integer taskstatus;//任务状态
 	
 	public Integer getId() {
 		return id;
@@ -56,11 +56,11 @@ public class Task implements Serializable{
 		this.deviceid = deviceid;
 	}
 
-	public String getTaskstatus() {
+	public Integer getTaskstatus() {
 		return taskstatus;
 	}
 
-	public void setTaskstatus(String taskstatus) {
+	public void setTaskstatus(Integer taskstatus) {
 		this.taskstatus = taskstatus;
 	}
 

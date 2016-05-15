@@ -26,6 +26,11 @@ public class TimeDateUtility {
 		SimpleDateFormat df = new SimpleDateFormat("yyMMddHHmmssSSS");
 		return df.format(getCurrentTimestamp());
 	}
+	
+	public static String getFormattedTime() {
+		SimpleDateFormat df = new SimpleDateFormat("ss");
+		return df.format(getCurrentTimestamp());
+	}
 
 	public static Integer getCurrentYear() {
 		Calendar cal = Calendar.getInstance();

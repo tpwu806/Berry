@@ -17,8 +17,8 @@ public interface DeviceService {
 
 	public abstract Device createDevice(DeviceDO deviceForm) throws DaoCreateException;
 
-	public abstract Page<DeviceDO> searchNoticeContent(
-			String searchTerm, String receiptState, Pageable pgble) throws DaoFinderException;
+	public abstract Page<DeviceDO> searchDeviceContent(String searchTerm, 
+			String receiptState, Pageable pgble) throws DaoFinderException;
 
 	public abstract DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException;
 
@@ -29,5 +29,9 @@ public interface DeviceService {
 	public abstract Device startDevice(Integer deviceId) throws DaoUpdateException;
 	
 	public abstract Device stopDevice(Integer deviceId) throws DaoUpdateException;
+	
+	public abstract void setAliveDevice() throws DaoUpdateException;
+	
+	public abstract DeviceDO findAliveDevice() throws DaoUpdateException, DaoFinderException;
 	
 }
