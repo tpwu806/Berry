@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<!-- Setup the active class for the list items -->
+<c:set var="url" value="url: ${requestScope['javax.servlet.forward.servlet_path']}"/>
+<c:set var="fxn1" value=""/>
+<c:choose>
+	<c:when test="${fn:containsIgnoreCase(url, '/device/viewdevice')}">
+        <c:set var="fxn1" value="class=\"active\""/>
+    </c:when>
+    <c:when test="${fn:containsIgnoreCase(url, '/device/newdeviceform')}">
+        <c:set var="fxn2" value="class=\"active\""/>
+    </c:when>
+    <c:otherwise></c:otherwise>
+</c:choose>
+
+<!-- HTML to be generated -->
+<div class="col-sm-3 col-md-2 sidebar-menu">
+    <ul class="nav-menu nav-sidebar">
+		
+		<li id="fxn1" ${fxn1}>
+            <img src="<c:url value="/images/navmenu/view-24.png"/>"/>
+            <a href="${pageContext.request.contextPath}/device/viewdevice?page=0&size=${properties['paging.numitems']}">
+               	 浏览设备<span style="right:10%; position:absolute;">›</span>
+            </a>
+        </li>
+		
+        
+        <li id="fxn2" ${fxn2}>
+            <img src="<c:url value="/images/navmenu/edit-24.png"/>"/>
+            <a href="${pageContext.request.contextPath}/device/newdeviceform">
+               	 新增设备<span style="right:10%; position:absolute;">›</span>
+            </a>
+        </li>
+        
+
+    </ul>
+</div>
