@@ -10,8 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Device_Device")//设备表
+@Table(name = "DEVICE_DEVICE")//设备表
 public class Device implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3574550010937711395L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
