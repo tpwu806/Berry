@@ -34,19 +34,51 @@ public class ThresholdControler {
 	private ThresholdService thresholdService;
 	
 	/**
-	 * 获得添加阈值表单
+	 * 获得修改阈值表单
 	 *
 	 */
-	@RequestMapping(value = { "/threshold/newthresholdform" }, method = {
+	@RequestMapping(value = { "/threshold/vieweditthreshold" }, method = { 
 			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView viewCreateThresholdForm() {
-		ModelAndView modelAndView = new ModelAndView("threshold/add-threshold-form");
+	public ModelAndView viewEditThreshold() {
+		ModelAndView modelAndView = null;
+		try {	
+			ThresholdDO thresholdObject = this.thresholdService.getThresholdDetail();
+			if(thresholdObject!=null){
+				modelAndView = new ModelAndView("threshold/edit-threshold-form");
+				modelAndView.addObject("thresholdForm", thresholdObject);		
+			}else{
+				modelAndView = new ModelAndView("threshold/add-threshold-form");				
+				ThresholdDO thresholdObjects = new ThresholdDO();
+				modelAndView.addObject("thresholdForm", thresholdObjects);
+			}
 		
-		ThresholdDO thresholdObject = new ThresholdDO();
-		modelAndView.addObject("thresholdForm", thresholdObject);
-		
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to display edit device form", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
 		return modelAndView;
 	}
+
+	/**
+	 * 保存修改阈值表单
+	 *
+	 */
+	@RequestMapping(value = { "/threshold/editthreshold" }, method = {
+			org.springframework.web.bind.annotation.RequestMethod.POST })
+	public ModelAndView editThresholdForm(@ModelAttribute("thresholdForm") ThresholdDO thresholdForm) {
+		ModelAndView modelAndView = null;
+		try {
+			Threshold nn = this.thresholdService.updateDevice(thresholdForm);
+			//Integer noticeId = nn.getId();
+	
+			modelAndView = new ModelAndView("redirect:threshold/vieweditthreshold");
+		} catch (Exception ex) {
+			log.debug("Error in finding news article to use in editing device article", ex);
+			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+		}
+		return modelAndView;
+	}
+
 	
 	/**
 	 * 保存添加阈值表单
@@ -56,7 +88,6 @@ public class ThresholdControler {
 			org.springframework.web.bind.annotation.RequestMethod.POST })
 	public String addNewThreshold(@Valid @ModelAttribute("thresholdForm") ThresholdDO thresholdForm, BindingResult bindingResult,
 			Model model, RedirectAttributes redirectAttributes) {
-		ModelAndView modelAndView = null;
 		try {
 			if (bindingResult.hasErrors()) {
 				return "threshold/edit-threshold-form";
@@ -66,45 +97,6 @@ public class ThresholdControler {
 			log.debug("Error when creating new device article", ex);
 			redirectAttributes.addFlashAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}
-		return "redirect:/device/viewdevice?page=0&size=" + this.env.getRequiredProperty("paging.numitems");
-	}
-	
-	/**
-	 * 获得修改阈值表单
-	 *
-	 */
-	@RequestMapping(value = { "/threshold/editthresholdform" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView editThreshold(@PathVariable Integer thresholdId) {
-		ModelAndView modelAndView = new ModelAndView("threshold/edit-threshold-form");
-		try {
-
-			ThresholdDO thresholdObject = this.thresholdService.getThresholdDetail();
-			modelAndView.addObject("thresholdForm", thresholdObject);			
-		} catch (Exception ex) {
-			log.debug("Error in finding news article to display edit device form", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
-		}
-		return modelAndView;
-	}
-	
-	/**
-	 * 保存修改阈值表单
-	 *
-	 */
-	@RequestMapping(value = { "/device/editthresholdform/editthreshold/{thresholdId}" }, method = {
-			org.springframework.web.bind.annotation.RequestMethod.POST })
-	public ModelAndView viewEditThresholdForm(@PathVariable Integer thresholdId, @ModelAttribute("thresholdForm") ThresholdDO thresholdForm) {
-		ModelAndView modelAndView = null;
-		try {
-			Threshold nn = this.thresholdService.updateDevice(thresholdForm);
-			//Integer noticeId = nn.getId();
-
-			modelAndView = new ModelAndView("redirect:/threshold/viewthreshold/viewthresholdarticle");
-		} catch (Exception ex) {
-			log.debug("Error in finding news article to use in editing device article", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
-		}
-		return modelAndView;
+		return "redirect:/threshold/vieweditthreshold";
 	}
 }

@@ -24,45 +24,6 @@
     <link href="<c:url value="/css/dashboard.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/kilo.css"/>" rel="stylesheet">
     
-	<%-- <script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/kindeditor.js"/>"></script>
-	<script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/lang/zh_CN.js"/>"></script>
-	<script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/plugins/code/prettify.js"/>"></script>
-	
-	<script>
-		KindEditor.ready(function(K) {
-			var editor1 = K.create('textarea[name="content"]', {
-				autoHeightMode : true,
-				cssPath : '<%=request.getContextPath()%>/js/kindeditor/plugins/code/prettify.css',
-				uploadJson : '<%=request.getContextPath()%>/js/kindeditor/jsp/upload_json.jsp',
-				fileManagerJson : '<%=request.getContextPath()%>/js/kindeditor/jsp/file_manager_json.jsp',
-				allowFileManager : true,
-				afterCreate : function() {
-					var self = this;
-					this.loadPlugin('autoheight');
-					
-				},
-				afterChange : function() {
-					K('.word_count2').html(this.count('text'));
-					 if (this.count()>0) {
-				        $('#submitButton').prop('disabled', false);
-			         } else {
-			            $('#submitButton').prop('disabled', true);
-			         }
-				},
-				afterBlur: function(){
-					this.sync();
-				}
-			});
-			prettyPrint();
-		});
-	</script> --%>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 <!-- Header bar -->
@@ -80,43 +41,32 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
             <div class="qy-con">
 
-                <form:form method="POST" commandName="deviceForm"
-                           action="${pageContext.request.contextPath}/device/newdeviceform/newdevice"
+                <form:form method="POST" commandName="thresholdForm"
+                           action="${pageContext.request.contextPath}/threshold/newthresholdform/newthreshold"
                            accept-charset="UTF-8">
 
                     <div class="news">
 
                         <!-- Left side labels -->
                         <div class="news-l">
-                            <div class="hy-list text-r">设备名称 *:</div>
-                            <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list text-r">ip *:</div>
-                             <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list text-r">端口号 *:</div>
-                            <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list text-r">设备类型*:</div>
-                            <div class="hy-list text-r">&nbsp;</div>
+                            <div class="hy-list text-r">温度*:</div>
+                            <div class="hy-sm">&nbsp;</div>                      
+                             <div class="hy-list text-r">湿度 *:</div>
+                            <div class="hy-sm">&nbsp;</div> 
                         </div>
 
                         <!-- Right side entry fields -->
                         <div class="news-r">
                             <div class="hy-list">
-                                <form:input id="deviceName" path="devicename" type="text" class="news-title-in" maxlength="10"/>
-                            </div>
-                            <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list">
-                                <form:input id="deviceIp" path="deviceip" type="text" class="news-ip-in" maxlength="15"/>
-                            </div>
-                            <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list">
-                                <form:input id="devicePort" path="deviceport" type="text" class="news-port-in" maxlength="5"/>
-                            </div>
-                            <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list">
-                                <form:input id="deviceType" path="devicetype" type="text" class="news-type-in" maxlength="10"/>
-                            </div>
-
-                        </div>
+		                        <form:hidden path="id"/>
+		                        最大：<form:input id="maxtemperature" path="maxtemperature" type="text" class="news-title-in" maxlength="10"/>
+		                        最小：<form:input id="mintemperature" path="mintemperature" type="text" class="news-title-in" maxlength="10"/>		                       
+	                        </div> 
+	                        <div class="hy-list">		                      
+		                        最大：<form:input id="maxhumidity" path="maxhumidity" type="text" class="news-title-in" maxlength="10"/>
+		                        最小：<form:input id="minhumidity" path="minhumidity" type="text" class="news-title-in" maxlength="10"/>		                        
+	                        </div>                                                  
+						</div>
 
                         <div class="clear"></div>
                         <div class="btn-news"> <button id="submitButton" class="btn btn-lg btn-primary" type="submit">保存</button></div>
@@ -147,15 +97,7 @@
 
 <script>
 
-	$(document).ready(function() {
-	
-	    
-	
-	    /* if ($('#regUserOnly').is(':checked')) {
-	        $('#warningMsg').show();
-	    } else {
-	        $('#warningMsg').hide();
-	    } */
+	$(document).ready(function() {		    		   
 	
 	    bootbox.setDefaults({
 	        locale: "zh_CN"
@@ -163,18 +105,11 @@
 	
 	});
 	
-    /* $('#regUserOnly').on('change', function() {
-        if ($('#regUserOnly').is(':checked')) {
-            $('#warningMsg').show();
-        } else {
-            $('#warningMsg').hide();
-        }
-    }); */
 
     $('#submitButton').on('click', function(e) {
     	
-    	if ($('#deviceName').val() == '' || $('#devicePort').val() == ''
-    		|| $('#deviceIp').val() == ''|| $('#deviceType').val() == '') {
+    	if ($('#maxtemperature').val() == '' || $('#mintemperature').val() == ''
+    		|| $('#maxhumidity').val() == ''|| $('#minhumidity').val() == '') {
 	        alert("信息填写不完整");
 	        return false;
 	    }

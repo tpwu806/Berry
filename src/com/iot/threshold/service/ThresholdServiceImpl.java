@@ -26,26 +26,64 @@ public class ThresholdServiceImpl implements ThresholdService {
 
 	@Override
 	public ThresholdDO getThresholdDetail() throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+		ThresholdDO thresholdDO=new ThresholdDO();
+		try{
+			Threshold threshold=this.thresholdDAO.findOne(Integer.valueOf(1));
+			if(threshold!=null){
+				thresholdDO.setId(threshold.getId());
+				thresholdDO.setMaxhumidity(threshold.getMaxhumidity());
+				thresholdDO.setMaxtemperature(threshold.getMaxtemperature());
+				thresholdDO.setMinhumidity(threshold.getMinhumidity());
+				thresholdDO.setMintemperature(threshold.getMintemperature());
+			}	
+		} catch (Exception ex) {
+			log.debug("Error creating new supervice", ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
+		return thresholdDO;
 	}
 
 	@Override
 	public Threshold updateDevice(ThresholdDO thresholdForm) throws DaoUpdateException {
-		// TODO Auto-generated method stub
-		return null;
+		Threshold ts=null;
+		try{
+			Threshold threshold=this.thresholdDAO.findOne(Integer.valueOf(1));
+			if(threshold!=null){				
+				//threshold.setId(threshold.getId());
+				threshold.setMaxhumidity(thresholdForm.getMaxhumidity());
+				threshold.setMaxtemperature(thresholdForm.getMaxtemperature());
+				threshold.setMinhumidity(thresholdForm.getMinhumidity());
+				threshold.setMintemperature(thresholdForm.getMintemperature());
+				ts=this.thresholdDAO.save(threshold);
+			}	
+		} catch (Exception ex) {
+			log.debug("Error creating new supervice", ex);
+			throw new DaoUpdateException(ex.getMessage());
+		}
+		return ts;
+	}
+
+	@Override
+	public Threshold createThreshold(ThresholdDO thresholdForm) throws DaoFinderException, DaoCreateException {		
+		Threshold ts=null;
+		try {
+			Threshold threshold=new Threshold();
+			threshold.setMaxhumidity(thresholdForm.getMaxhumidity());
+			threshold.setMaxtemperature(thresholdForm.getMaxtemperature());
+			threshold.setMinhumidity(thresholdForm.getMinhumidity());
+			threshold.setMintemperature(thresholdForm.getMintemperature());
+			ts=this.thresholdDAO.save(threshold);
+		} catch (Exception ex) {
+			log.debug("Error creating new supervice", ex);
+			throw new DaoCreateException(ex.getMessage());
+		}
+		return ts;
 	}
 
 	@Override
 	public void deleteThreshold(Integer thresholdId) throws DaoDeleteException {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Threshold createThreshold(ThresholdDO thresholdForm) throws DaoFinderException, DaoCreateException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

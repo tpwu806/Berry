@@ -20,8 +20,8 @@
 		
 		<li id="fxn1" ${fxn1}>
             <img src="<c:url value="/images/navmenu/view-24.png"/>"/>
-            <a href="${pageContext.request.contextPath}/device/viewdevice?page=0&size=${properties['paging.numitems']}">
-               	 浏览设备<span style="right:10%; position:absolute;">›</span>
+            <a href="${pageContext.request.contextPath}/device/viewdevice">
+               	查看阈值<span style="right:10%; position:absolute;">›</span>
             </a>
         </li>
 		
@@ -29,7 +29,7 @@
         <li id="fxn2" ${fxn2}>
             <img src="<c:url value="/images/navmenu/edit-24.png"/>"/>
             <a href="${pageContext.request.contextPath}/device/newdeviceform">
-               	 新增设备<span style="right:10%; position:absolute;">›</span>
+               	编辑阈值<span style="right:10%; position:absolute;">›</span>
             </a>
         </li>
         
