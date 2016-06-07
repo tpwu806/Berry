@@ -6,8 +6,8 @@ import com.iot.supervise.dto.SuperviseDO;
 
 public interface SuperviseService {
 	
-	public abstract SuperviseDO findMostNewSupervise() throws DaoFinderException;
+	SuperviseDO findMostNewSupervise() throws DaoFinderException;
 	
-	public abstract void creatSupervice(SuperviseDO s) throws DaoFinderException,DaoCreateException;
+	void creatSupervice(SuperviseDO s) throws DaoFinderException,DaoCreateException;
 	
 }

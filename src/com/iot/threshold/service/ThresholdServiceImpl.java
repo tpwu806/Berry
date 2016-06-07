@@ -1,7 +1,5 @@
 package com.iot.threshold.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,6 @@ import com.iot.exceptions.DaoCreateException;
 import com.iot.exceptions.DaoDeleteException;
 import com.iot.exceptions.DaoFinderException;
 import com.iot.exceptions.DaoUpdateException;
-import com.iot.supervise.dao.SuperviseDAO;
-import com.iot.supervise.dao.TaskDAO;
-import com.iot.supervise.domain.Supervise;
-import com.iot.supervise.dto.SuperviseDO;
 import com.iot.threshold.dao.ThresholdDAO;
 import com.iot.threshold.domain.Threshold;
 import com.iot.threshold.dto.ThresholdDO;

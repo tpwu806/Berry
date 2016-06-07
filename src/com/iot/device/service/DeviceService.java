@@ -13,25 +13,25 @@ import com.iot.exceptions.DaoUpdateException;
 
 public interface DeviceService {
 
-	public abstract Page<DeviceDO> retrieveAllDevice(Pageable pgble) throws DaoFinderException;
+	Page<DeviceDO> retrieveAllDevice(Pageable pgble) throws DaoFinderException;
 
-	public abstract Device createDevice(DeviceDO deviceForm) throws DaoCreateException;
+	Device createDevice(DeviceDO deviceForm) throws DaoCreateException;
 
-	public abstract Page<DeviceDO> searchDeviceContent(String searchTerm, 
+	Page<DeviceDO> searchDeviceContent(String searchTerm, 
 			String receiptState, Pageable pgble) throws DaoFinderException;
 
-	public abstract DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException;
+	DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException;
 
-	public abstract Device updateDevice(DeviceDO deviceForm) throws DaoUpdateException;
+	Device updateDevice(DeviceDO deviceForm) throws DaoUpdateException;
 
-	public abstract void deleteDevice(Integer deviceId)throws DaoDeleteException;
+	void deleteDevice(Integer deviceId)throws DaoDeleteException;
 	
-	public abstract Device startDevice(Integer deviceId) throws DaoUpdateException;
+	Device startDevice(Integer deviceId) throws DaoUpdateException;
 	
-	public abstract Device stopDevice(Integer deviceId) throws DaoUpdateException;
+	Device stopDevice(Integer deviceId) throws DaoUpdateException;
 	
-	public abstract void setAliveDevice() throws DaoUpdateException;
+	void setAliveDevice() throws DaoUpdateException;
 	
-	public abstract DeviceDO findAliveDevice() throws DaoUpdateException, DaoFinderException;
+	DeviceDO findAliveDevice() throws DaoUpdateException, DaoFinderException;
 	
 }

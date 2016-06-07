@@ -8,15 +8,15 @@ import com.iot.supervise.dto.TaskDO;
 
 public interface TaskService {
 
-	public abstract Task startTask(DeviceDO device) throws DaoCreateException;
+	Task startTask(DeviceDO device) throws DaoCreateException;
 	
-	public abstract Task stopTask(TaskDO task) throws DaoCreateException;
+	Task stopTask(TaskDO task) throws DaoCreateException;
 	
-	public abstract TaskDO findAliveTask() throws DaoFinderException;
+	TaskDO findAliveTask() throws DaoFinderException;
 	
-	public abstract void setAliveTask() throws DaoFinderException;
+	void setAliveTask() throws DaoFinderException;
 	
-	public abstract boolean findTaskByDeviceId(Integer id) throws DaoFinderException;
+	boolean findTaskByDeviceId(Integer id) throws DaoFinderException;
 	
-	public abstract boolean findTask() throws DaoFinderException;
+	boolean findTask() throws DaoFinderException;
 }

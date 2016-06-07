@@ -6,5 +6,5 @@ import com.iot.usermgmt.dto.CreateEditUserDO;
 
 public interface UserService {
 
-	public abstract boolean LoginCheck(CreateEditUserDO user) throws DaoFinderException;
+	boolean LoginCheck(CreateEditUserDO user) throws DaoFinderException;
 }

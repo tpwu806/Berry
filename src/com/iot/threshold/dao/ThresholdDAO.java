@@ -9,5 +9,5 @@ import com.iot.threshold.domain.Threshold;
 public interface ThresholdDAO extends JpaRepository<Threshold, Integer>{
 	
 	@Query("select s from Threshold s ") 
-	public abstract Threshold findOrderBySupervisetimeDesc();
+    Threshold findOrderBySupervisetimeDesc();
 }

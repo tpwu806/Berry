@@ -14,19 +14,19 @@ import com.iot.sensor.dto.SensorDO;
 
 public interface SensorService {
 	
-	public abstract Page<SensorDO> retrieveAllSensor(Integer deviceid , Pageable pgble) throws DaoFinderException;
+	Page<SensorDO> retrieveAllSensor(Integer deviceid , Pageable pgble) throws DaoFinderException;
 
-	public abstract Sensor createSensor(SensorDO sensorForm) throws DaoCreateException;
+	Sensor createSensor(SensorDO sensorForm) throws DaoCreateException;
 
-	public abstract Page<SensorDO> searchSensorContent(
+	Page<SensorDO> searchSensorContent(
 			String searchTerm, String receiptState, Pageable pgble) throws DaoFinderException;
 
-	public abstract SensorDO getSensorDetailById(Integer sensorId, String username) throws DaoFinderException;
+	SensorDO getSensorDetailById(Integer sensorId, String username) throws DaoFinderException;
 
-	public abstract Sensor updateSensor(SensorDO sensorForm) throws DaoUpdateException;
+	Sensor updateSensor(SensorDO sensorForm) throws DaoUpdateException;
 
-	public abstract void deleteSensor(Integer sensorId)throws DaoDeleteException;
+	void deleteSensor(Integer sensorId)throws DaoDeleteException;
 	
-	public abstract Integer getNumSearchSensor(String name,String receiptsign)throws DaoFinderException;
+	Integer getNumSearchSensor(String name,String receiptsign)throws DaoFinderException;
 
 }
