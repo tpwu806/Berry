@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.iot.common.utilities.Compare;
 import com.iot.common.utilities.TimeDateUtility;
 import com.iot.exceptions.DaoCreateException;
 import com.iot.exceptions.DaoFinderException;
@@ -17,6 +18,7 @@ import com.iot.supervise.dao.SuperviseDAO;
 import com.iot.supervise.domain.Supervise;
 import com.iot.supervise.dto.SuperviseDO;
 import com.iot.supervise.service.SuperviseService;
+import com.iot.threshold.dto.ThresholdDO;
 
 
 /**
@@ -29,6 +31,7 @@ public class MyThread extends Thread{
 	private Socket socket;
 	private SuperviseService superviseService;
 	private SuperviseDAO superviseDAO;
+	private ThresholdDO thresholdDO;
 	
 	public  boolean isStatus() {
 		return status;
@@ -38,10 +41,11 @@ public class MyThread extends Thread{
 		this.status = status;
 	}
 	
-	public MyThread(Socket socket,SuperviseDAO superviseDAO){
+	public MyThread(Socket socket,SuperviseDAO superviseDAO,ThresholdDO thresholdDO){
         this.socket=socket;
         this.superviseDAO=superviseDAO;
         status=true;
+        this.thresholdDO=thresholdDO;
     }
 	
 	public void run() {
@@ -68,6 +72,9 @@ public class MyThread extends Thread{
                 s.setSensorvalue(tem);
                 s.setSensorvalue2("666");
                 s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
+                if(Compare.compareClass(tem,thresholdDO)!=0){
+                	
+                }
                 s.setWarningclass(0);
                 this.superviseDAO.save(s);
                 System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");

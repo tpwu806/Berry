@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.iot.common.socket.thread.MyThread;
 import com.iot.device.dto.DeviceDO;
 import com.iot.supervise.dao.SuperviseDAO;
+import com.iot.threshold.dto.ThresholdDO;
 
 public class SocketUtilities {
 
@@ -16,17 +17,19 @@ public class SocketUtilities {
 	static MyThread mt;
 	static Socket socket;
 	static SuperviseDAO superviseDAO;
+	static ThresholdDO thresholdDO;
 	
 	/**
 	 * 开启线程
 	 * */
-	public static void startThread(DeviceDO dd,SuperviseDAO superviseDAO){
+	public static void startThread(DeviceDO dd,SuperviseDAO superviseDAO,ThresholdDO thresholdDO){
 		String IP=dd.getDeviceip(); 
 		int PORT = Integer.valueOf(dd.getDeviceport());
 		SocketUtilities.superviseDAO=superviseDAO;
+		SocketUtilities.thresholdDO=thresholdDO;
 		try {			
 			socket = new Socket(IP, PORT);
-			mt=new MyThread(socket,superviseDAO);
+			mt=new MyThread(socket,superviseDAO,thresholdDO);
 			mt.start();
 		}catch(Exception e){
             e.printStackTrace();

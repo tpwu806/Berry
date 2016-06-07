@@ -12,6 +12,8 @@ import com.iot.device.service.DeviceService;
 import com.iot.supervise.dao.SuperviseDAO;
 import com.iot.supervise.dto.TaskDO;
 import com.iot.supervise.service.TaskService;
+import com.iot.threshold.dto.ThresholdDO;
+import com.iot.threshold.service.ThresholdService;
 
 /**
  * 任务调度器
@@ -27,6 +29,8 @@ public class SocketScheduledTask {
 	private DeviceService deviceService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private ThresholdService thresholdService;
 	private boolean fiststart=true;
 	@Scheduled(cron="0/10 * *  * * ? ")//每5秒执行一次
 	private void ScheduledTask () throws Exception {
@@ -42,12 +46,13 @@ public class SocketScheduledTask {
 		}else{	
 			System.out.println("判断设备状态");
 			DeviceDO dd=this.deviceService.findAliveDevice();
+			ThresholdDO thresholdDO=this.thresholdService.getThresholdDetail();
             if(dd!=null){
             	boolean b=this.taskService.findTask();
             	if(b){
             		System.out.println("连接树莓派");
             		taskService.startTask(dd);
-            		SocketUtilities.startThread(dd,superviseDAO);
+            		SocketUtilities.startThread(dd,superviseDAO,thresholdDO);
             		
             	}
             }else{

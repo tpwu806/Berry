@@ -30,7 +30,7 @@ import com.iot.sensor.service.SensorService;
 
 /**
  * @author wutongpeng
- *
+ * 设备
  */
 
 
