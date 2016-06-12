@@ -72,9 +72,9 @@ public class MyThread extends Thread{
                 s.setSensorvalue(tem);
                 s.setSensorvalue2("666");
                 s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
-                if(Compare.compareClass(tem,thresholdDO)!=0){
-                	
-                }
+               /* if(Compare.compareClass(tem,thresholdDO)!=0){
+                	s.setWarningclass(1);
+                }*/
                 s.setWarningclass(0);
                 this.superviseDAO.save(s);
                 System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");

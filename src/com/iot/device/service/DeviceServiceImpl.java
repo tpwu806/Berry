@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import com.iot.common.dao.DeviceJdbcDAO;
 import com.iot.device.dao.DeviceDAO;
 import com.iot.device.dao.DeviceTypeDAO;
 import com.iot.device.domain.Device;
@@ -20,19 +22,19 @@ import com.iot.exceptions.DaoCreateException;
 import com.iot.exceptions.DaoDeleteException;
 import com.iot.exceptions.DaoFinderException;
 import com.iot.exceptions.DaoUpdateException;
-import com.iot.supervise.domain.Task;
 
 @Service
 @Transactional(rollbackFor = { Exception.class })
-@EnableJpaRepositories(basePackages = {"com.iot.device.dao"})
+@EnableJpaRepositories(basePackages = {"com.iot.device.dao","com.iot.common.dao"})
 public class DeviceServiceImpl implements DeviceService {
 
 	static final Logger log = LoggerFactory.getLogger(DeviceServiceImpl.class);
 	@Autowired
-	private DeviceDAO deviceDAO;
-	
+	private DeviceDAO deviceDAO;	
 	@Autowired
-	private DeviceTypeDAO deviceTypeDAO;
+	private DeviceTypeDAO deviceTypeDAO;	
+	@Autowired
+	private DeviceJdbcDAO deviceJdbcDAO;
 
 	@Override
 	public Page<DeviceDO> retrieveAllDevice(Pageable pgble) throws DaoFinderException {
@@ -124,10 +126,52 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
-	public Page<DeviceDO> searchDeviceContent(String searchTerm, String receiptState, Pageable pgble)
-			throws DaoFinderException {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<DeviceDO> searchDeviceContent(String searchTerm, String type, Pageable pgble)
+			throws DaoFinderException {		
+		Page<Device> page=null;
+		try {
+			System.out.println("searchTerm:"+searchTerm+" type:"+type);
+			if(StringUtils.isEmpty(searchTerm)){
+				if(StringUtils.isEmpty(type)){
+					page=this.deviceDAO.findAll(pgble);
+				}else{
+					page=this.deviceDAO.findByDeviceType(type,pgble);
+				}				
+			}else if(StringUtils.isEmpty(type)){				
+				page=this.deviceDAO.findByDeviceName(searchTerm,pgble);				
+			}else{
+				page=this.deviceDAO.findByDeviceNameAndDeviceType(searchTerm,type,pgble);
+			}
+			ArrayList<DeviceDO> list = new ArrayList<DeviceDO>();
+			if ((page != null) && (page.hasContent())) {
+				for (Device device : page.getContent()) {
+					DeviceDO dd = new DeviceDO();
+					
+					dd.setId(device.getId());
+					dd.setDevicename(device.getDevicename());
+					dd.setDeviceip(device.getDeviceip());
+					dd.setDeviceport(device.getDeviceport());
+					
+					if(device.getSensornumber()==null){
+						dd.setSensornumber(0);
+					}else{
+						dd.setSensornumber(device.getSensornumber());
+					}
+					
+					Integer[] s=new Integer[1];
+					s[0]=device.getDevicestatus();
+					dd.setStatus(s);
+					dd.setDevicetype(device.getDevicetype());
+
+					list.add(dd);
+				}
+			}
+			return new PageImpl<DeviceDO>(list, pgble, page.getTotalElements());
+
+		} catch (Exception ex) {
+			log.debug("Error creating new news post", ex);
+			throw new DaoFinderException(ex.getMessage());
+		}
 	}
 
 	@Override

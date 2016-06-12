@@ -91,12 +91,13 @@ public class SensorControler {
 	 * 获得添加传感器表单
 	 *
 	 */
-	@RequestMapping(value = { "/sensor/newsensorform" }, method = {
+	@RequestMapping(value = { "/sensor/newsensorform/{deviceId}" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public ModelAndView viewCreateSensorForm() {
+	public ModelAndView viewCreateSensorForm(@PathVariable Integer deviceId) {
 		ModelAndView modelAndView = new ModelAndView("sensor/add_sensor_form");
 		
 		SensorDO sensorObject = new SensorDO();
+		sensorObject.setDeviceid(deviceId);
 		modelAndView.addObject("sensorForm", sensorObject);
 		
 		return modelAndView;
@@ -110,7 +111,6 @@ public class SensorControler {
 			org.springframework.web.bind.annotation.RequestMethod.POST })
 	public String addNewSensor(@Valid @ModelAttribute("sensorForm") SensorDO sensorForm, BindingResult bindingResult,
 			Model model, RedirectAttributes redirectAttributes) {
-		ModelAndView modelAndView = null;
 		try {
 			if (bindingResult.hasErrors()) {
 				return "sensor/add-sensor-form";
@@ -152,7 +152,6 @@ public class SensorControler {
 		ModelAndView modelAndView = null;
 		try {
 			Sensor nn = this.sensorService.updateSensor(sensorForm);
-			//Integer noticeId = nn.getId();
 
 			modelAndView = new ModelAndView("redirect:/sensor/viewsensor/viewsensorarticle/" + sensorId);
 		} catch (Exception ex) {

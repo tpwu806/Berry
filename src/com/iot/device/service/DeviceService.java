@@ -17,8 +17,8 @@ public interface DeviceService {
 
 	Device createDevice(DeviceDO deviceForm) throws DaoCreateException;
 
-	Page<DeviceDO> searchDeviceContent(String searchTerm, 
-			String receiptState, Pageable pgble) throws DaoFinderException;
+	Page<DeviceDO> searchDeviceContent(String searchTerm,String receiptState, 
+			Pageable pgble) throws DaoFinderException;
 
 	DeviceDO getDeviceDetailById(Integer deviceId) throws DaoFinderException;
 

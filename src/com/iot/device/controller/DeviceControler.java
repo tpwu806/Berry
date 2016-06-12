@@ -184,22 +184,22 @@ public class DeviceControler {
 	
 	@RequestMapping(value = { "/device/searchdevice" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
-	public String searchDevice(@RequestParam("searchKey") String searchKey, @RequestParam("receiptstate") String receiptstate,
+	public String searchDevice(@RequestParam("searchKey") String searchKey, @RequestParam("devicetype") String devicetype,
 			Pageable pgble, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		try {
 			String pSearchKey = StringUtils.isEmpty(searchKey) ? "" : searchKey;
-			String pReceiptstate = StringUtils.isEmpty(receiptstate) ? "" : receiptstate;
+			String pDevicetype = StringUtils.isEmpty(devicetype) ? "" : devicetype;
 
-			Page<DeviceDO> searchResults = this.deviceService.searchDeviceContent(pSearchKey, pReceiptstate, pgble);
+			Page<DeviceDO> searchResults = this.deviceService.searchDeviceContent(pSearchKey, pDevicetype, pgble);
 			Integer deviceNum;
 			
 			if ((searchResults != null) && (searchResults.hasContent())) {
-				String url = request.getContextPath() + "/device/searchdevice?searchKey=" + pSearchKey + "&receiptstate="
-						+ pReceiptstate + "&";
+				String url = request.getContextPath() + "/device/searchdevice?searchKey=" + pSearchKey + "&devicetype="
+						+ pDevicetype + "&";
 
 				Pager<DeviceDO> page = new Pager(searchResults, url);
 
-				redirectAttributes.addFlashAttribute("noticeList", page);
+				redirectAttributes.addFlashAttribute("deviceList", page);
 				deviceNum=page.getTotalElements();
 			} else {
 				Pager<DeviceDO> page = new Pager(null, null);
@@ -209,7 +209,7 @@ public class DeviceControler {
 			}
 			redirectAttributes.addFlashAttribute("deviceNum", deviceNum);
 			redirectAttributes.addFlashAttribute("searchKey", pSearchKey);
-			redirectAttributes.addFlashAttribute("receiptstate", pReceiptstate);
+			redirectAttributes.addFlashAttribute("devicetype", pDevicetype);
 		} catch (Exception ex) {
 			log.debug("Error in searching for device article", ex);
 			System.out.print(ex);

@@ -54,9 +54,9 @@
                         <div class="page-header page-dropdown">设备型号
                              <select name="devicetype" class="admin-search">
 				                <option value="">全部</option>
-				                <option value="RECEIPT_YES">树莓派</option>
-				                <option value="RECEIPT_NO">audrou</option>
-				                <option value="RECEIPT_OTHER">其他</option>
+				                <option value="RASPBERRY">raspberry</option>
+				                <option value="AUDROU">audrou</option>
+				                <option value="device_OTHER">其他</option>
 				              </select>   
                         </div>
                     </div>

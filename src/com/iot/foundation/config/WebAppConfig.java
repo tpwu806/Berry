@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages = { "com.iot.usermgmt.service" ,"com.iot.supervise.service",
-		"com.iot.device.service" ,"com.iot.sensor.service","com.iot.threshold.service"})
+		"com.iot.device.service" ,"com.iot.sensor.service","com.iot.common.dao",
+		"com.iot.common.utilities","com.iot.threshold.service"})
 @EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({ "classpath:application.properties" })
 public class WebAppConfig {
@@ -27,3 +28,4 @@ public class WebAppConfig {
 		return bean;
 	}
 }
+

@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>新增通知</title>
+    <title>新增传感器</title>
     <!-- Bootstrap -->
     
     <link rel="stylesheet" href="<c:url value="/js/kindeditor/themes/default/default.css"/>" />
@@ -30,7 +30,7 @@
 	<script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/plugins/code/prettify.js"/>"></script>
 	
 	<script>
-		KindEditor.ready(function(K) {
+		<%-- KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[name="content"]', {
 				autoHeightMode : true,
 				cssPath : '<%=request.getContextPath()%>/js/kindeditor/plugins/code/prettify.css',
@@ -55,7 +55,7 @@
 				}
 			});
 			prettyPrint();
-		});
+		}); --%>
 	</script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -81,46 +81,36 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
             <div class="qy-con">
 
-                <form:form method="POST" commandName="noticeForm"
-                           action="${pageContext.request.contextPath}/mod/notice/newnoticeform/newnotice"
+                <form:form method="POST" commandName="sensorForm"
+                           action="${pageContext.request.contextPath}/device/newdeviceform/newdevice"
                            accept-charset="UTF-8">
 
                     <div class="news">
 
                         <!-- Left side labels -->
                         <div class="news-l">
-                            <div class="hy-list text-r">通知标题 *:</div>
+                            <div class="hy-list text-r">传感器名称 *:</div>
                             <div class="hy-sm">&nbsp;</div>
-                            <div class="hy-list text-r news-lm">内容 *:</div>
-                            <div class="hy-list text-r">&nbsp;</div>
+                            <div class="hy-list text-r">传感器类型 *:</div>
+                             <div class="hy-sm">&nbsp;</div>                          
                         </div>
 
                         <!-- Right side entry fields -->
                         <div class="news-r">
                             <div class="hy-list">
-                                <form:input id="inputTitle" path="title" type="text" class="news-title-in" maxlength="30"/>
+                            	<input type="hidden" id="deviceid" name="deviceid" value="${sensorForm.deviceid}">
+                                <form:input id="sensorname" path="devicename" type="text" class="news-title-in" maxlength="10"/>
                             </div>
-                            <div class="hy-sm">标题只限30字</div>
+                            <div class="hy-sm">&nbsp;</div>
+                            <div class="hy-list">
+                                <form:input id="sensortype" path="deviceip" type="text" class="news-ip-in" maxlength="15"/>
+                            </div>
+                            <div class="hy-sm">&nbsp;</div>
 
-                            <div class="hy-textarea">
-                                <div class="news-t"></div>
-                                <form:textarea id="content" name="content" path="content" cols="100" rows="8" style="width:700px;height:300px;visibility:hidden;"></form:textarea>
-								<p>
-									您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
-								</p>
-                            </div>
-
-                            <div class="news-checkbox hy-list" >
-                                <form:checkbox path="receiptsign" value="1" id="regUserOnly"/> 是否需要回执
-                            </div>
-                            <div id="warningMsg">
-                            	报名截至时间：&nbsp;&nbsp;<form:input id="regdeadline" path="regdeadline" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" />
-							</div>
                         </div>
 
                         <div class="clear"></div>
-                        <div class="btn-news"> <button id="submitButton" class="btn btn-lg btn-primary" type="submit">发布</button></div>
-                        <div class="btx">*必填项</div>
+                        <div class="btn-news"> <button id="submitButton" class="btn btn-lg btn-primary" type="submit">保存</button></div>
 
                     </div>
 
@@ -130,6 +120,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!-- Bootstrap core JavaScript
