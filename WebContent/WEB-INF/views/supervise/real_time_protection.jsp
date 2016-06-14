@@ -31,6 +31,7 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="<c:url value="/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript">
+    	//异步请求开始
         window.onload=repeatFlush();
 	    function repeatFlush(){
 	    	var xmlhttp;
@@ -49,6 +50,86 @@
 	    	xmlhttp.open("POST",url,true);
 	    	xmlhttp.send();
 	    }
+	    //异步请求结束
+	    
+	    //Highcharts绘画折线图开始
+		/* $(function () {
+		    $(document).ready(function () {
+		        Highcharts.setOptions({
+		            global: {
+		                useUTC: false
+		            }
+		        });
+		
+		        $('#container').highcharts({
+		            chart: {
+		                type: 'spline',
+		                animation: Highcharts.svg, // don't animate in old IE
+		                marginRight: 10,
+		                events: {
+		                    load: function () {
+		
+		                        // set up the updating of the chart each second
+		                        var series = this.series[0];
+		                        setInterval(function () {
+		                            var x = (new Date()).getTime(), // current time
+		                                y = Math.random();
+		                            series.addPoint([x, y], true, true);
+		                        }, 1000);
+		                    }
+		                }
+		            },
+		            title: {
+		                text: 'Live random data'
+		            },
+		            xAxis: {
+		                type: 'datetime',
+		                tickPixelInterval: 150
+		            },
+		            yAxis: {
+		                title: {
+		                    text: 'Value'
+		                },
+		                plotLines: [{
+		                    value: 0,
+		                    width: 1,
+		                    color: '#808080'
+		                }]
+		            },
+		            tooltip: {
+		                formatter: function () {
+		                    return '<b>' + this.series.name + '</b><br/>' +
+		                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+		                        Highcharts.numberFormat(this.y, 2);
+		                }
+		            },
+		            legend: {
+		                enabled: false
+		            },
+		            exporting: {
+		                enabled: false
+		            },
+		            series: [{
+		                name: 'Random data',
+		                data: (function () {
+		                    // generate an array of random data
+		                    var data = [],
+		                        time = (new Date()).getTime(),
+		                        i;
+		
+		                    for (i = -19; i <= 0; i += 1) {
+		                        data.push({
+		                            x: time + i * 1000,
+		                            y: Math.random()
+		                        });
+		                    }
+		                    return data;
+		                }())
+		            }]
+		        });
+		    });
+	}); */
+	//Highcharts绘画折线图结束
     </script>
 </head>
 
@@ -64,8 +145,10 @@
            		<h4>
            		<td>任务序号：${task.id}</td>
            		&nbsp;&nbsp;<td>设备id：${task.deviceid}</td>
-           		&nbsp;&nbsp;<td>任务开启时间：<fmt:formatDate var="date" value="${task.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
-                                        ${date}</td>
+           		&nbsp;&nbsp;<td>任务开启时间：
+           		<fmt:formatDate var="date" value="${task.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                ${date} 
+                            </td>
            		
                 </h4>
         </th>

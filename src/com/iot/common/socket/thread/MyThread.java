@@ -50,42 +50,45 @@ public class MyThread extends Thread{
 	
 	public void run() {
 		BufferedReader receive = null;
-		PrintWriter send = null;
-		String tem = null;
+		PrintWriter send = null;;
 		String cmd="GET";
-		Supervise s=null;
 		
 		try{
 			receive = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		    send = new PrintWriter(socket.getOutputStream());
-		    s=new Supervise();
-		    while(status){  
+			send = new PrintWriter(socket.getOutputStream());
+			
+		    while(status){
+		    	//String temperature=null;
 		        send.println(cmd);  
                 send.flush();
-		    	tem = receive.readLine(); 
-		    	System.out.println(tem);
-		    	/**
-		    	 * 保存到数据库
-		    	 * */
-		    	s=new Supervise();
-		    	s.setTaskid(1);
-                s.setSensorvalue(tem);
-                s.setSensorvalue2("666");
-                s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
-               /* if(Compare.compareClass(tem,thresholdDO)!=0){
-                	s.setWarningclass(1);
-                }*/
-                s.setWarningclass(0);
-                this.superviseDAO.save(s);
-                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");
-                
+                String tem = receive.readLine();
+		    	//System.out.println("tem:"+tem);
+		    	if(tem.length()==30){
+		    		String fail = tem.substring(15, 16);
+		    		if(!fail.equals("0")){
+		    			fail=tem.substring(15, 17);
+		    		}
+			    	System.out.println("fail:"+fail);
+			    	
+			    	/**
+			    	 * 保存到数据库
+			    	 * */
+			    	Supervise s=new Supervise();
+			    	s.setTaskid(1);
+	                s.setSensorvalue(fail);
+	                s.setSensorvalue2("0");
+	                s.setSupervisetime(TimeDateUtility.getCurrentTimestamp());
+	                /*if(String.valueOf(fail) != null){
+	                	s.setWarningclass(1);
+	                }*/
+	                s.setWarningclass(0);
+	                this.superviseDAO.save(s);
+	                //System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");
+		    	}
                 if(tem.equals("END")){  
                     break;  
-                }
-               
-                System.out.println("Client Socket Message:"+tem);  
-                Thread.sleep(1000);  
-                  
+                }               
+                Thread.sleep(1000);                   
             }
             
 		} catch (UnknownHostException e) {

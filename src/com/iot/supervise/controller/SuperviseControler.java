@@ -1,8 +1,5 @@
 package com.iot.supervise.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -104,13 +101,16 @@ public class SuperviseControler {
 	@RequestMapping(value = { "/supervise/getdht11" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.POST})
 	public String getdht11() throws DaoFinderException {
-		String tem;
-		SuperviseDO s=this.superviseService.findMostNewSupervise();
-		//tem=s.getSensorvalue();
-		tem=s.getSupervisetime().toString();
-		/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		tem=df.format(new Date());*/
-					
+		String tem = null;
+		try{
+			SuperviseDO s=this.superviseService.findMostNewSupervise();
+			tem=s.getSensorvalue();
+			//tem=s.getSupervisetime().toString();
+			/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			tem=df.format(new Date());*/
+		} catch (Exception ex) {
+			log.debug("Error retrieving list device search results or retrieving all device", ex);
+		}				
 		return tem;
 	}
 }
