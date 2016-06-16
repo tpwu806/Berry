@@ -94,7 +94,7 @@ public class SensorControler {
 	@RequestMapping(value = { "/sensor/newsensorform/{deviceId}" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET })
 	public ModelAndView viewCreateSensorForm(@PathVariable Integer deviceId) {
-		ModelAndView modelAndView = new ModelAndView("sensor/add_sensor_form");
+		ModelAndView modelAndView = new ModelAndView("sensor/add-sensor-form");
 		
 		SensorDO sensorObject = new SensorDO();
 		sensorObject.setDeviceid(deviceId);
@@ -120,7 +120,7 @@ public class SensorControler {
 			log.debug("Error when creating new sensor article", ex);
 			redirectAttributes.addFlashAttribute("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}
-		return "redirect:/sensor/viewsensor?page=0&size=" + this.env.getRequiredProperty("paging.numitems");
+		return "redirect:/sensor/viewsensor?page=0&size=" + this.env.getRequiredProperty("paging.numitems")+"&deviceId="+sensorForm.getDeviceid()+"&";
 	}
 	
 	/**

@@ -68,8 +68,22 @@ static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Override
 	public Sensor createSensor(SensorDO sensorForm) throws DaoCreateException {
-		// TODO Auto-generated method stub
-		return null;
+		Sensor s=null;
+		try {
+			s = new Sensor();//sensorForm
+			s.setDeviceid(sensorForm.getDeviceid());
+			s.setSensorname(sensorForm.getSensorname());
+			s.setSensortype(sensorForm.getSensortype());
+			//s.setSensorparameter(sensorForm.getSensorparameter());
+			s.setSensorparameter("1");
+			s.setSensorparameter("2");
+			//s.setSensorparameter2(sensorForm.getSensorparameter2());
+
+			return (Sensor) this.sensorDAO.save(s);
+		} catch (Exception ex) {
+			log.debug("Error creating new news post", ex);
+			throw new DaoCreateException(ex.getMessage());
+		}
 	}
 
 	@Override

@@ -114,6 +114,7 @@ public class SuperviseControler {
 		try{
 			SuperviseDO s=this.superviseService.findMostNewSupervise();
 			tem=s.getSensorvalue();
+			System.out.println("tem"+tem);
 			//tem=s.getSupervisetime().toString();
 			/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			tem=df.format(new Date());*/

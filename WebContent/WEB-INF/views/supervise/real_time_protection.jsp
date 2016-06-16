@@ -104,7 +104,7 @@
 		                        // set up the updating of the chart each second
 		                        var series = this.series[0];
 		                        setInterval(function () {
-
+		                        	getTem();
 		                            var x = (new Date()).getTime(), // current time
 		                                //y = Math.random();		                            
 		                            	y = temp;
@@ -151,12 +151,12 @@
 		                    var data = [],
 		                        time = (new Date()).getTime(),
 		                        i;
-		                    getTem();
+		                    //getTem();
 		                    for (i = -19; i <= 0; i += 1) {
 		                        data.push({
 		                            x: time + i * 1000,
-		                            //y: Math.random()
-		                            y: temp
+		                            y: Math.random()
+		                            //y: temp
 		                        });
 		                    }
 		                    return data;
@@ -191,7 +191,7 @@
         </th>
 	    
 	    <!-- <tr align="center">温度为：<span id="temp">null</span></tr> -->
-	           <th>  温度为：<div id="temp">null</div></th>
+	           温度为：<div id="temp">null</div>
 	    
 		
 		

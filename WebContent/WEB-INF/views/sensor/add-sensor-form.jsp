@@ -23,7 +23,7 @@
     <link href="<c:url value="/css/summernote.css"/>" media="screen" rel="stylesheet" type="text/css">
     <link href="<c:url value="/css/font-awesome.min.css"/>" media="screen" rel="stylesheet" type="text/css">
     <link href="<c:url value="/css/dashboard.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/qilu.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/kilo.css"/>" rel="stylesheet">
     
 	<script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/kindeditor.js"/>"></script>
 	<script type="text/javascript" charset="utf-8" src="<c:url value="/js/kindeditor/lang/zh_CN.js"/>"></script>
@@ -82,7 +82,7 @@
             <div class="qy-con">
 
                 <form:form method="POST" commandName="sensorForm"
-                           action="${pageContext.request.contextPath}/device/newdeviceform/newdevice"
+                           action="${pageContext.request.contextPath}/sensor/newsensorform/newsensor"
                            accept-charset="UTF-8">
 
                     <div class="news">
@@ -99,11 +99,11 @@
                         <div class="news-r">
                             <div class="hy-list">
                             	<input type="hidden" id="deviceid" name="deviceid" value="${sensorForm.deviceid}">
-                                <form:input id="sensorname" path="devicename" type="text" class="news-title-in" maxlength="10"/>
+                                <form:input id="sensorname" path="sensorname" type="text" class="news-title-in" maxlength="10"/>
                             </div>
                             <div class="hy-sm">&nbsp;</div>
                             <div class="hy-list">
-                                <form:input id="sensortype" path="deviceip" type="text" class="news-ip-in" maxlength="15"/>
+                                <form:input id="sensortype" path="sensortype" type="text" class="news-ip-in" maxlength="15"/>
                             </div>
                             <div class="hy-sm">&nbsp;</div>
 
@@ -141,21 +141,21 @@
 
 	$(document).ready(function() {
 	
-	    $('#submitButton').prop('disabled', true);
+	    //$('#submitButton').prop('disabled', true);
 	
-	    if ($('#regUserOnly').is(':checked')) {
+	    /* if ($('#regUserOnly').is(':checked')) {
 	        $('#warningMsg').show();
 	    } else {
 	        $('#warningMsg').hide();
 	    }
-	
+	 */
 	    bootbox.setDefaults({
 	        locale: "zh_CN"
 	    });
 	
 	});
 	
-    function enableSubmitButton() {
+/*     function enableSubmitButton() {
         var editorEmpty = $("#content").val();
         if ($('#inputTitle').val() != '' && editorEmpty != '') {
             $('#submitButton').prop('disabled', false);
@@ -174,7 +174,7 @@
         } else {
             $('#warningMsg').hide();
         }
-    });
+    }); */
 
     $('#submitButton').on('click', function(e) {
         e.preventDefault();
