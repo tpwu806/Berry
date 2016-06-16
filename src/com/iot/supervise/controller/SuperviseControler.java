@@ -77,26 +77,35 @@ public class SuperviseControler {
 	}
 	
 	
+	@SuppressWarnings("null")
 	@RequestMapping(value = { "/supervise/viewsupervise" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.GET})
 	public ModelAndView viewSupervise(){
-		ModelAndView modelAndView = new ModelAndView("/supervise/real_time_protection");
+		ModelAndView modelAndView = null;
 		try{
 			TaskDO taskObject = this.taskService.findAliveTask();
-			if(taskObject==null){
+			if(taskObject==null){				
+				//modelAndView = new ModelAndView("redirect:/device/viewdevice?page=0&size=" + this.env.getRequiredProperty("paging.numitems"));
+				modelAndView = new ModelAndView("/supervise/real_time_protection");
 				modelAndView.addObject("MESSAGE_KEY", "没有任务被激活，请在设备列表中开启设备！");
 			}else{
+				modelAndView = new ModelAndView("/supervise/real_time_protection");
 				modelAndView.addObject("task", taskObject);
 			}
 			
 			
 		} catch (Exception ex) {
 			log.debug("Error retrieving list device search results or retrieving all device", ex);
-			modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
+			//modelAndView.addObject("MESSAGE_KEY", "系统发生故障，请跟Berry联系");
 		}				
 		return modelAndView;
 	}
 	
+	/**
+	 * 功能    获取即时信息
+	 * @return
+	 * @throws DaoFinderException
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "/supervise/getdht11" }, method = {
 			org.springframework.web.bind.annotation.RequestMethod.POST})

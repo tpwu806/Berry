@@ -31,9 +31,13 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="<c:url value="/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript">
+        
     	//异步请求开始
-        window.onload=repeatFlush();
-	    function repeatFlush(){
+        //window.onload=repeatFlush();
+        //$(function () {
+        	//已废止
+	    /* function repeatFlush(){
+	    	var tem;
 	    	var xmlhttp;
 	    	var url="http://localhost:8080/Berry/supervise/getdht11";//aimat是目标servlet或页面
 	    	if(window.XMLHttpRequest){
@@ -44,16 +48,44 @@
 	    	xmlhttp.onreadystatechange=function(){
 	    		if(xmlhttp.readyState==4&&xmlhttp.status==200){
 	    			document.getElementById("temp").innerHTML=xmlhttp.responseText;
-	    			setTimeout("repeatFlush()",1000);//2秒刷新一次
+	    			//tem=document.getElementById("temp").value;
+	    			tem=27;
+	    			return tem;
+	    			//var myDate = new Date().toLocaleString();
+	    			//document.getElementById("time").innerHTML=myDate;
+	    			//setTimeout("repeatFlush()",1000);//2秒刷新一次
 	    		}
 	    	}
 	    	xmlhttp.open("POST",url,true);
 	    	xmlhttp.send();
-	    }
+	    	
+	    } */
+        //});
 	    //异步请求结束
 	    
+	   //ajax异步请求开始
+	   getTem();
+	   var temp=20;
+       function getTem(){
+         $.ajax({
+             type: "POST",
+             url: "http://localhost:8080/Berry/supervise/getdht11",
+             //data: {username:$("#username").val(), content:$("#content").val()},
+             dataType: "json",
+             success: function(data){
+                         $('#temp').html(data);
+                         temp=parseFloat(data)
+                         //alert(temp)
+                         
+                      }
+         });
+   
+	    }
+       //ajax异步请求结束
+       
 	    //Highcharts绘画折线图开始
-		/* $(function () {
+	    
+		$(function () {
 		    $(document).ready(function () {
 		        Highcharts.setOptions({
 		            global: {
@@ -72,15 +104,18 @@
 		                        // set up the updating of the chart each second
 		                        var series = this.series[0];
 		                        setInterval(function () {
+
 		                            var x = (new Date()).getTime(), // current time
-		                                y = Math.random();
+		                                //y = Math.random();		                            
+		                            	y = temp;
+		                            	//console.info(y);		                            	
 		                            series.addPoint([x, y], true, true);
 		                        }, 1000);
 		                    }
 		                }
 		            },
 		            title: {
-		                text: 'Live random data'
+		                text: '温度折线图'
 		            },
 		            xAxis: {
 		                type: 'datetime',
@@ -88,7 +123,7 @@
 		            },
 		            yAxis: {
 		                title: {
-		                    text: 'Value'
+		                    text: '温度'
 		                },
 		                plotLines: [{
 		                    value: 0,
@@ -116,11 +151,12 @@
 		                    var data = [],
 		                        time = (new Date()).getTime(),
 		                        i;
-		
+		                    getTem();
 		                    for (i = -19; i <= 0; i += 1) {
 		                        data.push({
 		                            x: time + i * 1000,
-		                            y: Math.random()
+		                            //y: Math.random()
+		                            y: temp
 		                        });
 		                    }
 		                    return data;
@@ -128,7 +164,8 @@
 		            }]
 		        });
 		    });
-	}); */
+		});
+	
 	//Highcharts绘画折线图结束
     </script>
 </head>
@@ -139,8 +176,8 @@
     <div class="row">
     <%@ include file="../includes/outermenu.jspf" %>
 	    <div class="col-sm-9 col-sm-offset-3 col-md-offset-2 col-md-10 main">
-	    <h1>欢迎使用Berry系统</h1>
-	    <h3>目前激活的任务：</h3>
+	    <!-- <h3>欢迎使用Berry系统</h3> -->
+	    <h4 align="center">目前激活的任务：</h4>
 	    <th>
            		<h4>
            		<td>任务序号：${task.id}</td>
@@ -153,23 +190,30 @@
                 </h4>
         </th>
 	    
-	    <tr align="center">
-		温度为：<span id="temp">null</span>
-		</tr>
+	    <!-- <tr align="center">温度为：<span id="temp">null</span></tr> -->
+	           <th>  温度为：<div id="temp">null</div></th>
+	    
+		
 		
 		<!-- <div><input id="dhtbtn" type="button" value="开始采集" onclick="repeatFlush();"></div> -->
 	    
+	    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		</div>
+		
+		
+		
 		<c:if test="${not empty MESSAGE_KEY}">
                 <nav class="search">
                     ${MESSAGE_KEY}
                 </nav>
-            </c:if>
+        </c:if>
 	</div>
 </div>
 
-
+<%-- <script src="<c:url value="/js/Highcharts425/js/highcharts.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/js/Highcharts425/js/modules/exporting.js"/>" type="text/javascript"></script> --%>
     
-
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script> 
 </body>
 </html>
